@@ -1,0 +1,12 @@
+body {
+position:relative;
+
+background-image: url("/images/gpback.jpg");
+background-repeat:no-repeat;
+background-position: center 150px;
+background-attachment: fixed;
+color:#687822;
+
+
+
+}
