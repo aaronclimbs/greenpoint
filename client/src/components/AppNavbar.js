@@ -6,6 +6,8 @@ import Logout from "./auth/Logout";
 import LoginModal from "./auth/LoginModal";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
+import logo from './logo.svg';
+import "./AppNavbar.css"
 
 class AppNavbar extends Component {
   state = {
@@ -69,6 +71,7 @@ class AppNavbar extends Component {
       <div>
         <Navbar color="dark" dark expand="sm">
           <Container>
+          <img src={logo} className="App-logo" alt="logo" />
             <NavbarBrand href="/">GreenPoint</NavbarBrand>
             <NavbarToggler onClick={this.toggle} />
             <Collapse isOpen={this.state.isOpen} navbar>
