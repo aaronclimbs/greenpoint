@@ -1,26 +1,43 @@
 import React, { Component } from "react";
 
-import { Provider } from "react-redux";
-import store from "./store";
+import { connect } from "react-redux";
 
-import "bootstrap/dist/css/bootstrap.min.css";
-import "./App.css";
-import Navbar from "./components/AppNavbar";
-import { Container } from "reactstrap";
-import { loadUser } from "./actions/authActions";
+import { BrowserRouter as Router, Switch, Route, Redirect } from "react-router-dom";
 
-export default class App extends Component {
-  componentDidMount() {
-    store.dispatch(loadUser());
-  }
+import AppNavbar from "./components/AppNavbar";
+import Why from "./components/pages/Why";
+import FAQ from "./components/pages/FAQ";
+import Profile from "./components/pages/Profile";
+import NotFound from "./components/pages/NotFound";
+import Landing from "./components/pages/Landing";
+
+class App extends Component {
   render() {
+    const { isAuthenticated } = this.props.auth;
     return (
-      <Provider store={store}>
+      <Router>
         <div>
-          <Navbar />
-          <Container></Container>
+          <AppNavbar />
+          <Switch>
+            <Route path="/" render={() => (isAuthenticated ? <Redirect to="/profile" /> : <Landing />)} />
+            <Route path="/profile" render={() => (isAuthenticated ? <Profile /> : <Redirect to="/" />)} />
+            <Route path="/faq" component={FAQ} />
+            <Route path="/why" component={Why} />
+            <Route component={NotFound} />
+          </Switch>
         </div>
-      </Provider>
+      </Router>
     );
   }
 }
+
+const mapStateToProps = state => {
+  return {
+    auth: state.auth
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  {}
+)(App);
