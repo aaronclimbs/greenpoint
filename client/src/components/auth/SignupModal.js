@@ -68,7 +68,7 @@ class SignupModal extends Component {
           Register
         </NavLink>
         <Modal isOpen={this.state.modal} toggle={this.toggle}>
-          <ModalHeader toggle={this.toggle}>Register Account</ModalHeader>
+          <ModalHeader className="modal-header" toggle={this.toggle}><h4 className="modal-text">Register Account</h4></ModalHeader>
           <ModalBody>
             {this.state.msg ? <Alert color="danger">{this.state.msg}</Alert> : null}
             <Form onSubmit={this.onSubmit}>

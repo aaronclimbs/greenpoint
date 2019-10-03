@@ -1,10 +1,11 @@
 import React, { Component } from "react";
+import "./pages.css"
 
 export default class Landing extends Component {
   render() {
     return (
       <div>
-        <h1>Landing Page</h1>
+        <h5 className="text-center mt-2 mb-2">Learn how your daily actions impact your carbon footprint</h5>
       </div>
     );
   }
