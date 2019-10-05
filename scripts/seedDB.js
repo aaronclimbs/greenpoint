@@ -50,61 +50,61 @@ const usersSeed = [
 {
     "name" : "jerry",
     "email" : "jerrytest1@test.com",
-    "password" : "test",
+    "password" : "$2b$10$k9kOOU763EMe3hD2kKSOAO5ClJF.TRQOWbJvBddg7ORXAseUQ45nW",
     "__v" : 0
 },
 {
     "name" : "james",
     "email" : "jamestest1@test.com",
-    "password" : "test",
+    "password" : "$2b$10$cqBpZmosg4X1/oQgGoRdNutADXYA.v9BpySV5B6IY1VX4vzRWmA2G",
     "__v" : 0
 },
 {
     "name" : "john",
     "email" : "johntest1@test.com",
-    "password" : "test",
+    "password" : "$2b$10$L0xY74gtgxOakSuULirmT.pBhF.svz6q2isCF/VSOkwem60cdoRVG",
     "__v" : 0
 },
 {
     "name" : "Mary",
     "email" : "marytest1@test.com",
-    "password" : "test",
+    "password" : "$2b$10$2ZZKHmFGT5/L78TpRv1mWezQLCBD7L9Qhi5.HdTJzmMGNOeVUzvJK",
     "__v" : 0
 },
 {
     "name" : "Magdalena",
     "email" : "magdalenatest1@test.com",
-    "password" : "test",
+    "password" : "$2b$10$qABtd6UZf6kRjFqkmy513u26/VDa.L60t6ApyXjZgHqmLGRfHkREm",
     "__v" : 0
 },
 {
     "name" : "Sally",
     "email" : "sallytest@test.com",
-    "password" : "test",
+    "password" : "$2b$10$4WaAT8cLT0WW7EaeJQHL8elUu9tT4HMIy3.5akMLlhzdJ40MaFJn2",
     "__v" : 0
 },
 {
     "name" : "Sloopy",
     "email" : "sloopytest@test.com",
-    "password" : "test",
+    "password" : "$2b$10$ADkctPX83kk8Bqzaeh8GSOW6sPW6ue2YP9f2buS2/8KYOPshuWB6i",
     "__v" : 0
 },
 {
     "name" : "Charlie",
     "email" : "charlietest@test.com",
-    "password" : "test",
+    "password" : "$2b$10$bUul4FrLc95aRjkwWRSx3utGelU7EEOZ0y5amUOG598/0mqVGnt6C",
     "__v" : 0
 },
 {
     "name" : "Chaz",
     "email" : "chaztest@test.com",
-    "password" : "test",
+    "password" : "$2b$10$v.4XdUL5I2cqeWquzTuXHuPDvIqAS3I9jd6CWaUxMdjfV78MT.I2i",
     "__v" : 0
 },
 {
     "name" : "Snuffalupagus",
     "email" : "snuffalupagustest@test.com",
-    "password" : "test",
+    "password" : "$2b$10$L55IzKEuMV4jBbitMpruO.sxJgOCupKbFcA6EB8Qx.VG3QS1ZSAqi",
     "__v" : 0
 }
 ];
