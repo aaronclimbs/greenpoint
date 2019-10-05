@@ -4,7 +4,7 @@ const db = require("../models");
 
 // mongoose.connect(
 //   process.env.MONGODB_URI ||
-//   "mongodb://"
+//   "mongodb://localhost/greenpoint_test"
 // );
 
 const eventsSeed = [
@@ -46,6 +46,90 @@ const eventsSeed = [
   {name: "Volunteer at a Local Park", points: 5, category: "green_action", added: true}
 ];
 
+const usersSeed = [
+{
+    "name" : "jerry",
+    "email" : "jerrytest1@test.com",
+    "password" : "$2b$10$k9kOOU763EMe3hD2kKSOAO5ClJF.TRQOWbJvBddg7ORXAseUQ45nW",
+    "register_date" : ISODate("2019-10-05T16:08:06.492Z"),
+    "__v" : 0
+},
+{
+    "name" : "james",
+    "email" : "jamestest1@test.com",
+    "password" : "$2b$10$cqBpZmosg4X1/oQgGoRdNutADXYA.v9BpySV5B6IY1VX4vzRWmA2G",
+    "register_date" : ISODate("2019-10-05T16:08:24.252Z"),
+    "__v" : 0
+},
+{
+    "name" : "john",
+    "email" : "johntest1@test.com",
+    "password" : "$2b$10$L0xY74gtgxOakSuULirmT.pBhF.svz6q2isCF/VSOkwem60cdoRVG",
+    "register_date" : ISODate("2019-10-05T16:08:38.389Z"),
+    "__v" : 0
+},
+{
+    "name" : "Mary",
+    "email" : "marytest1@test.com",
+    "password" : "$2b$10$2ZZKHmFGT5/L78TpRv1mWezQLCBD7L9Qhi5.HdTJzmMGNOeVUzvJK",
+    "register_date" : ISODate("2019-10-05T16:08:54.492Z"),
+    "__v" : 0
+},
+{
+    "name" : "Magdalena",
+    "email" : "magdalenatest1@test.com",
+    "password" : "$2b$10$qABtd6UZf6kRjFqkmy513u26/VDa.L60t6ApyXjZgHqmLGRfHkREm",
+    "register_date" : ISODate("2019-10-05T16:09:14.429Z"),
+    "__v" : 0
+},
+{
+    "name" : "Sally",
+    "email" : "sallytest@test.com",
+    "password" : "$2b$10$4WaAT8cLT0WW7EaeJQHL8elUu9tT4HMIy3.5akMLlhzdJ40MaFJn2",
+    "register_date" : ISODate("2019-10-05T16:14:10.632Z"),
+    "__v" : 0
+},
+{
+    "name" : "Sloopy",
+    "email" : "sloopytest@test.com",
+    "password" : "$2b$10$ADkctPX83kk8Bqzaeh8GSOW6sPW6ue2YP9f2buS2/8KYOPshuWB6i",
+    "register_date" : ISODate("2019-10-05T16:14:27.038Z"),
+    "__v" : 0
+},
+{
+    "name" : "Charlie",
+    "email" : "charlietest@test.com",
+    "password" : "$2b$10$bUul4FrLc95aRjkwWRSx3utGelU7EEOZ0y5amUOG598/0mqVGnt6C",
+    "register_date" : ISODate("2019-10-05T16:14:41.364Z"),
+    "__v" : 0
+},
+{
+    "name" : "Chaz",
+    "email" : "chaztest@test.com",
+    "password" : "$2b$10$v.4XdUL5I2cqeWquzTuXHuPDvIqAS3I9jd6CWaUxMdjfV78MT.I2i",
+    "register_date" : ISODate("2019-10-05T16:14:59.759Z"),
+    "__v" : 0
+},
+{
+    "name" : "Snuffalupagus",
+    "email" : "snuffalupagustest@test.com",
+    "password" : "$2b$10$L55IzKEuMV4jBbitMpruO.sxJgOCupKbFcA6EB8Qx.VG3QS1ZSAqi",
+    "register_date" : ISODate("2019-10-05T16:15:50.539Z"),
+    "__v" : 0
+}
+];
+
+db.User
+  .remove({})
+  .then(() => db.User.collection.insertMany(usersSeed))
+  .then(data => {
+    console.log(data.result.n + " records inserted!");
+    process.exit(0);
+  })
+  .catch(err => {
+    console.error(err);
+    process.exit(1);
+  });
 
 db.Event
   .remove({})
