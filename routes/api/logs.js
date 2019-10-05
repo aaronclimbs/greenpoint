@@ -2,13 +2,13 @@ const router = require("express").Router();
 const logsController = require("../../controllers/logsController");
 
 
-router.route("/logs")
+router.route("/")
   .get(logsController.findAll)
   .post(logsController.create);
 
 
 router
-  .route("/logs/:id")
+  .route("/:id")
   .get(logsController.findById)
   .put(logsController.update)
   .delete(logsController.remove);
