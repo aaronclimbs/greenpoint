@@ -10,6 +10,7 @@ import FAQ from "./components/pages/FAQ";
 import Profile from "./components/pages/Profile";
 import NotFound from "./components/pages/NotFound";
 import Landing from "./components/pages/Landing";
+import EventsList from "./components/events/";
 
 class App extends Component {
   render() {
@@ -23,6 +24,7 @@ class App extends Component {
             <Route path="/profile" render={() => (isAuthenticated ? <Profile /> : <Redirect to="/" />)} />
             <Route path="/faq" component={FAQ} />
             <Route path="/why" component={Why} />
+            <Route path="/events" component={EventsList} />
             <Route component={NotFound} />
           </Switch>
         </div>
