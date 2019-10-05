@@ -9,3 +9,8 @@ export const REGISTER_SUCCESS = "REGISTER_SUCCESS";
 export const REGISTER_FAIL = "REGISTER_FAIL";
 export const GET_ERRORS = "GET_ERRORS";
 export const CLEAR_ERRORS = "CLEAR_ERRORS";
+
+// event actions
+
+export const EVENT_LIST_LOADED = "EVENT_LIST_LOADED"
+export const EVENT_LOAD_FAIL = "EVENT_LOAD_FAIL";
