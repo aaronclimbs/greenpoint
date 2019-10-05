@@ -9,7 +9,7 @@ const actionsSchema = new Schema({
   added: Boolean
 });
 
-const actions = mongoose.model("Book", actionsSchema);
+const actions = mongoose.model("Action", actionsSchema);
 
 module.exports = actions;
 
