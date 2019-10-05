@@ -2,10 +2,10 @@ const mongoose = require("mongoose");
 const db = require("../models");
 
 
-// mongoose.connect(
-//   process.env.MONGODB_URI ||
-//   "mongodb://localhost/greenpoint_test"
-// );
+mongoose.connect(
+  process.env.MONGODB_URI ||
+  "mongodb://localhost/greenpoint_test"
+);
 
 const eventsSeed = [
   {name: "Recycle Plastic Bottle", points: 5, category: "re-use", added: true},
