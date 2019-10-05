@@ -8,6 +8,6 @@ const userEventsSchema = new Schema({
   notes: String
 });
 
-const userEvents = mongoose.model("UserEvents", userEventsSchema);
+const userEvents = mongoose.model("UserEvent", userEventsSchema);
 
 module.exports = userEvents;
