@@ -19,7 +19,7 @@ class App extends Component {
         <div>
           <AppNavbar />
           <Switch>
-            <Route path="/" render={() => (isAuthenticated ? <Redirect to="/profile" /> : <Landing />)} />
+            <Route exact path="/" render={() => (isAuthenticated ? <Redirect to="/profile" /> : <Landing />)} />
             <Route path="/profile" render={() => (isAuthenticated ? <Profile /> : <Redirect to="/" />)} />
             <Route path="/faq" component={FAQ} />
             <Route path="/why" component={Why} />
