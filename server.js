@@ -16,6 +16,8 @@ app.use(routes);
 
 // Connect to the Mongo DB
 mongoose
+    // .connect("mongodb://localhost/greenpoint_test", {
+      
   .connect(process.env.MONGODB_URI, {
     useNewUrlParser: true,
     useCreateIndex: true,
