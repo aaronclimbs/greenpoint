@@ -34,6 +34,11 @@ class AppNavbar extends Component {
           <Logout />
         </NavItem>
         <NavItem>
+          <NavLink tag={Link} to="/resources">
+          Resources
+          </NavLink>
+        </NavItem>
+        <NavItem>
           <NavLink tag={Link} to="/faq">
             FAQ
           </NavLink>
