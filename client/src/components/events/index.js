@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Form, FormGroup, Label, Input, Button, Modal, ModalHeader, ModalBody, NavLink, Alert } from "reactstrap";
+import { Form, FormGroup, Label, Input, Button, Dropdown, DropdownMenu, DropdownItem, DropdownToggle } from "reactstrap";
 import { connect } from "react-redux";
 import { loadList } from "../../actions/eventActions"
 
