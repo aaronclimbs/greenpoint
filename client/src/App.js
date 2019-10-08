@@ -12,6 +12,8 @@ import Profile from "./components/pages/Profile";
 import NotFound from "./components/pages/NotFound";
 import Landing from "./components/pages/Landing";
 import EventsList from "./components/events/";
+import DoughnutChart from "./components/doughnut/";
+import LineChart from "./components/line/";
 
 
 class App extends Component {
@@ -28,6 +30,8 @@ class App extends Component {
             <Route path="/faq" component={FAQ} />
             <Route path="/why" component={Why} />
             <Route path="/events" component={EventsList} />
+            <Route path="/doughnut" component={DoughnutChart} />
+            <Route path="/line" component={LineChart} />
             <Route component={NotFound} />
           </Switch>
         </div>
