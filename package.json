@@ -13,12 +13,9 @@
     "if-env": "^1.0.4",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.7.1",
-<<<<<<< HEAD
-    "react-chartjs-2": "^2.8.0"
-=======
+    "react-chartjs-2": "^2.8.0",
     "react-datepicker": "^2.9.6",
     "react-collapsible": "^2.6.0"
->>>>>>> origin
   },
   "devDependencies": {
     "nodemon": "^1.19.2"
