@@ -37,6 +37,7 @@ class EventList extends Component {
             id: e.currentTarget.id,
             name: e.currentTarget.name,
             cat: e.currentTarget.getAttribute('data-category'),
+            quantity: ""
         
            
           }
@@ -126,7 +127,7 @@ class EventList extends Component {
             id="quantity"
             defaultValue="1"
             
-            onChange={this.onChange}
+            
             
         /> </Col>
         <Col md={3}>
