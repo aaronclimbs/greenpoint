@@ -1,7 +1,9 @@
 import React, { Component } from "react";
 import { Form, FormGroup, Label, Input, Button, Dropdown, DropdownMenu, DropdownItem, DropdownToggle, ListGroup, ListGroupItem, Row,Col} from "reactstrap";
+
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+
 import { connect } from "react-redux";
 import { loadList } from "../../actions/eventActions"
 
@@ -26,6 +28,12 @@ class EventList extends Component {
         });
       };
 
+      // onChange = e => {
+      //   this.setState({
+      //     [e.target.name]: e.target.value
+      //   });
+      // };
+
       onClick = e => {
         console.log(e.target);
         console.log(e.currentTarget);
@@ -37,7 +45,9 @@ class EventList extends Component {
             id: e.currentTarget.id,
             name: e.currentTarget.name,
             cat: e.currentTarget.getAttribute('data-category'),
+
             quantity: ""
+
         
            
           }
@@ -89,10 +99,12 @@ class EventList extends Component {
 
         
         <Form onSubmit={this.onSubmit} className="w-75">
+
             <DatePicker
         selected={this.state.startDate}
         onChange={this.handleDateChange}
       />
+
            
         <Dropdown  isOpen={this.state.dropdownOpen} toggle={this.toggle}>
         <DropdownToggle caret>
@@ -125,9 +137,10 @@ class EventList extends Component {
             type="number"
             name="quantity"
             id="quantity"
+
             defaultValue="1"
             
-            
+
             
         /> </Col>
         <Col md={3}>
