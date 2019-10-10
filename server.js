@@ -19,7 +19,7 @@ app.use(routes);
 mongoose
     // .connect("mongodb://localhost/greenpoint_test", {
       
-  .connect("mongodb://localhost/greenpoint_test", {
+  .connect(process.env.MONGODB_URI, {
     useNewUrlParser: true,
     useCreateIndex: true,
     useUnifiedTopology: true,
