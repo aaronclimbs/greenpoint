@@ -20,7 +20,7 @@
     "react-chartjs-2": "^2.8.0",
     "react-collapsible": "^2.6.0",
 
-    "react-datepicker": "^2.9.6",
+    "react-datepicker": "^2.9.6"
 
   },
   "devDependencies": {
