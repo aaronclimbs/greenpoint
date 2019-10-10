@@ -4,11 +4,14 @@ import "./style.css";
 import { Form, FormGroup, Label, Row,Col} from "reactstrap";
 import { connect } from "react-redux";
 import { loadLogs } from "../../actions/doughnutActions"
+import moment from "moment";
+
 
 import axios from 'axios';
 
 	// const data = 
-// const startOfMonth = moment().startOf('month').format('YYYY-MM-DD hh:mm')
+const startOfMonth = moment().startOf('month').format('YYYY-MM-DD')
+console.log(startOfMonth);
 
 const setData = {
   labels: ["re-use", "food", "transportation", "lifestyle", "green action"],
@@ -119,8 +122,8 @@ class DoughnutChart extends Component {
 // console.log(startOfMonth);
 
   fetchLogs = async () => {
-    const result = await axios.get(`api/logs/:userId/${this.state.search}`);
-    this.setState({ doughnutArray: result.data, error: "" });
+    const result = await axios.get(`api/logs/5d98d50d96ba210da4c0e3b0/${startOfMonth}`);
+    this.setState({ data : result.data, error: "" });
   };
 
 
