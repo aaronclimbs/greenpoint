@@ -6,7 +6,6 @@ router.route("/")
   .get(logsController.findAll)
   .post(logsController.create);
 
-
 router
   .route("/:id/:date")
   .get(logsController.findByIdDate)
@@ -24,6 +23,7 @@ router
   .get(logsController.groupByEventDate)
   .put(logsController.update)
   .delete(logsController.remove);
+
 
   
 
