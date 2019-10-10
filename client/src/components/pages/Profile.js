@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import EventList from '../events'
 import DayList from '../daylist'
 import DayStats from '../daystats'
+import DoughnutChart from '../doughnut'
 import { loadList } from "../../actions/eventActions"
 import axios from "axios";
 import openSocket from 'socket.io-client'
@@ -28,7 +29,9 @@ class Profile extends Component {
     eventDate: new Date(),
     displayDate: new Date(),
     queryDate: "",
-    message:""
+    message:"",
+    chartLabels:[],
+    chartData:[]
     
   };
 
@@ -50,8 +53,12 @@ notify = () => toast(this.state.message)
     .then(res => {
 
       console.log(res.data)
+
+    
+
       this.setState({
-        dayEvents: res.data
+        dayEvents: res.data,
+
       })
    
     })
@@ -64,8 +71,23 @@ notify = () => toast(this.state.message)
     .then(res => {
 
       console.log(res.data)
+
+      const tempLabels = this.state.chartLabels
+      const tempChartData = this.state.chartData
+
+      res.data.forEach(storeChart)
+     
+
+      function storeChart (item) {
+        tempLabels.push(item._id);
+        tempChartData.push(item.totalPoints)
+
+      }
+
       this.setState({
-        dayStats: res.data
+        dayStats: res.data,
+        chartLabels: tempLabels,
+        chartData: tempChartData
       })
    
     })
@@ -114,9 +136,9 @@ notify = () => toast(this.state.message)
         </Col>
 
         <Col md={3} className="text-center"><h5>My Greeen Points</h5>
-       <DayStats getTodayStats={this.getTodayStats} today={this.state.today} dayStats={this.state.dayStats} userID={this.props.auth.user._id}/>
+        <DoughnutChart labels={this.state.chartLabels} data={this.state.chartData} getTodayStats={this.getTodayStats}></DoughnutChart>
         </Col>
-
+       {/* <DayStats getTodayStats={this.getTodayStats} today={this.state.today} dayStats={this.state.dayStats} userID={this.props.auth.user._id}/> */}
       </Row>
 
    

@@ -26,12 +26,10 @@ class EventList extends Component {
 
 
       onClick = e => {
-        console.log(e.target);
-        console.log(e.currentTarget);
+       
         e.preventDefault();
           console.log("Item list click" + e.currentTarget.catname)
-          // console.log("Target is " + JSON.stringify(e.target))
-          // console.log("Target is " + JSON.stringify(e.currentTarget))
+       
           const eventItem = {
             eventName: e.currentTarget.name,
             userID:this.props.userID,
