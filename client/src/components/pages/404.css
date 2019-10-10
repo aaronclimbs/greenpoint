@@ -1,0 +1,110 @@
+.four-oh-four-text {
+	color: white;
+}
+
+.Ocean {
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-end;
+	width: 100%;
+	height: 81vh;
+	background-color: #B3E5FC;
+	overflow: hidden;
+}
+
+.Wave {
+	width: 10000;
+	animation-name: swell;
+	animation-duration: 2s;
+	animation-fill-mode: forwards;
+	animation-iteration-count: infinite;
+	animation-timing-function: linear;
+	fill: #4FC3F7;
+}
+
+@keyframes swell {
+	0% {
+		transform: translateX(0%);
+	}
+	100% {
+		transform: translateX(0%);
+	}
+}
+
+
+.sun{
+	height:100%;
+	width:100%;
+	background-size:1000px 1000px;
+	background-repeat: repeat;
+	background-image:url(http://monday2.utopixstudios.com/wp-content/uploads/sunshine-pinyol.png);
+	background-position:0px,0px;
+	margin-top:-500px;
+	margin-left:calc(-500px + 400px);
+	animation: rotate 50s infinite linear;
+	-webkit-animation: rotate 50s infinite linear;
+	}
+	
+	
+@keyframes rotate{
+	from {
+		-ms-transform: rotate(0deg); /* IE 9 */
+		-webkit-transform: rotate(0deg); /* Safari 3-8 */
+		transform: rotate(0deg);
+	}
+	to {
+		-ms-transform: rotate(360deg); /* IE 9 */
+		-webkit-transform: rotate(360deg); /* Safari 3-8 */
+		transform: rotate(360deg);
+	}
+}
+/* left clouds */
+.cloud-1{
+	position:absolute;
+	top:100px;
+	left:-40px;
+	width:250px;
+	height:90px;
+	background-image:url(http://monday2.utopixstudios.com/wp-content/uploads/banner-cloud1.png);
+	animation: cloud 5s infinite linear;
+	-webkit-animation: cloud 5s infinite linear;
+}
+.cloud-2{
+	transform: scaleX(-1);
+	position:absolute;
+	top:280px;
+	left:-40px;
+	width:100px;
+	height:35px;
+	background-image:url(http://monday2.utopixstudios.com/wp-content/uploads/banner-cloud2.png);
+	animation: cloud 15s infinite linear;
+	-webkit-animation: cloud 15s infinite linear;
+}
+/* right clouds */
+.cloud-3{
+	transform: scaleX(-1);
+	position:absolute;
+	top:180px;
+	right:-10px;
+	width:250px;
+	height:90px;
+	background-image:url(http://monday2.utopixstudios.com/wp-content/uploads/banner-cloud1.png);
+	animation: cloud 7s infinite linear;
+	-webkit-animation: cloud 7s infinite linear;
+}
+.cloud-4{
+	position:absolute;
+	top:280px;
+	right:-20px;
+	width:100px;
+	height:35px;
+	background-image:url(http://monday2.utopixstudios.com/wp-content/uploads/banner-cloud2.png);
+	animation: cloud 20s infinite linear;
+	-webkit-animation: cloud 20s infinite linear;
+}
+/* clouds animations */
+@keyframes cloud{
+	0% {margin-top:0px;margin-left:0px;}
+	50% {margin-top:20px;margin-left:10px;}
+	100% {margin-top:0px;margin-left:0px;}
+}
