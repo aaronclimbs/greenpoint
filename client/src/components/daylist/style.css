@@ -1,5 +1,6 @@
 .day-list{
-    height: 200px;
-    overflow: none;
+    height: 350px;
+    width:100%;
+    overflow: scroll;
     color:green;
 }

@@ -6,10 +6,18 @@ import DayList from '../daylist'
 import DayStats from '../daystats'
 import { loadList } from "../../actions/eventActions"
 import axios from "axios";
+import openSocket from 'socket.io-client'
+import {ToastContainer, toast} from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
+
+const socket =openSocket('/')
+
 const moment= require("moment")
 
 
 class Profile extends Component {
+
+
 
   state = {
     dropdownOpen: false,
@@ -20,8 +28,21 @@ class Profile extends Component {
     eventDate: new Date(),
     displayDate: new Date(),
     queryDate: "",
+    message:""
     
   };
+
+  constructor() {
+    super()
+    this.sendSocketIO = this.sendSocketIO.bind(this);
+    this.notify = this.notify.bind(this);
+   
+}
+
+notify = () => toast(this.state.message)
+    
+    
+  
 
   getToday = () =>{
     axios
@@ -52,7 +73,10 @@ class Profile extends Component {
   }
 
 
-
+  sendSocketIO(msg) {
+    socket.emit('Test', msg);
+    
+}  
 
 
   componentDidMount() {
@@ -61,12 +85,24 @@ class Profile extends Component {
     this.getToday()
     this.getTodayStats()
 
+    socket.on("Weather", data => {
+      console.log(data)
+      this.setState({
+        message:"The temperature in DC is currently " + Math.round(data) + "\xB0"
+      })
+
+      this.notify()
+    })
+
+    
+
   }
 
 
   render() {
 
     return <Container>
+       <ToastContainer />
       <Row className="justify-content-md-center mb-3 mt-3"> <h4 >Welcome to your Green Dashboard for {moment(this.state.today).format("dddd MMMM Do YYYY")}, {this.props.auth.user.name}</h4></Row>
       <Row >
         <Col md={3} className="text-center"><h5>Add Green Events</h5>
