@@ -56,7 +56,7 @@ class DayList extends Component {
         
        
             
-
+            <div className="day-list">
         <Table hover size="md" bordered striped="true" className="day-list" modifiers={{
             setMaxHeight: {
                 enabled: true,
@@ -81,7 +81,9 @@ class DayList extends Component {
             <th></th>
           </tr>
         </thead>
+        
         <tbody >
+            
         {this.props.dayEvents.map((item, index) => {
             return(
           <tr>
@@ -106,8 +108,11 @@ class DayList extends Component {
             </td>
           </tr>)
         })}
+      
         </tbody>
+      
       </Table>
+      </div>
 
 
         )

@@ -47,7 +47,7 @@ module.exports = {
         _id:"$eventCat",
         totalPoints: {$sum: {$multiply: ["$eventQuantity",'$eventPoints']}}
       }},
-      {$sort: {totalPoints: -1}}
+      {$sort: {_id: 1}}
 
     ])
       .then(dbModel => res.json(dbModel))
