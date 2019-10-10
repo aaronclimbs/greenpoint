@@ -10,8 +10,8 @@ import moment from "moment";
 import axios from 'axios';
 
 	// const data = 
-const startOfMonth = moment().startOf('month').format('YYYY-MM-DD')
-console.log(startOfMonth);
+const getMonth = moment().format('YYYY-MM-DD')
+console.log(getMonth);
 
 const setData = {
   labels: ["re-use", "food", "transportation", "lifestyle", "green action"],
@@ -119,10 +119,10 @@ class DoughnutChart extends Component {
 
   // }
 
-// console.log(startOfMonth);
+// console.log(getMonth);
 
   fetchLogs = async () => {
-    const result = await axios.get(`api/logs/5d98d50d96ba210da4c0e3b0/${startOfMonth}`);
+    const result = await axios.get(`api/logs/5d98d50d96ba210da4c0e3b0/${getMonth}`);
     this.setState({ data : result.data, error: "" });
   };
 
