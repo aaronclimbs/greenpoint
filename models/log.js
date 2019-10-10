@@ -2,10 +2,13 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const logsSchema = new Schema({
-  user_id: { type: Number, required: true },
-  event_id: { type: Number, required: true },
-  date: { type: Date, default: Date.now },
-  notes: String
+  userID: { type: Schema.Types.ObjectId, ref:"User", required: true },
+  eventCat: {type: String},
+  eventName: {type: String},
+  eventPoints: {type: Number},
+  eventDate: {type: String},
+  dateEntered: { type: Date, default: Date.now },
+  eventQuantity: Number
 });
 
 const logs = mongoose.model("Log", logsSchema);
