@@ -1,3 +1,10 @@
+const router = require("express").Router();
+const logsController = require("../../controllers/logsController");
+
+
+router.route("/")
+  .get(logsController.findAll)
+  .post(logsController.create);
 
 router
   .route("/:id/:date")

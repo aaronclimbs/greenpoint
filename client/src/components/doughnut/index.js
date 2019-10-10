@@ -13,6 +13,15 @@ import axios from 'axios';
 const getMonth = moment().format('YYYY-MM-DD')
 console.log(getMonth);
 
+const  fetchLogs = async () => {
+    // const result = await axios.get(`api/logs/group/5d98d50d96ba210da4c0e3b0/${getMonth}`);
+    const result = await axios.get("api/logs/group/5d98d50d96ba210da4c0e3b0/" + getMonth)
+
+    // this.setState({ data : result.data, error: "" });
+    console.log(result.data);
+};
+
+
 const setData = {
   labels: ["re-use", "food", "transportation", "lifestyle", "green action"],
   datasets: [
@@ -121,16 +130,17 @@ class DoughnutChart extends Component {
 
 // console.log(getMonth);
 
-  fetchLogs = async () => {
-    const result = await axios.get(`api/logs/5d98d50d96ba210da4c0e3b0/${getMonth}`);
-    this.setState({ data : result.data, error: "" });
-  };
+
 
 
   componentDidMount() {
+
+
+
+
     // setTimeout(
     //   () =>
-
+    fetchLogs();
 
 
     this.setState(
