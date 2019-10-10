@@ -12,5 +12,10 @@ export const CLEAR_ERRORS = "CLEAR_ERRORS";
 
 // event actions
 
-export const EVENT_LIST_LOADED = "EVENT_LIST_LOADED"
+export const EVENT_LIST_LOADED = "EVENT_LIST_LOADED";
 export const EVENT_LOAD_FAIL = "EVENT_LOAD_FAIL";
+
+// log actions
+
+export const LOG_LIST_LOADED = "LOG_LIST_LOADED";
+export const LOG_LOAD_FAIL = "LOG_LOAD_FAIL";

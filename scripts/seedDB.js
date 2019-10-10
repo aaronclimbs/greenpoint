@@ -47,6 +47,21 @@ const eventsSeed = [
   {name: "Volunteer at a Local Park", points: 5, category: "green_action", added: true}
 ];
 
+
+const logsSeed = [
+{
+    "userID" : "5d98d50d96ba210da4c0e3b0",
+    "eventCat" : "re-use",
+    "eventName" : "Repair items of Clothing",
+    "eventPoints" : 5,
+    "eventDate" : "2019-10-09T20:56:10.605Z",
+    "eventQuantity": 2
+}
+
+];
+
+
+
 const usersSeed = [
 {
     "name" : "jerry",
@@ -121,6 +136,18 @@ db.User
     console.error(err);
     process.exit(1);
   });
+
+db.Log
+  .remove({})
+  .then(() => db.Log.collection.insertMany(logsSeed))
+  .then(data => {
+    console.log(data.result.n + " records inserted!");
+    process.exit(0);
+  })
+  .catch(err => {
+    console.error(err);
+    process.exit(1);
+});
 
 db.Event
   .remove({})
