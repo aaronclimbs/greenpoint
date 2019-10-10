@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import "./pages.css"
+
 
 export default class Landing extends Component {
   render() {

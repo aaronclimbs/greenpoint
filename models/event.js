@@ -4,7 +4,7 @@ const Schema = mongoose.Schema;
 const eventsSchema = new Schema({
   name: { type: String, required: true },
   points: { type: Number, required: true },
-  category: { type: Number, required: true },
+  category: { type: String, required: true },
   added: Boolean
 });
 
