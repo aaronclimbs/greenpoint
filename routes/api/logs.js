@@ -24,6 +24,10 @@ router
   .put(logsController.update)
   .delete(logsController.remove);
 
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> c7f5e176a2c907f20e44ddd5321ed061ad5911bf
 
 module.exports = router;
