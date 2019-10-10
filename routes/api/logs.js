@@ -13,4 +13,8 @@ router
   .put(logsController.update)
   .delete(logsController.remove);
 
+router
+  .route("/:userId")
+  .get(logsController.findByUser);
+
 module.exports = router;
