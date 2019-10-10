@@ -1,0 +1,16 @@
+.articleImage, .articleTitle {
+    text-align: center;
+    padding: 10px 10px;
+}
+
+.articleImage {
+display: block;
+margin-left: auto;
+margin-right: auto;
+}
+
+.resourcesTabs {
+    display: block;
+margin-left: auto;
+margin-right: auto;
+}
