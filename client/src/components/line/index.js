@@ -1,8 +1,13 @@
 import React, { Component } from "react";
 import {Line} from 'react-chartjs-2';
 import "./style.css";
+import { Form, FormGroup, Label, Row,Col} from "reactstrap";
+import { connect } from "react-redux";
+import { loadLogs } from "../../actions/doughnutActions"
 
-const data = {
+
+
+const setData = {
   labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
   datasets: [
     {
@@ -24,7 +29,7 @@ const data = {
       pointHoverBorderWidth: 2,
       pointRadius: 1,
       pointHitRadius: 10,
-      data: [65, 59, 80, 81, 56, 55, 40]
+      data: []
     }
   ]
 };
@@ -32,14 +37,47 @@ const data = {
 // export default React.createClass({
 //   displayName: 'LineExample',
 
-export default class LineChart extends Component {
+class LineChart extends Component {
+
+  state = {
+    data: []
+  };
+
+
+componentDidMount() {
+    // setTimeout(
+    //   () =>
+    this.setState(
+      {
+        data: [65, 59, 80, 81, 56, 55, 40]
+      },
+      () => {
+        console.log(this.state.data);
+        setData.datasets[0].data = this.state.data;
+      }
+    );
+}
+
+
 
   render() {
     return (
       <div>
         <h2>Line Example</h2>
-          <div className="line_chart"><Line data={data} /></div>
+          <div className="line_chart"><Line data={setData} /></div>
       </div>
     );
   }
 };
+
+
+
+const mapStateToProps = state => ({
+    events: state.events
+
+});
+
+export default connect(
+    mapStateToProps,
+    { loadLogs }
+)(LineChart);
