@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Form, FormGroup, Label, Input, Button, Dropdown, DropdownMenu, DropdownItem, DropdownToggle, ListGroup, ListGroupItem, Row,Col, Table} from "reactstrap";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+
 import { connect } from "react-redux";
 import { loadList } from "../../actions/eventActions"
 
@@ -175,6 +176,7 @@ class EventList extends Component {
         selected={this.state.eventDate}
         onChange={this.handleDateChange}
       />
+
            
         <Dropdown  isOpen={this.state.dropdownOpen} toggle={this.toggle}>
         <DropdownToggle caret>
@@ -274,9 +276,10 @@ class EventList extends Component {
             type="number"
             name="quantity"
             id="quantity"
+
             defaultValue="1"
             
-            
+
             
         /> </Col>
         <Col md={3}>
