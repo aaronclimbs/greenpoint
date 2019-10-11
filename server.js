@@ -51,6 +51,7 @@ io.sockets.on('connection', function (socket) {
   socket.emit("Welcome", {message:"Welcome to our site"})
 
   setInterval(() => getWeather(socket), 60000)
+
   socket.on('diconnect', function () {
     console.log("A user disconnected");
 
@@ -65,13 +66,15 @@ io.sockets.on('connection', function (socket) {
 })
 
 const getWeather = async socket => {
-  try {
-    const res =await axios.get (
-      "https://api.darksky.net/forecast/d9b62331cf144fc78ad5473806d97872/38.9072,-77.0369"
+  console.log("I'm getting the weather")
+  socket.emit("Weather", "Here is the weather")
+  // try {
+  //   const res =await axios.get (
+  //     "https://api.darksky.net/forecast/d9b62331cf144fc78ad5473806d97872/38.9072,-77.0369"
 
-    );
-    socket.emit("Weather", res.data.currently.temperature)
-  } catch (error) {
-    console.log(error)
-  }
+  //   );
+   
+  // } catch (error) {
+  //   console.log(error)
+  // }
 }
