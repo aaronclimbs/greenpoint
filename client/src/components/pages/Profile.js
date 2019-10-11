@@ -31,7 +31,20 @@ class Profile extends Component {
     queryDate: "",
     message:"",
     chartLabels:[],
-    chartData:[]
+    chartData:[],
+    setData: {
+              labels:[],
+              datasets:[{
+                data: [],
+                backgroundColor: ["#234d20", "#36802d", "#77ab59", "#c9df8a ", "#f0f7da"],
+                hoverBackgroundColor: [
+                  "#234d20",
+                  "#36802d",
+                  "#77ab59",
+                  "#c9df8a",
+                  "#f0f7da"
+              ]}]
+            }
     
   };
 
@@ -53,12 +66,9 @@ notify = () => toast(this.state.message)
     .then(res => {
 
       console.log(res.data)
-
-    
-
       this.setState({
-        dayEvents: res.data,
-
+        dayEvents: res.data
+        
       })
    
     })
@@ -69,25 +79,25 @@ notify = () => toast(this.state.message)
     axios
     .get("api/logs/group/"+ this.props.auth.user._id +"/" + this.state.today)
     .then(res => {
+      var tempLabels =[]
+      var tempStats = []
+
+      res.data.map(item => {
+        tempLabels.push(item._id)
+        tempStats.push(item.totalPoints)
+
+      })
 
       console.log(res.data)
-
-      const tempLabels = this.state.chartLabels
-      const tempChartData = this.state.chartData
-
-      res.data.forEach(storeChart)
-     
-
-      function storeChart (item) {
-        tempLabels.push(item._id);
-        tempChartData.push(item.totalPoints)
-
-      }
-
       this.setState({
         dayStats: res.data,
-        chartLabels: tempLabels,
-        chartData: tempChartData
+        setData:{
+          labels:tempLabels,
+          datasets:[{
+            data: tempStats,
+       }]
+
+        }
       })
    
     })
@@ -131,14 +141,23 @@ notify = () => toast(this.state.message)
         <EventList getToday={this.getToday} getTodayStats={this.getTodayStats} events={this.props.events.events} userID={this.props.auth.user._id}/>
         </Col>
 
-        <Col md={6} className="text-center"><h5>My Greeen Events </h5>
+        <Col md={6} className="text-center"><h5>My Green Events </h5>
         <DayList getToday={this.getToday} getTodayStats={this.getTodayStats} today={this.state.today} dayEvents={this.state.dayEvents} userID={this.props.auth.user._id}/>
         </Col>
 
-        <Col md={3} className="text-center"><h5>My Greeen Points</h5>
-        <DoughnutChart labels={this.state.chartLabels} data={this.state.chartData} getTodayStats={this.getTodayStats}></DoughnutChart>
+        <Col md={3} className="text-center"><h5>My Green Points</h5>
+        <DoughnutChart setData={this.state.setData}></DoughnutChart>
+       
         </Col>
-       {/* <DayStats getTodayStats={this.getTodayStats} today={this.state.today} dayStats={this.state.dayStats} userID={this.props.auth.user._id}/> */}
+
+      </Row>
+      <Row>
+        <Col md={3}></Col>
+        <Col md={6}></Col>
+        <Col md={3}>
+        <DayStats getTodayStats={this.getTodayStats} today={this.state.today} dayStats={this.state.dayStats} userID={this.props.auth.user._id}/>
+        </Col>
+
       </Row>
 
    
