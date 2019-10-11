@@ -1,166 +1,119 @@
 import React, { Component } from "react";
-import {
-  Form,
-  FormGroup,
-  Label,
-  Input,
-  Button,
-  Dropdown,
-  DropdownMenu,
-  DropdownItem,
-  DropdownToggle,
-  ListGroup,
-  ListGroupItem,
-  Row,
-  Col
-} from "reactstrap";
-
+import { Form, FormGroup, Label, Input, Button, Dropdown, DropdownMenu, DropdownItem, DropdownToggle, ListGroup, ListGroupItem, Row,Col, Table} from "reactstrap";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import axios from "axios";
+import "./style.css"
 
-import { connect } from "react-redux";
-import { loadList } from "../../actions/eventActions";
-import FuzzySearch from "../FuzzySearch";
+const moment= require("moment")
 
 class EventList extends Component {
-  state = {
-    dropdownOpen: false,
-    dropdownValue: "Choose a Green Action",
-    selected: [],
-    startDate: new Date()
-  };
 
-  // onChange = e => {
-  //   this.setState({
-  //     [e.target.name]: e.target.value
-  //   });
-  // };
+    state = {
+        dropdownOpen: true,
+        dropdownValue:"Choose a Green Action",
+        eventDate: new Date(),
+        displayDate: new Date(),
+        queryDate: ""
+      };
 
-  handleDateChange = date => {
-    this.setState({
-      startDate: date
-    });
-  };
 
-  // onChange = e => {
-  //   this.setState({
-  //     [e.target.name]: e.target.value
-  //   });
-  // };
-
-  onClick = e => {
-    console.log(e.target);
-    console.log(e.currentTarget);
-    e.preventDefault();
-    console.log("Item list click" + e.currentTarget.catname);
-    // console.log("Target is " + JSON.stringify(e.target))
-    // console.log("Target is " + JSON.stringify(e.currentTarget))
-    const newSelect = {
-      id: e.currentTarget.id,
-      name: e.currentTarget.name,
-      cat: e.currentTarget.getAttribute("data-category"),
-
-      quantity: ""
-    };
-    this.setState(
-      {
-        selected: [...this.state.selected, newSelect]
-      },
-      () => {
+      handleDateChange = date => {
         this.setState({
-          dropdownValue: this.state.selected.length > 0 ? "Choose another Green Action" : "Choose a Green Action"
+          eventDate: date
+        });
+      };
+
+
+      onClick = e => {
+
+        e.preventDefault();
+          console.log("Item list click" + e.currentTarget.catname)
+
+          const eventItem = {
+            eventName: e.currentTarget.name,
+            userID:this.props.userID,
+            eventDate: moment(this.state.eventDate).format("YYYYMMDD"),
+            eventQuantity: 1,
+            eventPoints: e.currentTarget.getAttribute('data-points'),
+            eventCat: e.currentTarget.getAttribute('data-category')
+
+
+          }
+          console.log(eventItem)
+
+          axios
+          .post("api/logs", eventItem)
+          .then(res =>
+            {console.log(res.data)
+                this.props.getToday()
+                this.props.getTodayStats()
+
+        })
+      };
+
+      toggle = () => {
+        this.setState ({
+          dropdownOpen: !this.state.dropdownOpen
         });
       }
-    );
-  };
 
-  delListItem = e => {
-    e.preventDefault();
-    const itemLoc = e.currentTarget.getAttribute("data-id");
 
-    const Select = this.state.selected;
-    console.log("Select is " + Select);
-    const newSelect = Select.splice(itemLoc, 1);
-    console.log("Select is now " + Select);
+    componentDidMount() {
 
-    this.setState({
-      selected: Select
-    });
-  };
 
-  componentDidMount() {
-    this.props.loadList();
-  }
+    }
 
-  toggle = () => {
-    this.setState({
-      dropdownOpen: !this.state.dropdownOpen
-    });
-  };
 
-  render() {
-    return (
-      <Form onSubmit={this.onSubmit} className="w-75">
-        <DatePicker selected={this.state.startDate} onChange={this.handleDateChange} />
 
-        <Dropdown isOpen={this.state.dropdownOpen} toggle={this.toggle}>
-          <DropdownToggle caret>{this.state.dropdownValue}</DropdownToggle>
-          <DropdownMenu>
-            <DropdownItem header>Choose an Event</DropdownItem>
-            <DropdownItem divider />
-            {this.props.events.events.map(event => {
-              return (
-                <DropdownItem
-                  onClick={this.onClick}
-                  name={event.name}
-                  id={event._id}
-                  key={event._id}
-                  data-category={event.category}
-                >
-                  <div>{event.name}</div>
-                </DropdownItem>
-              );
+    render() {
+
+        return (
+
+
+        <div>
+        <div className="mt-3"><h4>Select Event Date</h4>
+        </div><DatePicker className="mb-2"
+        selected={this.state.eventDate}
+        onChange={this.handleDateChange}
+        inline/>
+        <Dropdown size="lg"   isOpen={this.state.dropdownOpen} toggle={this.toggle} >
+
+        <DropdownToggle caret>
+         {this.state.dropdownValue}
+        </DropdownToggle>
+
+        <DropdownMenu left modifiers={{
+            setMaxHeight: {
+                enabled: true,
+                order:890,
+                fn: (data) => {
+                    return {
+                        ...data,
+                        styles: {
+                            overflow:"auto",
+                            maxHeight: 200,
+                            maxWidth: 250
+                        }
+                    }
+                }
+
+            }
+        }}>
+          {this.props.events.map(event => {
+
+              return  <DropdownItem className="event-items" onClick={this.onClick} name={event.name}  key={event._id} data-category={event.category} data-points={event.points}><div >{event.name}</div></DropdownItem>;
+
             })}
-          </DropdownMenu>
+        </DropdownMenu>
         </Dropdown>
+        </div>
 
-        <ListGroup>
-          {this.state.selected.map((item, index) => {
-            return (
-              <ListGroupItem key={index}>
-                {" "}
-                <Row className="">
-                  <Col md={1}>{index}</Col>
-                  <Col md={3}>{item.name} </Col>
-                  <Col md={3}>Category: {item.cat}</Col>
-                  <Col md={1}>
-                    <Label for="quantity">Quantity</Label>
-                  </Col>
-                  <Col md={1}>
-                    <Input type="number" name="quantity" id="quantity" defaultValue="1" />{" "}
-                  </Col>
-                  <Col md={3}>
-                    <i className="col icon-remove float-right" data-id={index} onClick={this.delListItem}></i>
-                  </Col>
-                </Row>
-              </ListGroupItem>
-            );
-          })}
-        </ListGroup>
+        )
 
-        <Button type="submit" className="w-25" color="dark" style={{ marginTop: "2rem" }} block>
-          Submit
-        </Button>
-      </Form>
-    );
-  }
+    }
+
 }
 
-const mapStateToProps = state => ({
-  events: state.events
-});
 
-export default connect(
-  mapStateToProps,
-  { loadList }
-)(EventList);
+export default (EventList);
