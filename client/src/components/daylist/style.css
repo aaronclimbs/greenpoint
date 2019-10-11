@@ -2,5 +2,8 @@
     height: 350px;
     width:100%;
     overflow: scroll;
-    color:green;
+    color:#234d20;
+}
+.day-list-header{
+    color:#234d20;
 }

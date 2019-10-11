@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Form, FormGroup, Label, Input, Button, Dropdown, DropdownMenu, DropdownItem, DropdownToggle, ListGroup, ListGroupItem, Row,Col, Table} from "reactstrap";
+import {  Dropdown, DropdownMenu, DropdownItem, DropdownToggle} from "reactstrap";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import axios from "axios";
@@ -83,7 +83,7 @@ class EventList extends Component {
          {this.state.dropdownValue}
         </DropdownToggle>
 
-        <DropdownMenu left modifiers={{
+        <DropdownMenu modifiers={{
             setMaxHeight: {
                 enabled: true,
                 order:890,
