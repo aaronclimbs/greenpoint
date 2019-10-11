@@ -57,7 +57,7 @@ class DayList extends Component {
        
             
             <div className="day-list">
-        <Table hover size="md" bordered striped="true" className="day-list" modifiers={{
+        <Table hover size="md" bordered striped className="day-list" modifiers={{
             setMaxHeight: {
                 enabled: true,
                 order:890,
@@ -73,7 +73,7 @@ class DayList extends Component {
 
             }
         }} >     
-        <thead>
+        <thead className="day-list-header">
           <tr>
             <th>Category</th>
             <th>Name</th>
@@ -86,7 +86,7 @@ class DayList extends Component {
             
         {this.props.dayEvents.map((item, index) => {
             return(
-          <tr>
+          <tr key={index}>
             
             <td>{item.eventCat}</td>
             <td>{item.eventName}</td>
