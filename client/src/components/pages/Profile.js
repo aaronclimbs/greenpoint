@@ -135,7 +135,7 @@ notify = () => toast(this.state.message)
 
     return <Container>
        <ToastContainer />
-      <Row className="justify-content-md-center mb-3 mt-3"> <h4 >Welcome to your Green Dashboard for {moment(this.state.today).format("dddd MMMM Do YYYY")}, </h4>
+      <Row className="justify-content-md-center mb-3 mt-3"> <h4 >Welcome to your Green Dashboard for {moment(this.state.today).format("dddd MMMM Do YYYY")} </h4>
       <Col md={12} className="mt-3" >
         <Row className="justify-content-md-center">
         <div className="float-left text-center "> <img src="../images/recycle.jpg"/><div>Re Use</div> </div>
