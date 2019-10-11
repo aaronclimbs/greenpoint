@@ -10,6 +10,7 @@ import axios from "axios";
 import openSocket from 'socket.io-client'
 import {ToastContainer, toast} from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
+import "./profile.css"
 
 const socket =openSocket('/')
 
@@ -135,8 +136,20 @@ notify = () => toast(this.state.message)
 
     return <Container>
        <ToastContainer />
-      <Row className="justify-content-md-center mb-3 mt-3"> <h4 >Welcome to your Green Dashboard for {moment(this.state.today).format("dddd MMMM Do YYYY")}, {this.props.auth.user.name}</h4></Row>
-      <Row >
+      <Row className="justify-content-md-center mb-3 mt-3"> <h4 >Welcome to your Green Dashboard for {moment(this.state.today).format("dddd MMMM Do YYYY")} </h4>
+      <Col md={12} className="mt-3" >
+        <Row className="justify-content-md-center">
+        <div className="float-left text-center "> <img src="../images/recycle.jpg"/><div>Re Use</div> </div>
+      <div className="float-left text-center ml-5"> <img src="../images/greenaction.jpg"/><div>Green Action</div></div>
+      <div className="float-left text-center ml-5"> <img src="../images/lifestyle.jpg"/><div>Lifestyle</div></div>
+      <div className="float-left text-center ml-5"> <img src="../images/transportation.jpg"/><div>Transportation</div></div>
+      <div className="float-left text-center ml-5"> <img src="../images/food.jpg"/><div>Food</div></div>
+        </Row>
+    
+      </Col>
+      </Row>
+     
+      <Row className="mt-3">
         <Col md={3} className="text-center"><h5>Add Green Events</h5>
         <EventList getToday={this.getToday} getTodayStats={this.getTodayStats} events={this.props.events.events} userID={this.props.auth.user._id}/>
         </Col>
