@@ -10,6 +10,7 @@ import axios from "axios";
 import openSocket from 'socket.io-client'
 import {ToastContainer, toast} from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
+import "./profile.css"
 
 const socket =openSocket('/')
 
@@ -148,7 +149,7 @@ notify = () => toast(this.state.message)
       </Col>
       </Row>
      
-      <Row >
+      <Row className="mt-3">
         <Col md={3} className="text-center"><h5>Add Green Events</h5>
         <EventList getToday={this.getToday} getTodayStats={this.getTodayStats} events={this.props.events.events} userID={this.props.auth.user._id}/>
         </Col>
