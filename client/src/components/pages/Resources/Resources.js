@@ -18,21 +18,22 @@ import {
   CardTitle,
   CardText,
   Row,
-  Col
+  Form,
+  Dropdown,
+  DropdownItem
 } from "reactstrap";
 import classnames from "classnames";
 import axios from "axios";
 import scraper from "../../../helpers/scraper";
 import "./Resources.css";
 
-const APIkey = "c9787ace9febf338";
-const materialID = [];
-
 export default class Resources extends Component {
   state = {
     scrapeResults: [],
     materialQuery: "",
-    activeTab: "1"
+    activeTab: "1",
+    materialOptions: [],
+    selected: {}
   };
 
   tabs(tab) {
@@ -55,52 +56,38 @@ export default class Resources extends Component {
     });
   };
 
-  onClick = e => {
+  onGetMaterials = e => {
     e.preventDefault();
     console.log(
-      "Button has been clicked. Search term is " + this.state.materialQuery
+      "Form has been submitted. Search term is " + this.state.materialQuery
     );
+    axios.get("api/helpers/recycle/" + this.state.materialQuery)
+    .then(response => {
+      this.setState({
+        materialOptions: response.data.result
+      })
+    })
+};
 
-    const eventItem = {
-      materialID: e.materialID
-    };
-    axios
-      .get(
-        "https://cors-anywhere.herokuapp.com/https://api.earth911.com/earth911.searchMaterials?query=" +
-          this.state.materialQuery +
-          "&api_key=" +
-          APIkey
-        // "https://cors-anywhere.herokuapp.com/http://api.earth911.com/earth911.material_id=" + materialID + "&api_key=" + APIkey
-      )
-      .then(res => {
-        console.log(res.data);
-      });
-  };
-
-  earth911 = () => {
-    console.log("****************************************");
-
-    const recyclingLocations = [];
-
-    axios
-      .get(
-        "https://cors-anywhere.herokuapp.com/http://api.earth911.com/earth911.searchLocations?latitude=38.9072&longitude=-77.0369&material_id=" +
-          materialID +
-          "&api_key=" +
-          APIkey
-      )
-      .then(function(response) {
-        console.log(
-          "Earth911 data is:" +
-            JSON.stringify(response) +
-            "************************** Our item is: " +
-            recyclingLocations
-        );
-      });
-  };
+getLocationData = e => {
+  this.setState({selected : {
+    description: e.currentTarget.name,
+    material_id: e.currentTarget.getAttribute("data-id")
+  } }, () => {
+    this.setState({materialQuery: ""})
+    axios.get(`/api/helpers/locations/${this.state.selected.material_id}`).then(response => {
+      this.setState({
+        selected: {
+          ...this.state.selected,
+          locations: response.data
+        }
+      })
+    })
+  })
+}
 
   async componentDidMount() {
-    this.earth911();
+    // this.earth911();
     axios
       .get(
         "https://cors-anywhere.herokuapp.com/https://www.onegreenplanet.org/channel/environment/"
@@ -179,31 +166,38 @@ export default class Resources extends Component {
         <TabContent activeTab={this.state.activeTab}>
           <TabPane tabId="2">
             <div className="materialSearch">
-              <InputGroup>
-                <InputGroupAddon addonType="prepend" className="APIsearch">
-                  <InputGroupText>
-                    Enter material you want to recycle...
-                  </InputGroupText>
-                </InputGroupAddon>
-                <Input
-                  type="text"
-                  name="materialQuery"
-                  value={this.state.materialQuery}
-                  onChange={this.handleInputChange}
-                />
-                <Button onClick={this.onClick} color="success">
-                  Search
-                </Button>
-              </InputGroup>
+              <Form onSubmit={this.onGetMaterials}>
+                <InputGroup>
+                  <InputGroupAddon addonType="prepend" className="APIsearch">
+                    <InputGroupText>
+                      Enter material you want to recycle...
+                    </InputGroupText>
+                  </InputGroupAddon>
+                  <Input
+                    type="text"
+                    name="materialQuery"
+                    value={this.state.materialQuery}
+                    onChange={this.handleInputChange}
+                  />
+                  <Button color="success">
+                    Search
+                  </Button>
+                </InputGroup>
+              </Form>
+              {this.state.materialQuery && <Dropdown>
+              {this.state.materialOptions.map(option => {
+                return <DropdownItem key={option.material_id} data-id={option.material_id} name={option.description} onClick={this.getLocationData}>{option.description}</DropdownItem>
+              })}
+              </Dropdown>}
+              {this.state.selected.locations && <ListGroup>
+                {this.state.selected.locations.result.map(location => {
+                  return <ListGroupItem>{location.description} Distance: {location.distance}</ListGroupItem>
+                })}
+              </ListGroup>}
             </div>
           </TabPane>
         </TabContent>
       </div>
     );
-<<<<<<< HEAD
-
-+  }
-=======
   }
->>>>>>> 0555e9adb071840c6e2f34bd244c9328a7009498
 }
