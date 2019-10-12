@@ -1,7 +1,7 @@
 {
   "name": "greenpoint",
   "version": "1.0.0",
-  "description": "",
+  "description": "An app to challenge users to be more environmentally conscious in their actions.",
   "main": "server.js",
   "dependencies": {
     "axios": "^0.19.0",
@@ -24,9 +24,11 @@
     "socket.io": "^2.3.0"
   },
   "devDependencies": {
-    "nodemon": "^1.19.2"
+    "nodemon": "^1.19.2",
+    "readme-jsx": "^0.3.0"
   },
   "scripts": {
+    "readme": "node ./scripts/readme-gen.js",
     "start": "if-env NODE_ENV=production && npm run start:prod || npm run start:dev",
     "start:prod": "node server.js",
     "start:dev": "concurrently \"nodemon --ignore 'client/*'\" \"npm run client\"",
@@ -40,8 +42,20 @@
     "type": "git",
     "url": "git+https://github.com/brityank/greenpoint.git"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": [
+    "conserve",
+    "green",
+    "environment",
+    "tree",
+    "recycle"
+  ],
+  "contributors": [
+    "brityank",
+    "kevdsteele",
+    "kimSpiegel04",
+    "javierjpagan",
+    "DavidPomarede"
+  ],
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/brityank/greenpoint/issues"
