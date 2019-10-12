@@ -31,7 +31,6 @@ class AppNavbar extends Component {
       <Fragment>
         <NavItem className="navbar-text mr-3">{user ? "Welcome " + user.name : ""}</NavItem>
         <NavItem>
-          <Logout />
         </NavItem>
         <NavItem>
           <NavLink tag={Link} to="/resources">
@@ -48,6 +47,7 @@ class AppNavbar extends Component {
             Why GreenPoint?
           </NavLink>
         </NavItem>
+        <Logout />
       </Fragment>
     );
 
