@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Container, Row, Col } from 'reactstrap';
 import qsAndAs from './question-answers';
 import Question from './Question';
+import "./faq.css"
 
 export default class FrequentlyAsked extends Component {
 

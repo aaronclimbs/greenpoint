@@ -1,13 +1,13 @@
 import React, { Component, Fragment } from "react";
 import { Link } from "react-router-dom";
 import { Collapse, Navbar, NavbarBrand, Nav, NavLink, NavbarToggler, NavItem, Container } from "reactstrap";
-import SignupModal from "./auth/SignupModal";
-import Logout from "./auth/Logout";
-import LoginModal from "./auth/LoginModal";
+import SignupModal from "../../auth/SignupModal";
+import Logout from "../../auth/Logout";
+import LoginModal from "../../auth/LoginModal";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import logo from './logo.svg';
-import "./AppNavbar.css"
+import "./style.css"
 
 class AppNavbar extends Component {
   state = {
