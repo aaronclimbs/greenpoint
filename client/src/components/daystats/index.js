@@ -1,12 +1,6 @@
 import React, { Component } from "react";
-import { Form, FormGroup, Label, Input, Button, Dropdown, DropdownMenu, DropdownItem, DropdownToggle, ListGroup, ListGroupItem, Row,Col, Table} from "reactstrap";
-import DatePicker from "react-datepicker";
+import { Table} from "reactstrap";
 import "react-datepicker/dist/react-datepicker.css";
-import { connect } from "react-redux";
-import { loadList } from "../../actions/eventActions"
-
-import axios from "axios";
-const moment= require("moment")
 
 class DayStats extends Component {
 
@@ -40,7 +34,7 @@ class DayStats extends Component {
          <tbody>
          {this.props.dayStats.map((item, index) => {
              return(
-           <tr>
+           <tr key={index}>
              
              <td>{item._id}</td>
              <td>{item.totalPoints}</td>
