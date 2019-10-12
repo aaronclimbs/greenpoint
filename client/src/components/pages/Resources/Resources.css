@@ -4,13 +4,31 @@
 }
 
 .articleImage {
+width: 50%;
+height: 50%;
 display: block;
 margin-left: auto;
 margin-right: auto;
+
 }
 
 .resourcesTabs {
     display: block;
 margin-left: auto;
 margin-right: auto;
+}
+
+.materialSearch {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    width: 800px;
+}
+
+.reactTabs {
+    float: none;
+    display: inline-block;
+    zoom:1;
+    text-align: center;
 }
