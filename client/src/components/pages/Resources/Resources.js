@@ -165,6 +165,7 @@ getLocationData = e => {
 
         <TabContent activeTab={this.state.activeTab}>
           <TabPane tabId="2">
+            <br></br>
             <div className="materialSearch">
               <Form onSubmit={this.onGetMaterials}>
                 <InputGroup>
@@ -173,6 +174,7 @@ getLocationData = e => {
                       Enter material you want to recycle...
                     </InputGroupText>
                   </InputGroupAddon>
+                  <br></br>
                   <Input
                     type="text"
                     name="materialQuery"
@@ -189,9 +191,10 @@ getLocationData = e => {
                 return <DropdownItem key={option.material_id} data-id={option.material_id} name={option.description} onClick={this.getLocationData}>{option.description}</DropdownItem>
               })}
               </Dropdown>}
+              <br></br>
               {this.state.selected.locations && <ListGroup>
                 {this.state.selected.locations.result.map(location => {
-                  return <ListGroupItem>{location.description} Distance: {location.distance}</ListGroupItem>
+                  return <ListGroupItem>{location.description}   Distance: {location.distance} miles</ListGroupItem>
                 })}
               </ListGroup>}
             </div>
