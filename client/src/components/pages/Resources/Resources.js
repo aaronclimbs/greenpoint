@@ -86,6 +86,7 @@ getLocationData = e => {
   })
 }
 
+
   async componentDidMount() {
     // this.earth911();
     axios
@@ -103,6 +104,7 @@ getLocationData = e => {
       <div>
         <h5 className="text-center mt-2 mb-2">Resources</h5>
         <Row className="justify-content-md-center mt-5">
+          {/* Resources tabs starts here */}
           <Nav tabs>
             <NavItem>
               <NavLink
@@ -136,12 +138,14 @@ getLocationData = e => {
             </NavItem>
           </Nav>
         </Row>
+        {/* Resources tabs end here */}
 
         <TabContent activeTab={this.state.activeTab}>
           <TabPane tabId="1">
             {this.state.scrapeResults.map(item => {
               return (
                 <div>
+                  {/* Article Tab/Scraping starts here */}
                   <ListGroup>
                     <ListGroupItem>
                       <Card>
@@ -149,9 +153,9 @@ getLocationData = e => {
                           <CardImg className="articleImage" src={item.image} />
 
                           <CardText>
-                            <h5 className="articleTitle" href={item.link}>
-                              {item.title}{" "}
-                            </h5>
+                            <a className="articleTitle" href={item.link}>
+                              {item.title}
+                            </a>
                           </CardText>
                         </CardBody>
                       </Card>
@@ -162,7 +166,9 @@ getLocationData = e => {
             })}
           </TabPane>
         </TabContent>
+                          {/* Article Tab/Scraping ends here */}
 
+                  {/* Recycling map tab starts here */}
         <TabContent activeTab={this.state.activeTab}>
           <TabPane tabId="2">
             <br></br>
@@ -200,6 +206,7 @@ getLocationData = e => {
             </div>
           </TabPane>
         </TabContent>
+        {/* Recycling map tab ends here */}
       </div>
     );
   }
