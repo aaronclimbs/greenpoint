@@ -1,17 +1,20 @@
 import React, { Component } from "react";
-import { ListGroup, ListGroupItem, TabContent, TabPane, Nav, NavItem, NavLink, Card, Button, CardTitle, CardText, Row, Col } from 'reactstrap';
+import { CardBody, CardImg, InputGroup, InputGroupText, InputGroupAddon, Input, ListGroup, ListGroupItem, TabContent, TabPane, Nav, NavItem, NavLink, Card, Button, CardTitle, CardText, Row, Col } from 'reactstrap';
 import classnames from 'classnames';
 import axios from "axios";
-import compression from "compression";
 import scraper from "../../../helpers/scraper"
 import "./Resources.css"
 
+const APIkey = "c9787ace9febf338"; 
+const materialID = [];
+
 export default class Resources extends Component {
   state = {
-    scrapeResults: []
+    scrapeResults: [],
+    materialQuery:""
   };
 
-  tabs(props) {
+  tabs(tab) {
   this.toggle = this.toggle.bind(this);
   this.state = {
     activeTab: '1'
@@ -26,18 +29,45 @@ toggle(tab) {
   }
 }
 
+handleInputChange = event => {
+
+const {name, value} = event.target;
+
+this.setState({
+  [name]:value
+
+})
+
+}
+
+onClick = e => {
+  e.preventDefault();
+  console.log("Button has been clicked. Search term is " + this.state.materialQuery);
+  
+  const eventItem = {
+    materialID: e.materialID
+  }
+  axios.get(
+
+    "https://cors-anywhere.herokuapp.com/https://api.earth911.com/earth911.searchMaterials?query=" + this.state.materialQuery + "&api_key=" + APIkey
+    // "https://cors-anywhere.herokuapp.com/http://api.earth911.com/earth911.material_id=" + materialID + "&api_key=" + APIkey 
+  ).then(res => {console.log(res.data);
+  })
+}
+
 earth911= () => {
   console.log("****************************************");
   
-  var APIkey = "c9787ace9febf338";
-  
-  var query = "plastic"
+ 
+  const recyclingLocations = [];
 
-  fetch(
-    "https://cors-anywhere.herokuapp.com/http://api.earth911.com/earth911.searchMaterials?query=" + query + "&api_key=" + APIkey
+
+  axios.get(
+    "https://cors-anywhere.herokuapp.com/http://api.earth911.com/earth911.searchLocations?latitude=38.9072&longitude=-77.0369&material_id=" + materialID + "&api_key=" + APIkey 
     )
     .then(function (response) {
-      console.log("Earth911 data is:" + (response) + "************************** Our item is: " + (query));
+      console.log("Earth911 data is:" + JSON.stringify(response) + "************************** Our item is: " + (recyclingLocations));
+
       
 
     })
@@ -59,6 +89,7 @@ earth911= () => {
     return (
       <div>
         <h5 className="text-center mt-2 mb-2">Resources</h5>
+        <Row className="justify-content-md-center mt-5">
         <Nav tabs>
           <NavItem>
             <NavLink
@@ -85,23 +116,53 @@ earth911= () => {
             </NavLink>
           </NavItem>
         </Nav>
+        </Row>
+
         
         <TabContent activeTab={this.state.activeTab}>
           <TabPane tabId="1">
         {this.state.scrapeResults.map(item => {
           return <div>
+
             <ListGroup>
               <ListGroupItem>
-            <img className="articleImage text-center" src={item.image} />
+                <Card>
+         <CardBody>
+
+         <CardImg className="articleImage" src={item.image} />
+
+         <CardText>
             <h5 className="articleTitle" href={item.link}>{item.title} </h5>
+            </CardText>
+            </CardBody>
+            </Card>
             </ListGroupItem>
             </ListGroup>
+            
+
             </div>
         })}
                   </TabPane>
                   </TabContent>
+
+                  <TabContent activeTab={this.state.activeTab}>
+    <TabPane tabId="2">
+      <div className="materialSearch">
+    <InputGroup>
+        <InputGroupAddon addonType="prepend" className="APIsearch">
+          <InputGroupText>Enter material you want to recycle...</InputGroupText>
+        </InputGroupAddon>
+        <Input type="text" name="materialQuery" value={this.state.materialQuery} onChange={this.handleInputChange} />
+        <Button onClick={this.onClick} color="success">Search</Button>
+      </InputGroup>
+
+</div>
+      </TabPane>
+    </TabContent>
+
       </div>
     );
+
   }
 }
 
