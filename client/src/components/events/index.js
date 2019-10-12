@@ -17,8 +17,8 @@ class EventList extends Component {
         queryDate: ""
       };
 
-   
-      handleDateChange = date => {    
+
+      handleDateChange = date => {
         this.setState({
           eventDate: date
         });
@@ -26,10 +26,10 @@ class EventList extends Component {
 
 
       onClick = e => {
-       
+
         e.preventDefault();
           console.log("Item list click" + e.currentTarget.catname)
-       
+
           const eventItem = {
             eventName: e.currentTarget.name,
             userID:this.props.userID,
@@ -37,19 +37,19 @@ class EventList extends Component {
             eventQuantity: 1,
             eventPoints: e.currentTarget.getAttribute('data-points'),
             eventCat: e.currentTarget.getAttribute('data-category')
-        
-           
+
+
           }
           console.log(eventItem)
-          
+
           axios
           .post("api/logs", eventItem)
           .then(res =>
             {console.log(res.data)
                 this.props.getToday()
                 this.props.getTodayStats()
-         
-        })        
+
+        })
       };
 
       toggle = () => {
@@ -57,26 +57,26 @@ class EventList extends Component {
           dropdownOpen: !this.state.dropdownOpen
         });
       }
-      
+
 
     componentDidMount() {
-      
-      
+
+
     }
 
-  
+
 
     render() {
 
         return (
 
-        
+
         <div>
         <div className="mt-3"><h4>Select Event Date</h4>
         </div><DatePicker className="mb-2"
         selected={this.state.eventDate}
-        onChange={this.handleDateChange} 
-        inline/>     
+        onChange={this.handleDateChange}
+        inline/>
         <Dropdown size="lg"   isOpen={this.state.dropdownOpen} toggle={this.toggle} >
 
         <DropdownToggle caret>
@@ -101,7 +101,7 @@ class EventList extends Component {
             }
         }}>
           {this.props.events.map(event => {
-            
+
               return  <DropdownItem className="event-items" onClick={this.onClick} name={event.name}  key={event._id} data-category={event.category} data-points={event.points}><div >{event.name}</div></DropdownItem>;
 
             })}
