@@ -6,7 +6,9 @@ export default function displayLocation() {
   
     var APIkey = "c9787ace9febf338";
   
+
     var queryURL = "https://cors-anywhere.herokuapp.com/earth911.getLocationDetails?query=plastic&api_key=" + APIkey;
+
   
     $.ajax({
         url: queryURL,
