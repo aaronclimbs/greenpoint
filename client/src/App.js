@@ -4,13 +4,13 @@ import { connect } from "react-redux";
 
 import { BrowserRouter as Router, Switch, Route, Redirect } from "react-router-dom";
 
-import AppNavbar from "./components/AppNavbar";
+import AppNavbar from "./components/pages/navbar/";
 import Why from "./components/pages/Why/Why";
 import Resources from "./components/pages/Resources/Resources";
 import FAQ from "./components/pages/FAQ/FAQ";
-import Profile from "./components/pages/Profile";
-import NotFound from "./components/pages/NotFound";
-import Landing from "./components/pages/Landing";
+import Profile from "./components/pages/profile/";
+import NotFound from "./components/pages/404/";
+import Landing from "./components/pages/landing/";
 import EventsList from "./components/events/";
 import DoughnutChart from "./components/doughnut/";
 import LineChart from "./components/line/";
