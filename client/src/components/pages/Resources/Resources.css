@@ -1,15 +1,18 @@
 .articleImage, .articleTitle {
     text-align: center;
     padding: 10px 10px;
+    display: block;
+margin-left: auto;
+margin-right: auto;
 }
 
 .articleImage {
 width: 50%;
 height: 50%;
-display: block;
-margin-left: auto;
-margin-right: auto;
+}
 
+.articleTitle {
+    color: #36802d; 
 }
 
 .resourcesTabs {
