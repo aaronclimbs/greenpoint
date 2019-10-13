@@ -147,315 +147,56 @@ module.exports = (
       Greenpoint is an app intended to build awareness around environmentally
       conscious actions and reward uses through points and community. Ultimately{" "}
     </QUOTE>
-    <QUOTE>
-      NOTICE: This file was generated with this library, you can checkout the
-      sourecode by viewing the README.jsx file
-    </QUOTE>
     <BR />
     <Header>Showcase</Header>
     <BR />
+    <IMG src="./readme_assets/dashboard.png" />
+    <IMG src="./readme_assets/resources.png" />
     <Header>Roadmap</Header>
     <BR />
     <TASKS
       list={[
         {
           title:
-            "Complain to self  about how tedious it is to write docs in markdown",
+            "Implement routes to MongoDB backend for adding and deleting user events",
           done: true
         },
-        { title: "Brainstorming", done: true },
-        { title: "Come up with a solution", done: true },
-        { title: "Initiate project", done: true },
-        { title: "Code solution", done: true },
         {
           title:
-            "Test solution manually because I'm not crazy enough to write a unit test for each case",
+            "Utilize JSON web tokens and custom middleware for authentication",
           done: true
         },
-        { title: "Add gif support", done: false },
-        { title: "Add watch mode", done: false },
-        { title: "Maybe publish also a cli", done: false },
-        { title: "Expand on metadata", done: false },
-        { title: "Add custom components", done: false },
-        { title: "Create VS Code extension", done: false }
+        { title: "Create dashboard view for users on login", done: true },
+        {
+          title: "Add redux for sharing state between adjacent components",
+          done: true
+        },
+        {
+          title:
+            "Test code incrementally and manually because we're not crazy enough to write unit tests for each case",
+          done: true
+        },
+        {
+          title: "Allow user to view next and  previous days in dashboard",
+          done: false
+        },
+        { title: "Add support chat", done: false },
+        { title: "Refactor redux store to React Context API", done: false },
+        { title: "Refactor major components to use React Hooks", done: false },
+        { title: "Create apple watch app", done: false }
       ]}
     />
-    <BR />
-    <Header>Installation</Header>
-    <BR />
-    <CODE lang="shell">{`npm i --save-dev readme-jsx`}</CODE>
     <BR />
     <Header>Usage</Header>
     <BR />
-    <Subheader>Basic</Subheader>
-    <BR />
-    <CODE inline={false} lang="jsx">{`// ./README.jsx
-const React = require("react");
-const { BADGE, metadata} = require("readme-jsx");
-
-module.exports = (
-  <React.Fragment>
-    <BADGE
-    label="LICENSE"
-    message={metadata.license}
-    style="for-the-badge"
-    color="blue" />
-  </React.Fragment>
-)`}</CODE>
-    <BR />
-    <CODE inline={false} lang="jsx">{`// ./scripts/readme-gen.js
-const { generateMD } = require("readme-jsx");
-generateMD("./README.jsx").then(() => {
-  console.log("README.md generated !");
-  process.exit();
-});
-)`}</CODE>
-    <BR />
-    <CODE lang="shell">{`node ./scripts/readme-gen.js`}</CODE>
-    <BR />
-    <BADGE
-      label="LICENSE"
-      message={metadata.license}
-      style="for-the-badge"
-      color="blue"
-    />
-    <BR />
-    <Subheader>Advanced</Subheader>
-    <BR />
-    <CODE inline={false} lang="jsx">{`// ./README.jsx
-const React = require("react");
-const { metadata} = require("readme-jsx");
-
-const CustomHeader = ({ title, color }) => (
-  <h1 className="custom-header" style={{ WebkitTextFillColor:color }}>{title}</h1>
-)
-module.exports = (
-  <React.Fragment>
-    <style>
-    @import url('https://fonts.googleapis.com/css?family=Pacifico&display=swap');
-    .custom-header{
-      -webkit-text-stroke-width: 2px;
-      -webkit-text-stroke-color: black;
-       color:red;
-      font-family: Pacifico;
-      width: 880px;
-      font-size: 3em;
-      padding: 0px 0px 10px 10px;
-      display: flex;
-      margin: 0px;
-      align-items: center;
-    }
-    </style>
-    <CustomHeader title={metadata.name} color="yellow"/>
-  </React.Fragment>
-)`}</CODE>
-    <BR />
-    <CODE inline={false} lang="jsx">{`// ./scripts/readme-gen.js
-const { generateMD } = require("readme-jsx");
-generateMD("./README.jsx").then(() => {
-  console.log("README.md generated !");
-  process.exit();
-});
-)`}</CODE>
-    <BR />
-    <CODE lang="shell">{`node ./scripts/readme-gen.js`}</CODE>
-    <BR />
-    <CustomHeader title={metadata.name} color="yellow" />
-    <BR />
-    <Header>API</Header>
-    <BR />
-    <Subheader>Components</Subheader>
-    <BR />
-    <TABLE
-      columns={["Component", "Props", "Description", "Example", "Preview"]}
-      rows={[
-        [
-          "H1",
-          "",
-          "A basic markdown header",
-          <CODE lang="jsx">{`<H1>A header</H1>`}</CODE>,
-          <H1>A header</H1>
-        ],
-        [
-          "H2",
-          "",
-          "A basic markdown header",
-          <CODE lang="jsx">{`<H2>A header</H2>`}</CODE>,
-          <H2>A header</H2>
-        ],
-        [
-          "H3",
-          "",
-          "A basic markdown header",
-          <CODE lang="jsx">{`<H3>A header</H3>`}</CODE>,
-          <H3>A header</H3>
-        ],
-        [
-          "H4",
-          "",
-          "A basic markdown header",
-          <CODE lang="jsx">{`<H4>A header</H4>`}</CODE>,
-          <H4>A header</H4>
-        ],
-        [
-          "H5",
-          "",
-          "A basic markdown header",
-          <CODE lang="jsx">{`<H5>A header</H5>`}</CODE>,
-          <H5>A header</H5>
-        ],
-        [
-          "H6",
-          "",
-          "A basic markdown header",
-          <CODE lang="jsx">{`<H6>A header</H6>`}</CODE>,
-          <H6>A header</H6>
-        ],
-        [
-          "ITALIC",
-          "",
-          "Turns text italic",
-          <CODE lang="jsx">{`<ITALIC>Italic</ITALIC>`}</CODE>,
-          <ITALIC>Italic</ITALIC>
-        ],
-        [
-          "BOLD",
-          "",
-          "Turns text bold",
-          <CODE lang="jsx">{`<BOLD>Bold</BOLD>`}</CODE>,
-          <BOLD>Bold</BOLD>
-        ],
-        [
-          "SCRATCH",
-          "",
-          "Strikes the text",
-          <CODE lang="jsx">{`<SCRATCH>Scratched</SCRATCH>`}</CODE>,
-          <SCRATCH>Scratched</SCRATCH>
-        ],
-        [
-          "BR",
-          "",
-          "A line break",
-          <CODE lang="jsx">{`<BR/>`}</CODE>,
-          "Doesn't show inside a table"
-        ],
-        [
-          "HR",
-          "",
-          "A horizontal line",
-          <CODE lang="jsx">{`<HR/>`}</CODE>,
-          <HR />
-        ],
-        [
-          "QUOTE",
-          "",
-          "A quote",
-          <CODE lang="jsx">{`<QUOTE>A thought here</QUOTE>`}</CODE>,
-          "Doesn't show inside a table"
-        ],
-        [
-          "OL",
-          <CODE>{`list: { title: string, content: string[]}[]`}</CODE>,
-          "An ordered list",
-          <CODE lang="jsx">{`<OL list={[{title: "First item", content: ["Lorem ipsum","Lorem ipsum"]}]} />`}</CODE>,
-          "Doesn't show inside a table"
-        ],
-        [
-          "UL",
-          <CODE>{`list: { title: string, content: string[]}[]`}</CODE>,
-          "An unordered list",
-          <CODE lang="jsx">{`<UL list={[{title: "First item", content: ["Lorem ipsum","Lorem ipsum"]}]} />`}</CODE>,
-          "Doesn't show inside a table"
-        ],
-        [
-          "CODE",
-          <CODE>{`inline: boolean|lang: string`}</CODE>,
-          "A code snippet",
-          <CODE lang="jsx">{`<CODE lang="shell">{"npm i readme-jsx"}</CODE>`}</CODE>,
-          <CODE lang="shell">{"npm i readme-jsx"}</CODE>
-        ],
-        [
-          "A",
-          <CODE>{`href: string`}</CODE>,
-          "A link",
-          <CODE lang="jsx">{`<A href="https://google.com">Click me</A>`}</CODE>,
-          <A href="https://google.com">Click me</A>
-        ],
-        [
-          "TASKS",
-          <CODE>{`list: {title: string, done: boolean}[]`}</CODE>,
-          "A list of tasks",
-          <CODE lang="jsx">{`<TASKS list={[{title: "Refactor", done: false}, {title: "Go to sleep", done: false}]} />`}</CODE>,
-          "Doesn't show inside a table"
-        ],
-        [
-          "COLLAPSIBLE",
-          <CODE>{`title: string`}</CODE>,
-          "A collapsible aka accordion",
-          <CODE lang="jsx">{`<COLLAPSIBLE  title="Show the content">The content</COLLAPSIBLE>`}</CODE>,
-          <COLLAPSIBLE title="Show the content">The content</COLLAPSIBLE>
-        ],
-        [
-          "TABLE",
-          <CODE>{`columns: string[]; rows: string[][];`}</CODE>,
-          "A table, like this one",
-          <CODE lang="jsx">{`<TABLE columns=["Fruit", "Color"]  rows={[["Banana", "Yellow"],["Watermelon","Green"]]}/>`}</CODE>,
-          "Doesn't show inside a table"
-        ],
-        [
-          "IMG",
-          <CODE>{`src: string ; href: string ; alt: string`}</CODE>,
-          "An image",
-          <CODE lang="jsx">{`<IMG src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/cd/Nuvola_emblem-favorite.svg/800px-Nuvola_emblem-favorite.svg.png"/>`}</CODE>,
-          <IMG src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/cd/Nuvola_emblem-favorite.svg/800px-Nuvola_emblem-favorite.svg.png" />
-        ],
-        [
-          "BADGE",
-          <CODE>{`label: string; message: string; link: string; color: string; style: "plastic" or "flat" or "flat-square" or "for-the-badge" or "social"; logo: string; logoColor: string; labelColor: string;`}</CODE>,
-          "A custom badge",
-          <CODE lang="jsx">{`<BADGE label="HELLO" message="WORLD" style="for-the-badge" color="orange" />`}</CODE>,
-          <BADGE
-            label="HELLO"
-            message="WORLD"
-            style="for-the-badge"
-            color="orange"
-          />
-        ]
-      ]}
-    />
-    <BR />
-    <Subheader>Functions</Subheader>
-    <BR />
-    <TABLE
-      columns={["Function", "Arguments", "Description", "Example"]}
-      rows={[
-        [
-          "generateMD",
-          "path: string, options: { linebreak: number; assetsDir: string; packagejson: string; }",
-          "The function which generates the markdown file",
-          <CODE>{`generateMD("./README.jsx").then(() => { console.log("README.md generated !"); process.exit(); });`}</CODE>
-        ],
-        [
-          "importJSX",
-          "path: string",
-          "This function is used to import jsx files inside your README.jsx, since node does not support the JSX engine by default",
-          <CODE>{`const importJSX = require("import-jsx"); const Button = importJSX("../components/Button.jsx");`}</CODE>
-        ]
-      ]}
-    />
-    <BR />
-    <Subheader>Properties</Subheader>
-    <BR />
-    <TABLE
-      columns={["Property", "Description", "Example"]}
-      rows={[
-        [
-          "metadata",
-          "An object which contains the list of metadata properties that can be parsed from the package.json file",
-          <CODE>{`<BADGE label="LICENSE" message={metadata.license}/>`}</CODE>
-        ]
-      ]}
-    />
-    <BR />
+    <QUOTE>
+      The basic user story is to sign up for an account via the signup form.
+      Upon signup, the user will be logged in and taken to a dashboard view. On
+      the dashboard, they will see the current breakdown of their actions by
+      category, a list of actions to add for that day, and an option to show
+      either the weather or a selection of environmental news articles. There
+      will also be additional resources to show where various materials can be
+      recycled on a map and an advanced carbon footprint calculator.
+    </QUOTE>
   </React.Fragment>
 );
