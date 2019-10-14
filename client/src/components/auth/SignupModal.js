@@ -1,5 +1,16 @@
 import React, { Component } from "react";
-import { Form, FormGroup, Label, Input, Button, Modal, ModalHeader, ModalBody, NavLink, Alert } from "reactstrap";
+import {
+  Form,
+  FormGroup,
+  Label,
+  Input,
+  Button,
+  Modal,
+  ModalHeader,
+  ModalBody,
+  NavLink,
+  Alert
+} from "reactstrap";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { register } from "../../actions/authActions";
@@ -36,9 +47,9 @@ class SignupModal extends Component {
 
   onSubmit = e => {
     e.preventDefault();
-    const { name, email, password } = this.state;
+    const { name, email, password, zipcode } = this.state;
 
-    const newUser = { name, email, password };
+    const newUser = { name, email, password, zipcode };
 
     // attempt register
     this.props.register(newUser);
@@ -68,17 +79,41 @@ class SignupModal extends Component {
           Register
         </NavLink>
         <Modal isOpen={this.state.modal} toggle={this.toggle}>
-          <ModalHeader className="modal-header" toggle={this.toggle}><h4 className="modal-text">Register Account</h4></ModalHeader>
+          <ModalHeader className="modal-header" toggle={this.toggle}>
+            <h4 className="modal-text">Register Account</h4>
+          </ModalHeader>
           <ModalBody>
-            {this.state.msg ? <Alert color="danger">{this.state.msg}</Alert> : null}
+            {this.state.msg ? (
+              <Alert color="danger">{this.state.msg}</Alert>
+            ) : null}
             <Form onSubmit={this.onSubmit}>
               <FormGroup>
                 <Label for="name">Name</Label>
-                <Input type="text" name="name" id="name" onChange={this.onChange} />
+                <Input
+                  type="text"
+                  name="name"
+                  id="name"
+                  onChange={this.onChange}
+                />
+              </FormGroup>
+              <FormGroup>
+                <Label for="name">Zip</Label>
+                <Input
+                  type="text"
+                  name="zipcode"
+                  id="zipcode"
+                  onChange={this.onChange}
+                />
               </FormGroup>
               <FormGroup>
                 <Label for="email">Email</Label>
-                <Input type="text" name="email" id="email" onChange={this.onChange} autoComplete="username" />
+                <Input
+                  type="text"
+                  name="email"
+                  id="email"
+                  onChange={this.onChange}
+                  autoComplete="username"
+                />
               </FormGroup>
               <FormGroup>
                 <Label for="password">Password</Label>
@@ -90,7 +125,12 @@ class SignupModal extends Component {
                   autoComplete="new-password"
                 />
               </FormGroup>
-              <Button type="submit" color="dark" style={{ marginTop: "2rem" }} block>
+              <Button
+                type="submit"
+                color="dark"
+                style={{ marginTop: "2rem" }}
+                block
+              >
                 Submit
               </Button>
             </Form>
