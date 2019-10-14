@@ -5,6 +5,10 @@ import "react-datepicker/dist/react-datepicker.css";
 import axios from "axios";
 import "./style.css"
 
+import { addDays } from 'date-fns'
+
+
+
 const moment= require("moment")
 
 class EventList extends Component {
@@ -76,6 +80,8 @@ class EventList extends Component {
         </div><DatePicker className="mb-2"
         selected={this.state.eventDate}
         onChange={this.handleDateChange}
+         includeDates={[new Date(), addDays(new Date(), -1)]}
+        
         inline/>
         <Dropdown size="lg"   isOpen={this.state.dropdownOpen} toggle={this.toggle} >
 

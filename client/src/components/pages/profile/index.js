@@ -35,8 +35,10 @@ class Profile extends Component {
     chartData:[],
     setData: {
               labels:[],
+              points:"",
               datasets:[{
                 data: [],
+              
                 backgroundColor: ["#234d20", "#36802d", "#77ab59", "#c9df8a ", "#f0f7da"],
                 hoverBackgroundColor: [
                   "#234d20",
@@ -112,6 +114,7 @@ notify = () => toast(this.state.message)
     .then(res => {
       var tempLabels =[]
       var tempStats = []
+      var tempPoints =""
 
       res.data.map(item => {
         tempLabels.push(item._id)
@@ -119,13 +122,23 @@ notify = () => toast(this.state.message)
 
       })
 
+      if (tempStats.length) {tempPoints = tempStats.reduce(sumPts)} else { tempPoints =0}
+
+      console.log("Points are " + tempPoints)
+
+      function sumPts(total, num) {
+        return total + num
+      }
+
       console.log(res.data)
       this.setState({
         dayStats: res.data,
         setData:{
           labels:tempLabels,
+          points: tempPoints || 0,
           datasets:[{
             data: tempStats,
+            
             backgroundColor: ["#234d20", "#36802d", "#77ab59", "#c9df8a ", "#f0f7da"],
       hoverBackgroundColor: [
         "#234d20",
