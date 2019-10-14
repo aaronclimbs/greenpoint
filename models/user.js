@@ -10,6 +10,14 @@ const UserSchema = new mongoose.Schema({
     required: true,
     unique: true
   },
+  location: {
+    lat: {
+      type: String
+    },
+    lng: {
+      type: String
+    }
+  },
   password: {
     type: String,
     required: true
