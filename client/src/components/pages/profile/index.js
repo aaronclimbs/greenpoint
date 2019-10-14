@@ -11,6 +11,7 @@ import openSocket from 'socket.io-client'
 import {ToastContainer, toast} from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import "./style.css"
+import emoji from 'react-easy-emoji'
 
 const socket =openSocket('/')
 
@@ -117,6 +118,7 @@ notify = () => toast(this.state.message)
       var tempLabels =[]
       var tempStats = []
       var tempPoints =""
+      var tempMedal=""
 
       res.data.map(item => {
         tempLabels.push(item._id)
@@ -130,11 +132,13 @@ notify = () => toast(this.state.message)
          function Notification(input) {
             switch(true) {
               case ((input >= 1) && (input <= 100)):
-                return console.log("Bronze Medal");
+                return (tempMedal = "🎖	Chocolate Medal",console.log("Chocolate Medal"));
               case ((input >= 101) && (input <= 200)):
-                return console.log("Silver Medal");
-              case ((input >= 201) && (input <= 1000)):
-                return console.log("Gold Medal");
+                return (tempMedal = "🥉 Bronze Medal",console.log("Bronze Medal"));
+              case ((input >= 201) && (input <= 300)):
+                return (tempMedal = "🥈	Silver Medal",console.log("Silver Medal"));
+              case ((input >= 301) && (input <= 1000)):
+                return (tempMedal = "🏆	Gold Medal",console.log("Gold Medal"));
               default:
                 return null;
             }
@@ -148,6 +152,7 @@ notify = () => toast(this.state.message)
       console.log(res.data)
       this.setState({
         dayStats: res.data,
+        medal:tempMedal,
         setData:{
           labels:tempLabels,
           points: tempPoints || 0,
@@ -244,7 +249,7 @@ notify = () => toast(this.state.message)
         <DayList getToday={this.getToday} getTodayStats={this.getTodayStats} today={this.state.today} dayEvents={this.state.dayEvents} userID={this.props.auth.user._id}/>
         </Col>
 
-        <Col md={3} className="text-center"><h5>My Green Points</h5>
+        <Col md={3} className="text-center"><h5>{this.state.medal ? `Today you've earned a ${this.state.medal}`: `No points yet` }</h5>
         <DoughnutChart setData={this.state.setData}></DoughnutChart>
        
         </Col>

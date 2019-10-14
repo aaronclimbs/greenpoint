@@ -53,26 +53,6 @@ module.exports = {
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   },
-  // sumPoints: function(req, res) {
-  //   console.log("User id is " + req.params.id)
-  //   console.log("Date is " + req.params.date)
-  //   db.Log
-  //     .aggregate([
-  //     {$match: { $and: [{userID:ObjectId(req.params.id)}, {eventDate: req.params.date}]}},  
-  //     {$group: {
-  //       _id:"$eventCat",
-  //       totalPoints: {$sum: {$multiply: ["$eventQuantity",'$eventPoints']}}
-  //     }},
-  //     {$sort: {_id: 1}}
-
-  //   ])
-  //     .then(dbModel => res.json(dbModel))
-  //     .catch(err => res.status(422).json(err));
-  // },
-
-
-
-
   create: function(req, res) {
     db.Log
       .create(req.body)
