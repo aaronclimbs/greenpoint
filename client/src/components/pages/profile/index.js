@@ -28,7 +28,7 @@ class Profile extends Component {
     dayStats:[],
     today:moment(new Date()).format("YYYYMMDD"),
     eventDate: new Date(),
-    displayDate: new Date(),
+    displayDate: "",
     queryDate: "",
     message:"",
     chartLabels:[],
@@ -59,11 +59,41 @@ class Profile extends Component {
 notify = () => toast(this.state.message)
     
     
+  dateForward = () => {
+    console.log("Date forward clicked")
+    var newForwardDate = moment(this.state.displayDate).add(1, 'days').format("YYYYMMDD")
+    console.log("Next day is " + newForwardDate)
+
+    this.setState({
+      displayDate: newForwardDate
+     
+    })
+    
+    setTimeout(() => this.getToday(), 500)
+    setTimeout(() => this.getTodayStats(), 500)
   
 
+  }
+
+  dateBack = () => {
+    console.log("Date back clicked")
+    var newBackDate = moment(this.state.displayDate).subtract(1, 'days').format("YYYYMMDD")
+    console.log("Next day is " + newBackDate)
+
+    this.setState({
+      displayDate: newBackDate
+      
+    })
+
+    setTimeout(() => this.getToday(), 500)
+    setTimeout(() => this.getTodayStats(), 500)
+
+  }
+
   getToday = () =>{
+    console.log("Display date in get today is " + this.state.displayDate)
     axios
-    .get("api/logs/"+ this.props.auth.user._id +"/" + this.state.today)
+    .get("api/logs/"+ this.props.auth.user._id +"/" + this.state.displayDate)
     .then(res => {
 
       console.log(res.data)
@@ -78,7 +108,7 @@ notify = () => toast(this.state.message)
 
   getTodayStats = () => {
     axios
-    .get("api/logs/group/"+ this.props.auth.user._id +"/" + this.state.today)
+    .get("api/logs/group/"+ this.props.auth.user._id +"/" + this.state.displayDate)
     .then(res => {
       var tempLabels =[]
       var tempStats = []
@@ -96,6 +126,14 @@ notify = () => toast(this.state.message)
           labels:tempLabels,
           datasets:[{
             data: tempStats,
+            backgroundColor: ["#234d20", "#36802d", "#77ab59", "#c9df8a ", "#f0f7da"],
+      hoverBackgroundColor: [
+        "#234d20",
+        "#36802d",
+        "#77ab59",
+        "#c9df8a",
+        "#f0f7da"
+    ]
        }]
 
         }
@@ -105,6 +143,8 @@ notify = () => toast(this.state.message)
 
   }
 
+  
+
 
   sendSocketIO(msg) {
     socket.emit('Test', msg);
@@ -113,10 +153,20 @@ notify = () => toast(this.state.message)
 
 
   componentDidMount() {
-   
+
+
     this.props.loadList()
-    this.getToday()
-    this.getTodayStats()
+
+    this.setState({
+      displayDate: moment(new Date()).format("YYYYMMDD"),
+    })
+
+
+    setTimeout(() => this.getToday(), 500)
+    setTimeout(() => this.getTodayStats(), 500)
+   
+    
+  
 
     socket.on("Weather", data => {
       console.log(data)
@@ -133,10 +183,11 @@ notify = () => toast(this.state.message)
 
 
   render() {
+   
 
     return <Container>
        <ToastContainer />
-      <Row className="justify-content-md-center mb-3 mt-3"> <h4 >Welcome to your Green Dashboard for {moment(this.state.today).format("dddd MMMM Do YYYY")} </h4>
+      <Row className="justify-content-md-center mb-3 mt-3"> <h4 >Welcome to your Green Dashboard, {this.props.auth.user.name} </h4>
       <Col md={12} className="mt-3" >
         <Row className="justify-content-md-center">
         <div className="float-left text-center "> <img src="../images/recycle.jpg"/><div>Re Use</div> </div>
@@ -147,6 +198,12 @@ notify = () => toast(this.state.message)
         </Row>
     
       </Col>
+      </Row>
+      <Row className="justify-content-md-center">
+        <div><i className="fa fa-caret-left fa-2x mr-3" onClick={this.dateBack}></i></div>
+        <div> Displaying data for {moment(this.state.displayDate).format("dddd MMMM Do, YYYY")}</div>
+        <div><i className="fa fa-caret-right fa-2x ml-3" aria-hidden="true" onClick={this.dateForward}></i></div>
+      
       </Row>
      
       <Row className="mt-3">

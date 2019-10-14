@@ -21,9 +21,12 @@ class DayStats extends Component {
 
       render() {
 
-        return (
+        const noDayStats = (
+          <div>No results to display</div>
+        )
 
-<Table>
+        const dayStats = (
+          <Table>
          
          <thead>
            <tr>
@@ -43,6 +46,14 @@ class DayStats extends Component {
          })}
          </tbody>
        </Table>
+
+        )
+
+        return (
+
+<div>
+          {this.props.dayStats.length ? dayStats : noDayStats}
+        </div>
 
 
         )
