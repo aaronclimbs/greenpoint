@@ -11,7 +11,6 @@ import openSocket from 'socket.io-client'
 import {ToastContainer, toast} from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import "./style.css"
-import emoji from 'react-easy-emoji'
 
 const socket =openSocket('/')
 
