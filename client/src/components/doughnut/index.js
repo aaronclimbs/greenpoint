@@ -9,17 +9,30 @@ class DoughnutChart extends Component {
        
   }
   render() {
-   
-    return (
+
+    const noChartData = (
+      <div>No results to display</div>
+    )
+
+    const chartData = (
       <div>
         
-        <div >
-          <Doughnut width={250} height={350}   options={{
-          responsive: true,
-          maintainAspectRatio: true,
-        }} data={this.props.setData} />
-        </div>
+      <div >
+        <Doughnut width={250} height={350}   options={{
+        responsive: true,
+        maintainAspectRatio: true,
+      }} data={this.props.setData} />
       </div>
+    </div>
+
+    )
+   
+    return (
+
+      <div>
+      {this.props.setData.labels.length ? chartData : noChartData}
+    </div>
+   
     );
   }
 }
