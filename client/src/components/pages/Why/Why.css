@@ -1,4 +1,43 @@
 .whyStatement {
-    text-align: center;
-    padding: 5px 10px
+    color: #36802d;
+    font-weight: bold;
+    margin-left: 15%;
+    margin-right: 15%;
 }
+
+.whyHeader {
+    text-align: center;
+    padding-bottom: 30px;
+    font-size: 34px;
+    padding-top: 5%;
+}
+
+
+.firstPara {
+display: inline-block;
+text-indent: 40px;
+font-size: 22px;
+}
+
+.hoverOne {
+    color: red;
+}
+
+    .leftPic {
+        float: left;
+        width: 27%;
+        padding: 0 20px 20px 0;
+    }
+
+    .secondPara {
+        display: inline-block;
+        text-indent: 40px;
+        font-size: 22px;
+
+    }
+
+    .rightPic {
+        float: right;
+        width: 30%;
+        padding: 0 20px 20px 0;
+    }
