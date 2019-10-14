@@ -33,6 +33,7 @@ class Profile extends Component {
     message:"",
     chartLabels:[],
     chartData:[],
+    medal:"",
     setData: {
               labels:[],
               points:"",
@@ -108,6 +109,7 @@ notify = () => toast(this.state.message)
 
   }
 
+
   getTodayStats = () => {
     axios
     .get("api/logs/group/"+ this.props.auth.user._id +"/" + this.state.displayDate)
@@ -124,8 +126,21 @@ notify = () => toast(this.state.message)
 
       if (tempStats.length) {tempPoints = tempStats.reduce(sumPts)} else { tempPoints =0}
 
-      console.log("Points are " + tempPoints)
+      console.log("Points are " + tempPoints + Notification(tempPoints))
+         function Notification(input) {
+            switch(true) {
+              case ((input >= 1) && (input <= 100)):
+                return console.log("Bronze Medal");
+              case ((input >= 101) && (input <= 200)):
+                return console.log("Silver Medal");
+              case ((input >= 201) && (input <= 1000)):
+                return console.log("Gold Medal");
+              default:
+                return null;
+            }
+          };
 
+      // Notification(tempPoints)
       function sumPts(total, num) {
         return total + num
       }
@@ -151,12 +166,13 @@ notify = () => toast(this.state.message)
 
         }
       })
+
    
     })
 
   }
 
-  
+
 
 
   sendSocketIO(msg) {
