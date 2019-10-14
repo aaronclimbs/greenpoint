@@ -20,6 +20,7 @@ class DayList extends Component {
         .then( res => {
           this.props.getToday()
           this.props.getTodayStats()
+          this.props.getMonth()
          
         })
         
@@ -35,6 +36,7 @@ class DayList extends Component {
         .then( res => {
           this.props.getToday()
           this.props.getTodayStats()
+          this.props.getMonth()
         })
         
 

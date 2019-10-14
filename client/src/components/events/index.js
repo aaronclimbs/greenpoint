@@ -18,7 +18,8 @@ class EventList extends Component {
         dropdownValue:"Choose a Green Action",
         eventDate: new Date(),
         displayDate: new Date(),
-        queryDate: ""
+        eventMonth: new Date().getMonth()+1,
+        eventYear: new Date().getFullYear()
       };
 
 
@@ -40,7 +41,9 @@ class EventList extends Component {
             eventDate: moment(this.state.eventDate).format("YYYYMMDD"),
             eventQuantity: 1,
             eventPoints: e.currentTarget.getAttribute('data-points'),
-            eventCat: e.currentTarget.getAttribute('data-category')
+            eventCat: e.currentTarget.getAttribute('data-category'),
+            eventMonth: this.state.eventMonth,
+            eventYear: this.state.eventYear
 
 
           }

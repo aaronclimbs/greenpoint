@@ -53,6 +53,23 @@ module.exports = {
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   },
+  groupByEventMonth: function(req, res) {
+    console.log("User id is " + req.params.id)
+    console.log("Month is " + req.params.month)
+    var month = parseInt(req.params.month)
+    db.Log
+      .aggregate([
+      {$match: { $and: [{userID:ObjectId(req.params.id)}, {eventMonth: month}]}},  
+      {$group: {
+        _id:"$eventCat",
+        totalPoints: {$sum: {$multiply: ["$eventQuantity",'$eventPoints']}}
+      }},
+      {$sort: {_id: 1}}
+
+    ])
+      .then(dbModel => res.json(dbModel))
+      .catch(err => res.status(422).json(err));
+  },
   create: function(req, res) {
     db.Log
       .create(req.body)

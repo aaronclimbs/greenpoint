@@ -8,7 +8,9 @@ const logsSchema = new Schema({
   eventPoints: {type: Number},
   eventDate: {type: String},
   dateEntered: { type: Date, default: Date.now },
-  eventQuantity: Number
+  eventQuantity: {type: Number},
+  eventMonth: {type: Number},
+  eventYear: {type: String}
 });
 
 const logs = mongoose.model("Log", logsSchema);

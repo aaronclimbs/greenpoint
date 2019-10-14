@@ -24,6 +24,12 @@ router
   .put(logsController.update)
   .delete(logsController.remove);
 
+  router
+  .route("/month/:id/:month")
+  .get(logsController.groupByEventMonth)
+  .put(logsController.update)
+  .delete(logsController.remove);
+
 
   
 

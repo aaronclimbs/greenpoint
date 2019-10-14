@@ -26,14 +26,37 @@ class Profile extends Component {
     dropdownValue:"Choose a Green Action",
     dayEvents: [],
     dayStats:[],
+    monthStats: [],
     today:moment(new Date()).format("YYYYMMDD"),
     eventDate: new Date(),
     displayDate: "",
-    queryDate: "",
+    currentMonth: new Date().getMonth()+ 1,
     message:"",
     chartLabels:[],
     chartData:[],
     medal:"",
+    monthMedal:"",
+    setMonthData: {
+      labels:[],
+      points:"",
+      datasets:[{
+        data: [],
+        options: {
+          legend: {
+             display: false
+          }
+        },
+      
+        backgroundColor: ["#234d20", "#36802d", "#77ab59", "#c9df8a ", "#f0f7da"],
+        hoverBackgroundColor: [
+          "#234d20",
+          "#36802d",
+          "#77ab59",
+          "#c9df8a",
+          "#f0f7da"
+      ]}]
+    },
+
     setData: {
               labels:[],
               points:"",
@@ -104,6 +127,72 @@ notify = () => toast(this.state.message)
         dayEvents: res.data
         
       })
+   
+    })
+
+  }
+
+  getMonth = () =>{
+    axios
+    .get("api/logs/month/"+ this.props.auth.user._id +"/" + this.state.currentMonth)
+    .then(res => {
+      var tempMonthLabels =[]
+      var tempMonthStats = []
+      var tempMonthPoints =""
+      var tempMonthMedal=""
+
+      res.data.map(item => {
+        tempMonthLabels.push(item._id)
+        tempMonthStats.push(item.totalPoints)
+
+      })
+
+      if (tempMonthStats.length) {tempMonthPoints = tempMonthStats.reduce(sumPts)} else { tempMonthPoints =0}
+
+      console.log("Points are " + tempMonthPoints + Notification(tempMonthPoints))
+         function Notification(input) {
+            switch(true) {
+              case ((input >= 1) && (input <= 100)):
+                return (tempMonthMedal = "🎖	Chocolate Medal",console.log("Chocolate Medal"));
+              case ((input >= 101) && (input <= 200)):
+                return (tempMonthMedal = "🥉 Bronze Medal",console.log("Bronze Medal"));
+              case ((input >= 201) && (input <= 300)):
+                return (tempMonthMedal = "🥈	Silver Medal",console.log("Silver Medal"));
+              case ((input >= 301) && (input <= 1000)):
+                return (tempMonthMedal = "🏆	Gold Medal",console.log("Gold Medal"));
+              default:
+                return null;
+            }
+          };
+
+      // Notification(tempPoints)
+      function sumPts(total, num) {
+        return total + num
+      }
+
+      console.log(res.data)
+      this.setState({
+        monthStats: res.data,
+        monthMedal: tempMonthMedal,
+        setMonthData:{
+          labels:tempMonthLabels,
+          points: tempMonthPoints || 0,
+          datasets:[{
+            data: tempMonthStats,
+            
+            backgroundColor: ["#234d20", "#36802d", "#77ab59", "#c9df8a ", "#f0f7da"],
+      hoverBackgroundColor: [
+        "#234d20",
+        "#36802d",
+        "#77ab59",
+        "#c9df8a",
+        "#f0f7da"
+    ]
+       }]
+
+        } 
+      })
+
    
     })
 
@@ -197,6 +286,7 @@ notify = () => toast(this.state.message)
 
     setTimeout(() => this.getToday(), 500)
     setTimeout(() => this.getTodayStats(), 500)
+    setTimeout(() => this.getMonth(), 500)
    
     
   
@@ -241,11 +331,11 @@ notify = () => toast(this.state.message)
      
       <Row className="mt-3">
         <Col md={3} className="text-center"><h5>Add Green Events</h5>
-        <EventList getToday={this.getToday} getTodayStats={this.getTodayStats} events={this.props.events.events} userID={this.props.auth.user._id}/>
+        <EventList getToday={this.getToday} getTodayStats={this.getTodayStats} getMonth={this.getMonth} events={this.props.events.events} userID={this.props.auth.user._id}/>
         </Col>
 
         <Col md={6} className="text-center"><h5>My Green Events </h5>
-        <DayList getToday={this.getToday} getTodayStats={this.getTodayStats} today={this.state.today} dayEvents={this.state.dayEvents} userID={this.props.auth.user._id}/>
+        <DayList getToday={this.getToday} getTodayStats={this.getTodayStats} today={this.state.today} dayEvents={this.state.dayEvents} getMonth={this.getMonth} userID={this.props.auth.user._id}/>
         </Col>
 
         <Col md={3} className="text-center"><h5>{this.state.medal ? `Today you've earned a ${this.state.medal}`: `No points yet` }</h5>
@@ -257,8 +347,8 @@ notify = () => toast(this.state.message)
       <Row>
         <Col md={3}></Col>
         <Col md={6}></Col>
-        <Col md={3}>
-        <DayStats getTodayStats={this.getTodayStats} today={this.state.today} dayStats={this.state.dayStats} userID={this.props.auth.user._id}/>
+        <Col md={3} className="text-center"><h5>{this.state.monthMedal ? "This "  + moment(this.state.eventMonth).format("MMMM") + " you have earned a " + (this.state.monthMedal) : `No points yet` }</h5>
+        <DoughnutChart setData={this.state.setMonthData}></DoughnutChart>
         </Col>
 
       </Row>
