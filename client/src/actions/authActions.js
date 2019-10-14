@@ -36,7 +36,7 @@ export const loadUser = () => (dispatch, getState) => {
 
 // register user
 
-export const register = ({ name, email, password }) => dispatch => {
+export const register = ({ name, email, password, zipcode }) => dispatch => {
   // headers
   const config = {
     headers: {
@@ -46,7 +46,7 @@ export const register = ({ name, email, password }) => dispatch => {
 
   // request body
 
-  const body = JSON.stringify({ name, email, password });
+  const body = JSON.stringify({ name, email, password, zipcode });
 
   axios
     .post("api/users", body, config)
@@ -57,7 +57,9 @@ export const register = ({ name, email, password }) => dispatch => {
       })
     )
     .catch(err => {
-      dispatch(returnErrors(err.response.data, err.response.status, "REGISTER_FAIL"));
+      dispatch(
+        returnErrors(err.response.data, err.response.status, "REGISTER_FAIL")
+      );
       dispatch({ type: REGISTER_FAIL });
     });
 };
@@ -94,7 +96,9 @@ export const login = ({ email, password }) => dispatch => {
       })
     )
     .catch(err => {
-      dispatch(returnErrors(err.response.data, err.response.status, "LOGIN_FAIL"));
+      dispatch(
+        returnErrors(err.response.data, err.response.status, "LOGIN_FAIL")
+      );
       dispatch({ type: LOGIN_FAIL });
     });
 };

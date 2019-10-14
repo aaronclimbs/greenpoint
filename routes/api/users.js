@@ -2,12 +2,27 @@ const router = require("express").Router();
 const bcrypt = require("bcrypt");
 // require("dotenv").config();
 const jwt = require("jsonwebtoken");
-const { User, Book } = require("../../models/");
+const { User } = require("../../models/");
 const auth = require("../../middleware/auth");
+const axios = require("axios");
 
 // signup user
-router.post("/", (req, res) => {
-  const { name, email, password } = req.body;
+router.post("/", async (req, res) => {
+  const { name, email, password, zipcode } = req.body;
+  console.log(JSON.stringify(req.body));
+  let gpsCoords = "";
+
+  if (zipcode) {
+    // get gps coords
+    gpsCoords = await axios
+      .get(
+        `https://www.zipcodeapi.com/rest/${process.env.API_ZIPCODE}/info.json/${zipcode}/degrees`
+      )
+      .then(response => {
+        return response.data;
+      })
+      .catch(err => console.log(err));
+  }
 
   // basic validation
   if (!name || !email || !password) {
@@ -21,7 +36,11 @@ router.post("/", (req, res) => {
     const newUser = new User({
       name,
       email,
-      password
+      password,
+      location: {
+        lat: gpsCoords.lat,
+        lng: gpsCoords.lng
+      }
     });
 
     // create salt and hash
@@ -38,7 +57,15 @@ router.post("/", (req, res) => {
               if (err) throw err;
               res.json({
                 token,
-                user: { id: user._id, name: user.name, email: user.email }
+                user: {
+                  id: user._id,
+                  name: user.name,
+                  email: user.email,
+                  location: {
+                    lat: user.location.lat,
+                    lng: user.location.lng
+                  }
+                }
               });
             }
           );
