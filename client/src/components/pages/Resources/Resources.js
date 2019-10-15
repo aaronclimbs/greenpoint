@@ -148,7 +148,7 @@ getLocationData = e => {
                   {/* Article Tab/Scraping starts here */}
                   <ListGroup>
                     <ListGroupItem>
-                      <Card>
+                      <Card className="cardBox">
                         <CardBody>
                           <CardImg className="articleImage" src={item.image} />
 

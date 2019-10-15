@@ -13,6 +13,8 @@ height: 50%;
 
 .articleTitle {
     color: #36802d; 
+    font-weight: bold;
+    text-shadow: .5px .5px #212529;
 }
 
 .resourcesTabs {
@@ -34,4 +36,10 @@ margin-right: auto;
     display: inline-block;
     zoom:1;
     text-align: center;
+}
+
+.cardBox {
+    margin-right: 25%;
+    margin-left: 25%;
+    background-color: lightgray;
 }
