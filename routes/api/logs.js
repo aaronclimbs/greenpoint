@@ -30,6 +30,12 @@ router
   .put(logsController.update)
   .delete(logsController.remove);
 
+  router
+  .route("/monthUserStats/:month/:year")
+  .get(logsController.groupByUserStatsMonth)
+  .put(logsController.update)
+  .delete(logsController.remove);
+
 
   
 
