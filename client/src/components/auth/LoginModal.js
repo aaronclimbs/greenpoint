@@ -55,7 +55,7 @@ class LoginModal extends Component {
           Login
         </NavLink>
         <Modal isOpen={this.state.modal} toggle={this.toggle}>
-          <ModalHeader className="modal-header" toggle={this.toggle}><h4 className="modal-text">Login</h4></ModalHeader>
+          <ModalHeader className="login-modal-header" toggle={this.toggle}><h4 className="login-modal-text">Login</h4></ModalHeader>
           <ModalBody>
             {this.state.msg ? <Alert color="danger">{this.state.msg}</Alert> : null}
             <Form onSubmit={this.onSubmit}>
