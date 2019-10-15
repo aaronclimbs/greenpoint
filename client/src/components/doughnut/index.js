@@ -52,8 +52,9 @@ Chart.helpers.extend(Chart.controllers.doughnut.prototype, {
       <div >
         <Doughnut width={250} height={350}   options={{
         responsive: true,
+        legend: {display: this.props.setData.display},
         maintainAspectRatio: true,
-      }} data={this.props.setData} />
+      }}  data={this.props.setData} />
       </div>
     </div>
 
