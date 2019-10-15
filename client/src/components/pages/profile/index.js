@@ -39,13 +39,9 @@ class Profile extends Component {
     setMonthData: {
       labels:[],
       points:"",
+     display:false,
       datasets:[{
         data: [],
-        options: {
-          legend: {
-             display: false
-          }
-        },
       
         backgroundColor: ["#234d20", "#36802d", "#77ab59", "#c9df8a ", "#f0f7da"],
         hoverBackgroundColor: [
@@ -60,6 +56,7 @@ class Profile extends Component {
     setData: {
               labels:[],
               points:"",
+              display: true,
               datasets:[{
                 data: [],
               
@@ -177,6 +174,7 @@ notify = () => toast(this.state.message)
         setMonthData:{
           labels:tempMonthLabels,
           points: tempMonthPoints || 0,
+          display: false,
           datasets:[{
             data: tempMonthStats,
             
@@ -244,6 +242,7 @@ notify = () => toast(this.state.message)
         setData:{
           labels:tempLabels,
           points: tempPoints || 0,
+          display: true,
           datasets:[{
             data: tempStats,
             
@@ -348,7 +347,7 @@ notify = () => toast(this.state.message)
         <Col md={3}></Col>
         <Col md={6}></Col>
         <Col md={3} className="text-center"><h5>{this.state.monthMedal ? "This "  + moment(this.state.eventMonth).format("MMMM") + " you have earned a " + (this.state.monthMedal) : `No points yet` }</h5>
-        <DoughnutChart setData={this.state.setMonthData}></DoughnutChart>
+        <DoughnutChart  options={this.state.setMonthData} setData={this.state.setMonthData}></DoughnutChart>
         </Col>
 
       </Row>
