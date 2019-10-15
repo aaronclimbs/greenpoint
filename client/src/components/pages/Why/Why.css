@@ -58,6 +58,31 @@ font-size: 22px;
         color:white;
         position: relative; 
      }
+
+     
+    .why-modal-fire {
+        border-bottom: none;
+        padding: 15px 15px 0 15px;
+        background-image: url("/images/recpic5.jpg");
+        height: 250px;
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center center;
+        color:white;
+        position: relative; 
+     }
+
+    .why-modal-ice {
+        border-bottom: none;
+        padding: 15px 15px 0 15px;
+        background-image: url("/images/recpic6.jpg");
+        height: 250px;
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center center;
+        color:white;
+        position: relative; 
+     }
     
     .why-modal-text {
         position: relative;
@@ -100,8 +125,10 @@ font-size: 22px;
         }
       }
 
-      .close {
-          float: right;
+      .hoverText {
+          text-align: center;
+          color: red;
+          font-size: 12px;
+          margin-bottom: 20px;
       }
 
-      
