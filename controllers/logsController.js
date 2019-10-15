@@ -78,22 +78,13 @@ module.exports = {
     var year = parseInt(req.params.year)
     db.Log
       .aggregate([
-        {$lookup: {
-          from: "users",
-          localField: "userID",
-          foreignField: "_id",
-          as: "user_info"
-        }},
-        {$unwind: "$user_info"},
-     {$match: { $and: [ {eventMonth: month}, {eventYear: year}]}},  
-     {$group: {
-   
-       _id: "$user_info.name", count: {$sum: {$multiply: ["$eventPoints", "$eventQuantity"] }}}},
-    { 
-       $sort: 
-       {"count":-1 }
-     },
-     {$limit:10}
+      {$match: { $and: [ {eventMonth: month}, {eventYear: year}]}},  
+      {$group: {
+        _id:"$eventCat",
+        _id:"$userID",
+        totalPoints: {$sum: {$multiply: ["$eventQuantity",'$eventPoints']}}
+      }},
+      {$sort: {_id: 1}}
 
     ])
       .then(dbModel => res.json(dbModel))
