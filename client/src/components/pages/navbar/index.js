@@ -29,7 +29,7 @@ class AppNavbar extends Component {
 
     const authLinks = (
       <Fragment>
-        <NavItem className="navbar-text mr-3">{user ? "Welcome " + user.name : ""}</NavItem>
+
         <NavItem>
         </NavItem>
         <NavItem>
@@ -47,7 +47,14 @@ class AppNavbar extends Component {
             Why GreenPoint?
           </NavLink>
         </NavItem>
+        <NavItem>
+          <NavLink tag={Link} to={`/chat?name=${user ? user.name : "Guest"}&room=GreenPoint%20Support`}>
+            Support Chat
+          </NavLink>
+        </NavItem>
         <Logout />
+
+        
       </Fragment>
     );
 

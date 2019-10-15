@@ -15,7 +15,8 @@ import Landing from "./components/pages/landing/";
 import EventsList from "./components/events/";
 import DoughnutChart from "./components/doughnut/";
 import LineChart from "./components/line/";
-
+import Chat from './components/Chat/Chat';
+import Join from './components/Join/Join';
 
 class App extends Component {
   render() {
@@ -34,6 +35,8 @@ class App extends Component {
             <Route path="/stats" component={EventsList} />
             <Route path="/doughnut" component={DoughnutChart} />
             <Route path="/line" component={LineChart} />
+            <Route path="/join" component={Join} />
+            <Route path="/chat" component={Chat} />
             <Route component={NotFound} />
           </Switch>
         </div>
@@ -52,3 +55,4 @@ export default connect(
   mapStateToProps,
   {}
 )(App);
+
