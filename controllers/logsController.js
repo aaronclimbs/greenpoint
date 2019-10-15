@@ -77,19 +77,29 @@ module.exports = {
     var month = parseInt(req.params.month)
     var year = parseInt(req.params.year)
     db.Log
-      .aggregate([
-      {$match: { $and: [ {eventMonth: month}, {eventYear: year}]}},  
-      {$group: {
-        _id:"$eventCat",
-        _id:"$userID",
-        totalPoints: {$sum: {$multiply: ["$eventQuantity",'$eventPoints']}}
+    .aggregate([
+      {$lookup: {
+        from: "users",
+        localField: "userID",
+        foreignField: "_id",
+        as: "user_info"
       }},
-      {$sort: {_id: 1}}
+      {$unwind: "$user_info"},
+   {$match: { $and: [ {eventMonth: month}, {eventYear: year}]}},  
+   {$group: {
+ 
+     _id: "$user_info.name", count: {$sum: {$multiply: ["$eventPoints", "$eventQuantity"] }}}},
+  { 
+     $sort: 
+     {"count":-1 }
+   },
+   {$limit:10}
 
-    ])
-      .then(dbModel => res.json(dbModel))
-      .catch(err => res.status(422).json(err));
-  },
+  ])
+    .then(dbModel => res.json(dbModel))
+    .catch(err => res.status(422).json(err));
+},
+
   create: function(req, res) {
     db.Log
       .create(req.body)
