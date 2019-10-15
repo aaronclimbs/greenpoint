@@ -55,6 +55,7 @@ class EventList extends Component {
             {console.log(res.data)
                 this.props.getToday()
                 this.props.getTodayStats()
+                this.props.getMonth()
 
         })
       };

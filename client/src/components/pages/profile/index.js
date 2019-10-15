@@ -31,6 +31,7 @@ class Profile extends Component {
     eventDate: new Date(),
     displayDate: "",
     currentMonth: new Date().getMonth()+ 1,
+    currentYear: new Date().getFullYear(),
     message:"",
     chartLabels:[],
     chartData:[],
@@ -131,7 +132,7 @@ notify = () => toast(this.state.message)
 
   getMonth = () =>{
     axios
-    .get("api/logs/month/"+ this.props.auth.user._id +"/" + this.state.currentMonth)
+    .get("api/logs/month/"+ this.props.auth.user._id +"/" + this.state.currentMonth + "/" + this.state.currentYear)
     .then(res => {
       var tempMonthLabels =[]
       var tempMonthStats = []

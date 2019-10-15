@@ -57,9 +57,10 @@ module.exports = {
     console.log("User id is " + req.params.id)
     console.log("Month is " + req.params.month)
     var month = parseInt(req.params.month)
+    var year = parseInt(req.params.year)
     db.Log
       .aggregate([
-      {$match: { $and: [{userID:ObjectId(req.params.id)}, {eventMonth: month}]}},  
+      {$match: { $and: [{userID:ObjectId(req.params.id)}, {eventMonth: month}, {eventYear: year}]}},  
       {$group: {
         _id:"$eventCat",
         totalPoints: {$sum: {$multiply: ["$eventQuantity",'$eventPoints']}}
