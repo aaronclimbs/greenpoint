@@ -1,5 +1,5 @@
-import React, { Component, useState } from "react";
-import { Form, FormGroup, Label, Input, NavLink, Alert, Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
+import React, { Component } from "react";
+import { Modal, ModalHeader, ModalBody } from 'reactstrap';
 import "./Why.css"
 
 
