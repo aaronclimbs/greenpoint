@@ -10,7 +10,7 @@ const logsSchema = new Schema({
   dateEntered: { type: Date, default: Date.now },
   eventQuantity: {type: Number},
   eventMonth: {type: Number},
-  eventYear: {type: String}
+  eventYear: {type: Number}
 });
 
 const logs = mongoose.model("Log", logsSchema);

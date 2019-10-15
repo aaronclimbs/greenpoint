@@ -25,7 +25,7 @@ router
   .delete(logsController.remove);
 
   router
-  .route("/month/:id/:month")
+  .route("/month/:id/:month/:year")
   .get(logsController.groupByEventMonth)
   .put(logsController.update)
   .delete(logsController.remove);
