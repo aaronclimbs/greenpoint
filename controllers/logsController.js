@@ -71,6 +71,25 @@ module.exports = {
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   },
+  groupByUserStatsMonth: function(req, res) {
+    
+    
+    var month = parseInt(req.params.month)
+    var year = parseInt(req.params.year)
+    db.Log
+      .aggregate([
+      {$match: { $and: [ {eventMonth: month}, {eventYear: year}]}},  
+      {$group: {
+        _id:"$eventCat",
+        _id:"$userID",
+        totalPoints: {$sum: {$multiply: ["$eventQuantity",'$eventPoints']}}
+      }},
+      {$sort: {_id: 1}}
+
+    ])
+      .then(dbModel => res.json(dbModel))
+      .catch(err => res.status(422).json(err));
+  },
   create: function(req, res) {
     db.Log
       .create(req.body)
