@@ -4,13 +4,13 @@
     height: 100px;
     margin-left:0px;
   }
-
+  
 @keyframes App-logo-spin {
     from { transform: rotate(0deg); }
     to { transform: rotate(360deg); }
   }
 
-  .modal-header {
+  .login-modal-header {
     border-bottom: none;
     padding: 15px 15px 0 15px;
     background-image: url("/images/login-img.jpg");
@@ -19,14 +19,10 @@
     background-repeat: no-repeat;
     background-position: center center;
     color:white;
-    position: relative;
-    
-
-   
-  
+    position: relative;  
 }
 
-.modal-text {
+.login-modal-text {
     position:absolute;
     bottom:0;
     right:0;
