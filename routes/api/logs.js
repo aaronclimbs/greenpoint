@@ -24,6 +24,23 @@ router
   .put(logsController.update)
   .delete(logsController.remove);
 
+  router
+  .route("/month/:id/:month/:year")
+  .get(logsController.groupByEventMonth)
+  .put(logsController.update)
+  .delete(logsController.remove);
+
+  router
+  .route("/monthUserStats/:month/:year")
+  .get(logsController.groupByUserStatsMonth)
+  .put(logsController.update)
+  .delete(logsController.remove);
+
+  router
+  .route("/monthCatStats/:month/:year")
+  .get(logsController.groupByUserCatStatsMonth)
+  .put(logsController.update)
+  .delete(logsController.remove);
 
   
 

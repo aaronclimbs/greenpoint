@@ -5,6 +5,10 @@ import "react-datepicker/dist/react-datepicker.css";
 import axios from "axios";
 import "./style.css"
 
+import { addDays } from 'date-fns'
+
+
+
 const moment= require("moment")
 
 class EventList extends Component {
@@ -14,7 +18,8 @@ class EventList extends Component {
         dropdownValue:"Choose a Green Action",
         eventDate: new Date(),
         displayDate: new Date(),
-        queryDate: ""
+        eventMonth: new Date().getMonth()+1,
+        eventYear: new Date().getFullYear()
       };
 
 
@@ -36,7 +41,9 @@ class EventList extends Component {
             eventDate: moment(this.state.eventDate).format("YYYYMMDD"),
             eventQuantity: 1,
             eventPoints: e.currentTarget.getAttribute('data-points'),
-            eventCat: e.currentTarget.getAttribute('data-category')
+            eventCat: e.currentTarget.getAttribute('data-category'),
+            eventMonth: this.state.eventMonth,
+            eventYear: this.state.eventYear
 
 
           }
@@ -48,6 +55,7 @@ class EventList extends Component {
             {console.log(res.data)
                 this.props.getToday()
                 this.props.getTodayStats()
+                this.props.getMonth()
 
         })
       };
@@ -76,6 +84,8 @@ class EventList extends Component {
         </div><DatePicker className="mb-2"
         selected={this.state.eventDate}
         onChange={this.handleDateChange}
+         includeDates={[new Date(), addDays(new Date(), -1)]}
+        
         inline/>
         <Dropdown size="lg"   isOpen={this.state.dropdownOpen} toggle={this.toggle} >
 

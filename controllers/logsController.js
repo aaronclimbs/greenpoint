@@ -53,6 +53,80 @@ module.exports = {
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   },
+  groupByEventMonth: function(req, res) {
+    console.log("User id is " + req.params.id)
+    console.log("Month is " + req.params.month)
+    var month = parseInt(req.params.month)
+    var year = parseInt(req.params.year)
+    db.Log
+      .aggregate([
+      {$match: { $and: [{userID:ObjectId(req.params.id)}, {eventMonth: month}, {eventYear: year}]}},  
+      {$group: {
+        _id:"$eventCat",
+        totalPoints: {$sum: {$multiply: ["$eventQuantity",'$eventPoints']}}
+      }},
+      {$sort: {_id: 1}}
+
+    ])
+      .then(dbModel => res.json(dbModel))
+      .catch(err => res.status(422).json(err));
+  },
+  groupByUserStatsMonth: function(req, res) {
+    
+    
+    var month = parseInt(req.params.month)
+    var year = parseInt(req.params.year)
+    db.Log
+    .aggregate([
+      {$lookup: {
+        from: "users",
+        localField: "userID",
+        foreignField: "_id",
+        as: "user_info"
+      }},
+      {$unwind: "$user_info"},
+   {$match: { $and: [ {eventMonth: month}, {eventYear: year}]}},  
+   {$group: {
+ 
+     _id: "$user_info.name", count: {$sum: {$multiply: ["$eventPoints", "$eventQuantity"] }}}},
+  { 
+     $sort: 
+     {"count":-1 }
+   },
+   {$limit:10}
+
+  ])
+    .then(dbModel => res.json(dbModel))
+    .catch(err => res.status(422).json(err));
+},
+groupByUserCatStatsMonth: function(req, res) {
+    
+    
+  var month = parseInt(req.params.month)
+  var year = parseInt(req.params.year)
+  db.Log
+  .aggregate([
+    {$lookup: {
+      from: "users",
+      localField: "userID",
+      foreignField: "_id",
+      as: "user_info"
+    }},
+    {$unwind: "$user_info"},
+ {$match: { $and: [ {eventMonth: month}, {eventYear: year}]}},  
+ {$group: {
+
+   _id: "$user_info.name", count: {$sum: {$multiply: ["$eventPoints", "$eventQuantity"] }}}},
+{ 
+   $sort: 
+   {"count":-1 }
+ },
+ {$limit:10}
+
+])
+  .then(dbModel => res.json(dbModel))
+  .catch(err => res.status(422).json(err));
+},
 
   create: function(req, res) {
     db.Log

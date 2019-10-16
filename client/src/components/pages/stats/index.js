@@ -17,7 +17,7 @@ const socket =openSocket('/')
 const moment= require("moment")
 
 
-class Profile extends Component {
+class Stats extends Component {
 
 
 
@@ -149,7 +149,7 @@ notify = () => toast(this.state.message)
 
   getMonth = () =>{
     axios
-    .get("api/logs/month/"+ this.props.auth.user._id +"/" + this.state.currentMonth + "/" + this.state.currentYear)
+    .get("api/logs/monthUserStats/" + this.state.currentMonth + "/" + this.state.currentYear)
     .then(res => {
       var tempMonthLabels =[]
       var tempMonthStats = []
@@ -383,4 +383,4 @@ const mapStateToProps = state => {
 export default connect(
   mapStateToProps,
   { loadList }
-)(Profile);
+)(Stats);

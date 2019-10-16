@@ -20,6 +20,7 @@ class DayList extends Component {
         .then( res => {
           this.props.getToday()
           this.props.getTodayStats()
+          this.props.getMonth()
          
         })
         
@@ -35,6 +36,7 @@ class DayList extends Component {
         .then( res => {
           this.props.getToday()
           this.props.getTodayStats()
+          this.props.getMonth()
         })
         
 
@@ -51,12 +53,12 @@ class DayList extends Component {
 
       render() {
 
-        return (
-
-        
-       
-            
-            <div className="day-list">
+        const noDayData = (
+          <div>No results to display</div>
+        )
+   
+        const dayData = (
+          <div className="day-list">
         <Table hover size="md" bordered striped className="day-list" modifiers={{
             setMaxHeight: {
                 enabled: true,
@@ -84,7 +86,8 @@ class DayList extends Component {
         
         <tbody >
             
-        {this.props.dayEvents.map((item, index) => {
+      
+         {this.props.dayEvents.map((item, index) => {
             return(
           <tr key={index}>
             
@@ -104,15 +107,26 @@ class DayList extends Component {
         />
             </td>
             <td>
-            <i className="col icon-remove float-right" data-id={item._id} onClick={this.delListItem}></i>
+            <i className="col fa fa-minus-circle  fa-lg float-right" data-id={item._id} onClick={this.delListItem}></i>
             </td>
-          </tr>)
-        })}
+          </tr>) 
+        })} 
       
         </tbody>
       
       </Table>
       </div>
+          
+        )
+
+        return (
+
+        <div>
+          {this.props.dayEvents.length ? dayData : noDayData}
+        </div>
+       
+            
+            
 
 
         )

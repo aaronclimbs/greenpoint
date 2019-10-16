@@ -29,7 +29,15 @@ router.post("/", (req, res) => {
           if (err) throw err;
           res.json({
             token,
-            user: { id: user._id, name: user.name, email: user.email }
+            user: {
+              _id: user._id,
+              name: user.name,
+              email: user.email,
+              location: {
+                lat: user.location.lat,
+                lng: user.location.lng
+              }
+            }
           });
         }
       );
