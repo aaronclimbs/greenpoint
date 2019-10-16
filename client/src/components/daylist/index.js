@@ -70,6 +70,34 @@ class DayList extends Component {
 
       }
 
+      getCatColor = (cat) => {
+        var catColor =""
+       switch (cat) {
+         case "re-use":
+           catColor = "recycle"
+           
+           break;
+         case "transportation":
+          catColor = "transportation"
+           break;
+         case "food":
+          catColor = "food"
+           break;
+         case "lifestyle":
+          catColor = "lifestyle"
+           
+           break;
+         case "green_action":
+          catColor = "green_action"
+           break;
+        
+         default:
+          catColor = "recycle"
+       }
+       return catColor
+ 
+       }
+
 
 
       componentDidMount() {
@@ -119,7 +147,7 @@ class DayList extends Component {
             return(
           <tr key={index}>
             
-            <td><img className="day-list-icon"src={this.getIcon(item.eventCat)} /> </td>
+            <td className="day-list-cat-cell"><div className="pb-0 mb-0"><img className="day-list-icon"src={this.getIcon(item.eventCat)} /></div> <div className={this.getCatColor(item.eventCat)}></div> </td>
             <td>{item.eventName}</td>
             <td className="day-list-quantity">    <Input 
             data-id={item._id}

@@ -16,3 +16,55 @@
 .day-list-quantity {
     width: 1rem;
 }
+
+.day-list-cat-color {
+    display:inline-block;
+   
+    width: 40px;
+    height:10px;
+    background-color: green;
+}
+
+.day-list-cat-cell {
+   text-align: center;
+   width: 40px;
+    height:10px;
+}
+
+.food {
+    display:inline-block;
+    background-color: #234d20;
+    width: 40px;
+    height:10px;
+}
+
+.green_action {
+    display:inline-block;
+    background-color: #36802d;
+    width: 40px;
+    height:10px;
+}
+
+.lifestyle {
+    display:inline-block;
+    background-color: #77ab59;
+    width: 40px;
+    height:10px;
+
+}
+
+.recycle {
+    display:inline-block;
+    background-color: #c9df8a;
+    width: 40px;
+    height:10px;
+  
+}
+
+.transportation {
+    display:inline-block;
+    background-color: #f0f7da;  
+    width: 40px;
+    height:10px;
+}
+
