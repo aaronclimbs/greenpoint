@@ -151,34 +151,10 @@ notify = () => toast(this.state.message)
     axios
     .get("api/logs/monthUserStats/" + this.state.currentMonth + "/" + this.state.currentYear)
     .then(res => {
-      var tempMonthLabels =[]
-      var tempMonthStats = []
-      var tempMonthPoints =""
-      var tempMonthMedal=""
+      console.log(res.data);
 
-      res.data.map(item => {
-        tempMonthLabels.push(item._id)
-        tempMonthStats.push(item.totalPoints)
 
-      })
-
-      if (tempMonthStats.length) {tempMonthPoints = tempMonthStats.reduce(sumPts)} else { tempMonthPoints =0}
-
-      console.log("Points are " + tempMonthPoints + Notification(tempMonthPoints))
-         function Notification(input) {
-            switch(true) {
-              case ((input >= 1) && (input <= 100)):
-                return (tempMonthMedal = "🎖	Chocolate Medal",console.log("Chocolate Medal"));
-              case ((input >= 101) && (input <= 200)):
-                return (tempMonthMedal = "🥉 Bronze Medal",console.log("Bronze Medal"));
-              case ((input >= 201) && (input <= 300)):
-                return (tempMonthMedal = "🥈	Silver Medal",console.log("Silver Medal"));
-              case ((input >= 301) && (input <= 1000)):
-                return (tempMonthMedal = "🏆	Gold Medal",console.log("Gold Medal"));
-              default:
-                return null;
-            }
-          };
+      // if (tempMonthStats.length) {tempMonthPoints = tempMonthStats.reduce(sumPts)} else { tempMonthPoints =0}
 
       // Notification(tempPoints)
       function sumPts(total, num) {
@@ -186,28 +162,28 @@ notify = () => toast(this.state.message)
       }
 
       console.log(res.data)
-      this.setState({
-        monthStats: res.data,
-        monthMedal: tempMonthMedal,
-        setMonthData:{
-          labels:tempMonthLabels,
-          points: tempMonthPoints || 0,
-          display: false,
-          datasets:[{
-            data: tempMonthStats,
+    //   this.setState({
+    //     monthStats: res.data,
+    //     monthMedal: tempMonthMedal,
+    //     setMonthData:{
+    //       labels:tempMonthLabels,
+    //       points: tempMonthPoints || 0,
+    //       display: false,
+    //       datasets:[{
+    //         data: tempMonthStats,
             
-            backgroundColor: ["#234d20", "#36802d", "#77ab59", "#c9df8a ", "#f0f7da"],
-      hoverBackgroundColor: [
-        "#234d20",
-        "#36802d",
-        "#77ab59",
-        "#c9df8a",
-        "#f0f7da"
-    ]
-       }]
+    //         backgroundColor: ["#234d20", "#36802d", "#77ab59", "#c9df8a ", "#f0f7da"],
+    //   hoverBackgroundColor: [
+    //     "#234d20",
+    //     "#36802d",
+    //     "#77ab59",
+    //     "#c9df8a",
+    //     "#f0f7da"
+    // ]
+    //    }]
 
-        } 
-      })
+    //     } 
+    //   })
 
    
     })
@@ -215,72 +191,72 @@ notify = () => toast(this.state.message)
   }
 
 
-  getTodayStats = () => {
-    axios
-    .get("api/logs/group/"+ this.props.auth.user._id +"/" + this.state.displayDate)
-    .then(res => {
-      var tempLabels =[]
-      var tempStats = []
-      var tempPoints =""
-      var tempMedal=""
+  // getTodayStats = () => {
+  //   axios
+  //   .get("api/logs/group/"+ this.props.auth.user._id +"/" + this.state.displayDate)
+  //   .then(res => {
+  //     var tempLabels =[]
+  //     var tempStats = []
+  //     var tempPoints =""
+  //     var tempMedal=""
 
-      res.data.map(item => {
-        tempLabels.push(item._id)
-        tempStats.push(item.totalPoints)
+  //     res.data.map(item => {
+  //       tempLabels.push(item._id)
+  //       tempStats.push(item.totalPoints)
 
-      })
+  //     })
 
-      if (tempStats.length) {tempPoints = tempStats.reduce(sumPts)} else { tempPoints =0}
+  //     if (tempStats.length) {tempPoints = tempStats.reduce(sumPts)} else { tempPoints =0}
 
-      console.log("Points are " + tempPoints + Notification(tempPoints))
-         function Notification(input) {
-            switch(true) {
-              case ((input >= 1) && (input <= 100)):
-                return (tempMedal = "🎖	Chocolate Medal",console.log("Chocolate Medal"));
-              case ((input >= 101) && (input <= 200)):
-                return (tempMedal = "🥉 Bronze Medal",console.log("Bronze Medal"));
-              case ((input >= 201) && (input <= 300)):
-                return (tempMedal = "🥈	Silver Medal",console.log("Silver Medal"));
-              case ((input >= 301) && (input <= 1000)):
-                return (tempMedal = "🏆	Gold Medal",console.log("Gold Medal"));
-              default:
-                return null;
-            }
-          };
+  //     console.log("Points are " + tempPoints + Notification(tempPoints))
+  //        function Notification(input) {
+  //           switch(true) {
+  //             case ((input >= 1) && (input <= 100)):
+  //               return (tempMedal = "🎖	Chocolate Medal",console.log("Chocolate Medal"));
+  //             case ((input >= 101) && (input <= 200)):
+  //               return (tempMedal = "🥉 Bronze Medal",console.log("Bronze Medal"));
+  //             case ((input >= 201) && (input <= 300)):
+  //               return (tempMedal = "🥈	Silver Medal",console.log("Silver Medal"));
+  //             case ((input >= 301) && (input <= 1000)):
+  //               return (tempMedal = "🏆	Gold Medal",console.log("Gold Medal"));
+  //             default:
+  //               return null;
+  //           }
+  //         };
 
-      // Notification(tempPoints)
-      function sumPts(total, num) {
-        return total + num
-      }
+  //     // Notification(tempPoints)
+  //     function sumPts(total, num) {
+  //       return total + num
+  //     }
 
-      console.log(res.data)
-      this.setState({
-        dayStats: res.data,
-        medal:tempMedal,
-        setData:{
-          labels:tempLabels,
-          points: tempPoints || 0,
-          display: true,
-          datasets:[{
-            data: tempStats,
+  //     console.log(res.data)
+  //     this.setState({
+  //       dayStats: res.data,
+  //       medal:tempMedal,
+  //       setData:{
+  //         labels:tempLabels,
+  //         points: tempPoints || 0,
+  //         display: true,
+  //         datasets:[{
+  //           data: tempStats,
             
-            backgroundColor: ["#234d20", "#36802d", "#77ab59", "#c9df8a ", "#f0f7da"],
-      hoverBackgroundColor: [
-        "#234d20",
-        "#36802d",
-        "#77ab59",
-        "#c9df8a",
-        "#f0f7da"
-    ]
-       }]
+  //           backgroundColor: ["#234d20", "#36802d", "#77ab59", "#c9df8a ", "#f0f7da"],
+  //     hoverBackgroundColor: [
+  //       "#234d20",
+  //       "#36802d",
+  //       "#77ab59",
+  //       "#c9df8a",
+  //       "#f0f7da"
+  //   ]
+  //      }]
 
-        }
-      })
+  //       }
+  //     })
 
    
-    })
+  //   })
 
-  }
+  // }
 
 
 
