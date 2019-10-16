@@ -28,3 +28,38 @@
     right:0;
     margin-right:10px;
 }
+
+.weather-info {
+  text-align:center;
+  color:white;
+  
+  font-size: 12px;
+}
+
+.weather-caption {
+  text-align: center;
+  color:white;
+  
+  font-size: 12px;
+}
+
+.navbar-css {
+  background-color: #373737;
+}
+
+.weather-img {
+  
+  height:50px;
+  width:60px;
+}
+
+.weather-img-cont {
+ text-align: center;
+}
+
+.weather-container {
+  position: relative;
+  margin-left: 10%;
+  
+
+}

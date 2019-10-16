@@ -42,6 +42,62 @@ class DayList extends Component {
 
       }
 
+     getIcon = (cat) => {
+       var catIcon =""
+      switch (cat) {
+        case "re-use":
+          catIcon = "../images/recycle.jpg"
+          
+          break;
+        case "transportation":
+          catIcon = "../images/transportation.jpg"
+          break;
+        case "food":
+          catIcon = "../images/food.jpg"
+          break;
+        case "lifestyle":
+          catIcon = "../images/lifestyle.jpg"
+          
+          break;
+        case "green_action":
+          catIcon = "../images/greenaction.jpg"
+          break;
+       
+        default:
+          catIcon = "../images/recycle.jpg"
+      }
+      return catIcon
+
+      }
+
+      getCatColor = (cat) => {
+        var catColor =""
+       switch (cat) {
+         case "re-use":
+           catColor = "recycle"
+           
+           break;
+         case "transportation":
+          catColor = "transportation"
+           break;
+         case "food":
+          catColor = "food"
+           break;
+         case "lifestyle":
+          catColor = "lifestyle"
+           
+           break;
+         case "green_action":
+          catColor = "green_action"
+           break;
+        
+         default:
+          catColor = "recycle"
+       }
+       return catColor
+ 
+       }
+
 
 
       componentDidMount() {
@@ -59,7 +115,7 @@ class DayList extends Component {
    
         const dayData = (
           <div className="day-list">
-        <Table hover size="md" bordered striped className="day-list" modifiers={{
+        <Table hover size="md" bordered className="day-list" modifiers={{
             setMaxHeight: {
                 enabled: true,
                 order:890,
@@ -91,11 +147,10 @@ class DayList extends Component {
             return(
           <tr key={index}>
             
-            <td>{item.eventCat}</td>
+            <td className="day-list-cat-cell"><div className="pb-0 mb-0"><img className="day-list-icon"src={this.getIcon(item.eventCat)} /></div> <div className={this.getCatColor(item.eventCat)}></div> </td>
             <td>{item.eventName}</td>
-            <td>    <Input
+            <td className="day-list-quantity">    <Input 
             data-id={item._id}
-            size="1"
             type="number"
             name="quantity"
             id="quantity"
