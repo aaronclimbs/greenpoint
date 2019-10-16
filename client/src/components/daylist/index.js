@@ -42,6 +42,34 @@ class DayList extends Component {
 
       }
 
+     getIcon = (cat) => {
+       var catIcon =""
+      switch (cat) {
+        case "re-use":
+          catIcon = "../images/recycle.jpg"
+          
+          break;
+        case "transportation":
+          catIcon = "../images/transportation.jpg"
+          break;
+        case "food":
+          catIcon = "../images/food.jpg"
+          break;
+        case "lifestyle":
+          catIcon = "../images/lifestyle.jpg"
+          
+          break;
+        case "green_action":
+          catIcon = "../images/greenaction.jpg"
+          break;
+       
+        default:
+          catIcon = "../images/recycle.jpg"
+      }
+      return catIcon
+
+      }
+
 
 
       componentDidMount() {
@@ -59,7 +87,7 @@ class DayList extends Component {
    
         const dayData = (
           <div className="day-list">
-        <Table hover size="md" bordered striped className="day-list" modifiers={{
+        <Table hover size="md" bordered className="day-list" modifiers={{
             setMaxHeight: {
                 enabled: true,
                 order:890,
@@ -91,7 +119,7 @@ class DayList extends Component {
             return(
           <tr key={index}>
             
-            <td>{item.eventCat}</td>
+            <td><img className="day-list-icon"src={this.getIcon(item.eventCat)} /> </td>
             <td>{item.eventName}</td>
             <td>    <Input
             data-id={item._id}
