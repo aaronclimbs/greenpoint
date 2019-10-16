@@ -9,6 +9,7 @@ export default class Why extends Component {
   state = {
     turtlemodal: false,
     videomodal: false,
+    videomodal2: false,
     firemodal: false,
     icemodal: false
   };
@@ -23,6 +24,12 @@ export default class Why extends Component {
  videotoggle = () => {
   this.setState({
     videomodal: !this.state.videomodal
+  });
+};
+
+ videotoggle2 = () => {
+  this.setState({
+    videomodal2: !this.state.videomodal2
   });
 };
 
@@ -63,7 +70,7 @@ icetoggle = () => {
 
 <Modal className="why-modal-turtle" isOpen={this.state.turtlemodal} toggle={this.turtletoggle}>
           <ModalHeader className="why-modal-header"><img className="whyHoverOne"></img></ModalHeader>
-          <ModalBody>
+          <ModalBody className="outline-success waves-effect">
 <p className="why-modal-text">A baby sea turtle that died after washing ashore in Boca Raton, Florida, had 104 pieces of small plastic in it.</p>
           </ModalBody>
         </Modal>
@@ -85,6 +92,22 @@ icetoggle = () => {
               <br></br>
 
               <p className="secondPara"><img src="../images/recpic.jpg" className="rightPic"></img> In other words: When you drive a car, the engine <span className="hoverOne" onMouseOver={this.firetoggle}>burns</span> fuel which creates a certain amount of CO2, depending on its fuel consumption and the driving distance. (CO2 is the chemical symbol for carbon dioxide). When you heat your house with oil, gas or coal, then you also generate CO2. Even if you heat your house with electricity, the generation of the electrical power may also have emitted a certain amount of CO2. When you buy food and goods, the production of the food and goods also emitted some quantities of CO2.</p>
+
+              <br></br>
+
+              <p className="thirdPara"><img src="../images/recpic7.jpg" className="leftPic"></img>We recognize that in order to raise environmental awareness and increase recycling efforts there needs to be quality and easily understandable information available in order for people to get involved.  This is what prompted us to create this website. Greenpoint is intended to build awareness around environmentally conscious actions and reward uses through points and community. Our intent is to increase recycling rates, which translates into measurable benefits including waste reduction, energy savings, natural resource conservation and job creation. Give your trash a better future; don’t let it end up in a landfill.  We all have a responsibility to preserve the Earth for <span
+               className="hoverOne" onMouseOver={this.videotoggle2}>generations</span> to come; you can help make a difference by being an avid recycler.</p>
+
+              <Modal className="why-modal-wholeVideo modal-dialog modal-xl" isOpen={this.state.videomodal2} toggle={this.videotoggle2}>
+              <div class="youtube-responsive-container">
+              <ModalHeader className="why-modal-video"><iframe width="560" height="315" src="https://www.youtube.com/embed/rYxt0BeTrT8" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+              </ModalHeader>
+         </div>
+          <ModalBody>
+<p className="why-modal-text" >Climate activist Greta Thunberg rebukes world leaders | A New Climate</p>
+          </ModalBody>
+        </Modal> 
+             
 
     </div>;
   }

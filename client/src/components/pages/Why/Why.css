@@ -43,8 +43,16 @@ font-size: 22px;
 
     .rightPic {
         float: right;
-        width: 40%;
-        padding: 0 20px 20px 0;
+        width: 45%;
+        padding: 0 20px 20px 20px;
+    }
+
+    .thirdPara {
+        display: inline-block;
+        text-indent: 40px;
+        font-size: 22px;
+        padding-top: 15px;
+
     }
 
     .why-modal-header {
@@ -125,10 +133,19 @@ font-size: 22px;
         }
       }
 
+     @media (min-width: 768px) {
+        .modal-xl {
+          width: 90%;
+          max-width: 1000px;
+        }
+      }
+
       .hoverText {
           text-align: center;
           color: red;
           font-size: 12px;
           margin-bottom: 20px;
       }
+
+  
 
