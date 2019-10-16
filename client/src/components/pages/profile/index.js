@@ -293,7 +293,6 @@ notify = () => toast(this.state.message)
 
   componentDidMount() {
 
-
     this.props.loadList()
 
     this.setState({
@@ -305,18 +304,6 @@ notify = () => toast(this.state.message)
     setTimeout(() => this.getTodayStats(), 500)
     setTimeout(() => this.getMonth(), 500)
    
-    
-  
-
-    socket.on("Weather", data => {
-      console.log(data)
-      this.setState({
-        message:"The temperature in DC is currently " + Math.round(data) + "\xB0"
-      })
-
-      this.notify()
-    })
-
     
 
   }
@@ -341,7 +328,7 @@ notify = () => toast(this.state.message)
       </Row>
       <Row className="justify-content-md-center">
         <div><i className="fa fa-caret-left fa-2x mr-3" onClick={this.dateBack}></i></div>
-        <div> Displaying data for {moment(this.state.displayDate).format("dddd MMMM Do, YYYY")}</div>
+        <div>{moment(this.state.displayDate).format("dddd MMMM Do, YYYY")}</div>
         <div><i className="fa fa-caret-right fa-2x ml-3" aria-hidden="true" onClick={this.dateForward}></i></div>
       
       </Row>

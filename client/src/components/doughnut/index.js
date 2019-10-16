@@ -28,7 +28,7 @@ Chart.helpers.extend(Chart.controllers.doughnut.prototype, {
 
     var text = chart.config.data.points+ " pts",
         textX = Math.round((width - ctx.measureText(text).width) / 2),
-        textY = height / 1.73;
+        textY = height / 1.80;
 
     ctx.fillText(text, textX, textY);
   }
@@ -50,9 +50,9 @@ Chart.helpers.extend(Chart.controllers.doughnut.prototype, {
       <div>
         
       <div >
-        <Doughnut width={250} height={350}   options={{
+        <Doughnut width={250} height={250}   options={{
         responsive: true,
-        legend: {display: this.props.setData.display},
+        legend: {display: false},
         maintainAspectRatio: true,
       }}  data={this.props.setData} />
       </div>
