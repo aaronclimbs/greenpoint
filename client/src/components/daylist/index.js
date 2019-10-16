@@ -121,9 +121,8 @@ class DayList extends Component {
             
             <td><img className="day-list-icon"src={this.getIcon(item.eventCat)} /> </td>
             <td>{item.eventName}</td>
-            <td>    <Input
+            <td className="day-list-quantity">    <Input 
             data-id={item._id}
-            size="1"
             type="number"
             name="quantity"
             id="quantity"
