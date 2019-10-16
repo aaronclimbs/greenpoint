@@ -55,7 +55,7 @@ io.sockets.on('connection', function (socket) {
   console.log("A user just connected");
   socket.emit("Welcome", {message:"Welcome to our site"})
 
-  setInterval(() => getWeather(socket), 60000)
+  // setInterval(() => getWeather(socket), 15000)
 
   socket.on('disconnect', () => {
     const user = removeUser(socket.id);
@@ -65,6 +65,18 @@ io.sockets.on('connection', function (socket) {
       io.to(user.room).emit('roomData', { room: user.room, users: getUsersInRoom(user.room)});
     }
   })
+
+  socket.on('getWeather', (userloc) => {
+   console.log("user loc is " + userloc)
+
+   socket.emit("Weather", {temperature:64, summary: "Rain", icon: "rain"})
+
+  //  getWeather(socket, userloc)
+   
+
+    // socket.emit('message', { user: 'admin', text: `${user.name}, Welcome to ${user.room}.`});
+    
+  });
 
 
 
@@ -95,16 +107,16 @@ io.sockets.on('connection', function (socket) {
 
 })
 
-const getWeather = async socket => {
+const getWeather  = async (socket, userloc) => {
   console.log("I'm getting the weather")
-  socket.emit("Weather", "Here is the weather")
-  // try {
-  //   const res =await axios.get (
-  //     "https://api.darksky.net/forecast/d9b62331cf144fc78ad5473806d97872/38.9072,-77.0369"
 
-  //   );
-   
-  // } catch (error) {
-  //   console.log(error)
-  // }
+  try {
+    const res =await axios.get (
+      "https://api.darksky.net/forecast/e040cb3dafa1fdb7dbc48b2aea251422/" + userloc
+
+    );
+    socket.emit("Weather", res.data.currently)
+  } catch (error) {
+    console.log(error)
+  }
 }

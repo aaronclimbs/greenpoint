@@ -276,7 +276,6 @@ notify = () => toast(this.state.message)
 
   componentDidMount() {
 
-
     this.props.loadList()
 
     this.setState({
@@ -288,18 +287,6 @@ notify = () => toast(this.state.message)
     setTimeout(() => this.getTodayStats(), 500)
     setTimeout(() => this.getMonth(), 500)
    
-    
-  
-
-    socket.on("Weather", data => {
-      console.log(data)
-      this.setState({
-        message:"The temperature in DC is currently " + Math.round(data) + "\xB0"
-      })
-
-      this.notify()
-    })
-
     
 
   }

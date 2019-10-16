@@ -25,7 +25,8 @@ class EventList extends Component {
 
       handleDateChange = date => {
         this.setState({
-          eventDate: date
+          eventDate: date,
+          displayDate: date
         });
       };
 
@@ -60,11 +61,11 @@ class EventList extends Component {
         })
       };
 
-      toggle = () => {
-        this.setState ({
-          dropdownOpen: !this.state.dropdownOpen
-        });
-      }
+      // toggle = () => {
+      //   this.setState ({
+      //     dropdownOpen: true
+      //   });
+      // }
 
 
     componentDidMount() {
