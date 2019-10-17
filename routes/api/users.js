@@ -1,10 +1,11 @@
 const router = require("express").Router();
 const bcrypt = require("bcrypt");
-// require("dotenv").config();
+require("dotenv").config();
 const jwt = require("jsonwebtoken");
 const { User } = require("../../models/");
 const auth = require("../../middleware/auth");
 const axios = require("axios");
+const sendEmail = require('../../helpers/welcomeEmail');
 
 // signup user
 router.post("/", async (req, res) => {
@@ -48,6 +49,7 @@ router.post("/", async (req, res) => {
       }
     });
 
+
     // create salt and hash
     bcrypt.genSalt(10, (err, salt) => {
       bcrypt.hash(newUser.password, salt, (err, hash) => {
@@ -60,6 +62,8 @@ router.post("/", async (req, res) => {
             { expiresIn: 3600 },
             (err, token) => {
               if (err) throw err;
+              // send email 
+              sendEmail(user.name, user.email);
               res.json({
                 token,
                 user: {
