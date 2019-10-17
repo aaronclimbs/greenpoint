@@ -10,7 +10,12 @@ const axios = require("axios");
 router.post("/", async (req, res) => {
   const { name, email, password, zipcode } = req.body;
   console.log(JSON.stringify(req.body));
-  let gpsCoords = "";
+  let gpsCoords = {
+    lat: "",
+    lng: "",
+    zip_code: "",
+    city: ""
+  };
 
   if (zipcode) {
     // get gps coords
@@ -18,9 +23,7 @@ router.post("/", async (req, res) => {
       .get(
         `https://www.zipcodeapi.com/rest/${process.env.API_ZIPCODE}/info.json/${zipcode}/degrees`
       )
-      .then(response => {
-        return response.data;
-      })
+      .then(response => response.data)
       .catch(err => console.log(err));
   }
 
@@ -39,7 +42,9 @@ router.post("/", async (req, res) => {
       password,
       location: {
         lat: gpsCoords.lat,
-        lng: gpsCoords.lng
+        lng: gpsCoords.lng,
+        city: gpsCoords.city,
+        zip: gpsCoords.zip_code
       }
     });
 
@@ -63,7 +68,9 @@ router.post("/", async (req, res) => {
                   email: user.email,
                   location: {
                     lat: user.location.lat,
-                    lng: user.location.lng
+                    lng: user.location.lng,
+                    zip: user.location.zip,
+                    city: user.location.city
                   }
                 }
               });

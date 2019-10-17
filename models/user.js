@@ -16,6 +16,12 @@ const UserSchema = new mongoose.Schema({
     },
     lng: {
       type: String
+    },
+    zip: {
+      type: String
+    },
+    city: {
+      type: String
     }
   },
   password: {

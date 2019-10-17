@@ -35,7 +35,9 @@ router.post("/", (req, res) => {
               email: user.email,
               location: {
                 lat: user.location.lat,
-                lng: user.location.lng
+                lng: user.location.lng,
+                zip: user.location.zip,
+                city: user.location.city
               }
             }
           });
