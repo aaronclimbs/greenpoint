@@ -3,8 +3,7 @@ import { Modal, ModalHeader, ModalBody } from 'reactstrap';
 import "./Why.css"
 
 
-
-export default class Why extends Component {
+export default class Why  extends Component {
 
   state = {
     turtlemodal: false,
@@ -13,6 +12,8 @@ export default class Why extends Component {
     firemodal: false,
     icemodal: false
   };
+
+
 
 
  turtletoggle = () => {

@@ -23,10 +23,6 @@ font-size: 22px;
     color: red;
 }
 
-.hoverTwo {
-    color: red;
-}
-
     .leftPic {
         float: left;
         width: 40%;
@@ -97,7 +93,8 @@ font-size: 22px;
         text-align: center;
         bottom:0;
         right:0;
-        margin-right:10px;
+        margin-right: 10px;
+        font-family: 'Lato', sans-serif;
     }
 
     /* .why-modal-video {

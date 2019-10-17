@@ -133,7 +133,7 @@ getLocationData = e => {
                   this.toggle("3");
                 }}
               >
-                Carbon Footprint Calculator
+                Carbon Footprint Calculator / Related Links
               </NavLink>
             </NavItem>
           </Nav>
