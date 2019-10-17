@@ -1,16 +1,22 @@
 const router = require("express").Router();
 const bcrypt = require("bcrypt");
-// require("dotenv").config();
+require("dotenv").config();
 const jwt = require("jsonwebtoken");
 const { User } = require("../../models/");
 const auth = require("../../middleware/auth");
 const axios = require("axios");
+const sendEmail = require('../../helpers/welcomeEmail');
 
 // signup user
 router.post("/", async (req, res) => {
   const { name, email, password, zipcode } = req.body;
   console.log(JSON.stringify(req.body));
-  let gpsCoords = "";
+  let gpsCoords = {
+    lat: "",
+    lng: "",
+    zip_code: "",
+    city: ""
+  };
 
   if (zipcode) {
     // get gps coords
@@ -18,9 +24,7 @@ router.post("/", async (req, res) => {
       .get(
         `https://www.zipcodeapi.com/rest/${process.env.API_ZIPCODE}/info.json/${zipcode}/degrees`
       )
-      .then(response => {
-        return response.data;
-      })
+      .then(response => response.data)
       .catch(err => console.log(err));
   }
 
@@ -39,9 +43,12 @@ router.post("/", async (req, res) => {
       password,
       location: {
         lat: gpsCoords.lat,
-        lng: gpsCoords.lng
+        lng: gpsCoords.lng,
+        city: gpsCoords.city,
+        zip: gpsCoords.zip_code
       }
     });
+
 
     // create salt and hash
     bcrypt.genSalt(10, (err, salt) => {
@@ -55,6 +62,8 @@ router.post("/", async (req, res) => {
             { expiresIn: 3600 },
             (err, token) => {
               if (err) throw err;
+              // send email 
+              sendEmail(user.name, user.email);
               res.json({
                 token,
                 user: {
@@ -63,7 +72,9 @@ router.post("/", async (req, res) => {
                   email: user.email,
                   location: {
                     lat: user.location.lat,
-                    lng: user.location.lng
+                    lng: user.location.lng,
+                    zip: user.location.zip,
+                    city: user.location.city
                   }
                 }
               });

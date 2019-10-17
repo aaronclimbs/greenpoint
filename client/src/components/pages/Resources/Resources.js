@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
 import {
   CardBody,
   CardImg,
@@ -20,21 +21,47 @@ import {
   Row,
   Form,
   Dropdown,
-  DropdownItem
+  DropdownItem,
+  Popover,
+  PopoverHeader,
+  PopoverBody
 } from "reactstrap";
+
 import classnames from "classnames";
 import axios from "axios";
 import scraper from "../../../helpers/scraper";
 import "./Resources.css";
+import GoogleMapReact from 'google-map-react';
 
-export default class Resources extends Component {
+
+
+class Resources extends Component {
+
+  constructor (props) {
+    super(props);
+
+    this.popToggle=this.popToggle.bind(this);
+   
+  }
+
   state = {
     scrapeResults: [],
     materialQuery: "",
     activeTab: "1",
     materialOptions: [],
-    selected: {}
+    selected: {},
+    center: {
+      lat: 38.9072,
+      lng: -77.0369
+    },
+    zoom: 11,
+   popOverDisplay:[],
+   popoverOpen: false
+   
+    
   };
+
+  
 
   tabs(tab) {
     this.toggle = this.toggle.bind(this);
@@ -70,25 +97,62 @@ export default class Resources extends Component {
 };
 
 getLocationData = e => {
+  var tempDisplay =[]
   this.setState({selected : {
     description: e.currentTarget.name,
     material_id: e.currentTarget.getAttribute("data-id")
   } }, () => {
     this.setState({materialQuery: ""})
     axios.get(`/api/helpers/locations/${this.state.selected.material_id}`).then(response => {
+      console.log("Location data is " + JSON.stringify(response.data.result))
+     
+  
+
+  
+
       this.setState({
         selected: {
           ...this.state.selected,
           locations: response.data
+         
         }
       })
     })
   })
+
+
 }
+
+// popArray =() => {
+//   var tempArray=[]
+//   console.log("location array is " + this.state.selected.locations.result.length)
+
+//   for (let i=0; i<this.state.selected.locations.result.length; i++ ) {
+//     tempArray.push({index:i, popoverOpen:false})
+//   }
+
+//   console.log("Temp array is " + JSON.stringify(tempArray))
+
+// this.setState({
+//   popOverDisplay: tempArray
+// })  
+// }
+
+popToggle =() => {
+ 
+
+this.setState({
+  popoverOpen: !this.state.popoverOpen
+})  
+}
+
+
 
 
   async componentDidMount() {
     // this.earth911();
+
+    // console.log("Loc is " + this.props.auth.user.location.lat)
     axios
       .get(
         "https://cors-anywhere.herokuapp.com/https://www.onegreenplanet.org/channel/environment/"
@@ -142,9 +206,9 @@ getLocationData = e => {
 
         <TabContent activeTab={this.state.activeTab}>
           <TabPane tabId="1">
-            {this.state.scrapeResults.map(item => {
+            {this.state.scrapeResults.map((item, index) => {
               return (
-                <div>
+                <div key={index}>
                   {/* Article Tab/Scraping starts here */}
                   <ListGroup>
                     <ListGroupItem>
@@ -198,12 +262,30 @@ getLocationData = e => {
               })}
               </Dropdown>}
               <br></br>
-              {this.state.selected.locations && <ListGroup>
-                {this.state.selected.locations.result.map(location => {
-                  return <ListGroupItem>{location.description}   Distance: {location.distance} miles</ListGroupItem>
+              <div style={{ height: '100vh', width: '100%' }}>
+              {this.state.selected.locations && <GoogleMapReact
+          bootstrapURLKeys={{ key: "AIzaSyDw0JZhy_QiGa9aBDIXyLP0lIqUXMPado8"}}
+          defaultCenter={this.state.center}
+          defaultZoom={this.state.zoom}> 
+              
+                {this.state.selected.locations.result.map((location, index) => {
+                  return <div lat={location.latitude} lng={location.longitude} > <Button key={index}  id={"popover-" + location.location_id} type="button">
+                      {index}
+                    </Button>
+                    <Popover placement="bottom" isOpen={this.state.popoverOpen} data-id={"popover-" + location.location_id} target={"popover-" + location.location_id} toggle={this.popToggle} >
+                    <PopoverBody>
+                      {location.description}
+                    </PopoverBody>
+
+                    </Popover>
+                    </div>
+        
+                       
                 })}
-              </ListGroup>}
+              </GoogleMapReact>}
+              </div>
             </div>
+            
           </TabPane>
         </TabContent>
         {/* Recycling map tab ends here */}
@@ -211,3 +293,13 @@ getLocationData = e => {
     );
   }
 }
+
+const mapStateToProps = state => {
+  return {
+           auth: state.auth };
+};
+
+export default connect(
+  mapStateToProps,
+  {  }
+)(Resources);
