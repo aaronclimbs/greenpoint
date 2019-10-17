@@ -344,7 +344,10 @@ notify = () => toast(this.state.message)
 
         <Col md={3} className="text-center"><h5>{this.state.medal ? `Today you've earned a ${this.state.medal}`: `No points yet` }</h5>
         <DoughnutChart setData={this.state.setData}></DoughnutChart>
-       
+             <a className="navbar-brand" href="/stats">
+              High Scores
+            </a>
+
         </Col>
 
       </Row>
