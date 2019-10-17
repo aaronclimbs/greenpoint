@@ -52,7 +52,7 @@ server.listen(PORT, function() {
 });
 
 io.sockets.on('connection', function (socket) {
-  console.log("A user just connected");
+  console.log("A user just connected ");
   socket.emit("Welcome", {message:"Welcome to our site"})
 
   // setInterval(() => getWeather(socket), 15000)
