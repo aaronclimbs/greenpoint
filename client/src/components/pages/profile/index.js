@@ -316,13 +316,13 @@ notify = () => toast(this.state.message)
        <ToastContainer />
       <Row className="justify-content-md-center mb-3 mt-3"> <h4 >Welcome to your Green Dashboard, {this.props.auth.user.name} </h4>
       <Col md={12} className="mt-3" >
-        <Row className="justify-content-md-center">
+        {/* <Row className="justify-content-md-center">
         <div className="float-left text-center "> <img src="../images/recycle.jpg"/><div>Re Use</div> </div>
       <div className="float-left text-center ml-5"> <img src="../images/greenaction.jpg"/><div>Green Action</div></div>
       <div className="float-left text-center ml-5"> <img src="../images/lifestyle.jpg"/><div>Lifestyle</div></div>
       <div className="float-left text-center ml-5"> <img src="../images/transportation.jpg"/><div>Transportation</div></div>
       <div className="float-left text-center ml-5"> <img src="../images/food.jpg"/><div>Food</div></div>
-        </Row>
+        </Row> */}
     
       </Col>
       </Row>
