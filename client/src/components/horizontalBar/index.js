@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component }  from 'react';
 import {HorizontalBar} from 'react-chartjs-2';
 
 // const data = {
@@ -16,7 +16,7 @@ import {HorizontalBar} from 'react-chartjs-2';
 //   ]
 // };
 
-class horizontalChart extends Component{
+class HorizontalChart extends Component{
 
 
   render() {
@@ -29,9 +29,9 @@ class horizontalChart extends Component{
       <div>
         
       <div >
-        <HorizontalBar width={250} height={350}   options={{
+        <HorizontalBar width={250} height={150}   options={{
         responsive: true,
-        maintainAspectRatio: true,
+        maintainAspectRatio: false,
       }} data={this.props.setBarData} />
       </div>
     </div>
@@ -43,12 +43,12 @@ class horizontalChart extends Component{
     return (
       <div>
       {this.props.setBarData.labels.length ? chartData : noChartData}
-          <div className="horizontalBar_chart"><HorizontalBar data={this.props.setBarData} /></div>
+          {/* <div className="horizontalBar_chart"><HorizontalBar data={this.props.setBarData} /></div> */}
       </div>
     );
   }
 
+}
 
 
-
-export default (horizontalChart)
+export default (HorizontalChart)

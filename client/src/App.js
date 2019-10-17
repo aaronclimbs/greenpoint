@@ -32,7 +32,7 @@ class App extends Component {
             <Route path="/faq" component={FAQ} />
             <Route path="/why" component={Why} />
             <Route path="/events" component={EventsList} />
-            <Route path="/stats" component={EventsList} />
+            <Route path="/stats" component={Stats} />
             <Route path="/doughnut" component={DoughnutChart} />
             <Route path="/line" component={LineChart} />
             <Route path="/join" component={Join} />
