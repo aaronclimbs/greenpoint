@@ -81,7 +81,7 @@ class EventList extends Component {
 
 
         <div>
-        <div className="mt-3"><h4>Select Event Date</h4>
+        <div className="mt-3">
         </div><DatePicker className="mb-2"
         selected={this.state.eventDate}
         onChange={this.handleDateChange}
