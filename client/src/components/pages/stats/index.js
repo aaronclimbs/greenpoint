@@ -1,16 +1,18 @@
 import React, { Component } from "react";
 import {Row,Col, Container} from "reactstrap";
-import { connect } from "react-redux";
-import EventList from '../../events'
-import DayList from '../../daylist'
-import DayStats from '../../daystats'
-import DoughnutChart from '../../doughnut'
-import { loadList } from "../../../actions/eventActions"
+// import { connect } from "react-redux";
+// import EventList from '../../events'
+// import DayList from '../../daylist'
+// import DayStats from '../../daystats'
+import HorizontalChart from '../../horizontalBar'
+// import { loadList } from "../../../actions/eventActions"
 import axios from "axios";
 import openSocket from 'socket.io-client'
 import {ToastContainer, toast} from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import "./style.css"
+import { List, ListItem } from "../../list";
+
 
 const socket =openSocket('/')
 
@@ -22,8 +24,8 @@ class Stats extends Component {
 
 
   state = {
-    dropdownOpen: false,
-    dropdownValue:"Choose a Green Action",
+    // dropdownOpen: false,
+    // dropdownValue:"Choose a Green Action",
     dayEvents: [],
     dayStats:[],
     monthStats: [],
@@ -37,29 +39,13 @@ class Stats extends Component {
     chartData:[],
     medal:"",
     monthMedal:"",
-    setMonthData: {
-      labels:[],
-      points:"",
-     display:false,
-      datasets:[{
-        data: [],
-      
-        backgroundColor: ["#234d20", "#36802d", "#77ab59", "#c9df8a ", "#f0f7da"],
-        hoverBackgroundColor: [
-          "#234d20",
-          "#36802d",
-          "#77ab59",
-          "#c9df8a",
-          "#f0f7da"
-      ]}]
-    },
-
-    setBarData: {
-              labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
+    list:[],
+        setBarData: {
+              labels: [],
               datasets: [
                 {
                   label: 'My First dataset',
-                  backgroundColor: 'rgba(255,99,132,0.2)',
+                  backgroundColor: '#13dd68',
                   borderColor: 'rgba(255,99,132,1)',
                   borderWidth: 1,
                   hoverBackgroundColor: 'rgba(255,99,132,0.4)',
@@ -69,24 +55,56 @@ class Stats extends Component {
               ]
             },
 
+    // setMonthData: {
+    //   labels:[],
+    //   points:"",
+    //  display:false,
+    //   datasets:[{
+    //     data: [],
+      
+    //     backgroundColor: ["#234d20", "#36802d", "#77ab59", "#c9df8a ", "#f0f7da"],
+    //     hoverBackgroundColor: [
+    //       "#234d20",
+    //       "#36802d",
+    //       "#77ab59",
+    //       "#c9df8a",
+    //       "#f0f7da"
+    //   ]}]
+    // },
+
+    // setBarData: {
+    //           labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
+    //           datasets: [
+    //             {
+    //               label: 'My First dataset',
+    //               backgroundColor: 'rgba(255,99,132,0.2)',
+    //               borderColor: 'rgba(255,99,132,1)',
+    //               borderWidth: 1,
+    //               hoverBackgroundColor: 'rgba(255,99,132,0.4)',
+    //               hoverBorderColor: 'rgba(255,99,132,1)',
+    //               data: []
+    //             }
+    //           ]
+    //         },
 
 
-    setData: {
-              labels:[],
-              points:"",
-              display: true,
-              datasets:[{
-                data: [],
+
+    // setData: {
+    //           labels:[],
+    //           points:"",
+    //           display: true,
+    //           datasets:[{
+    //             data: [],
               
-                backgroundColor: ["#234d20", "#36802d", "#77ab59", "#c9df8a ", "#f0f7da"],
-                hoverBackgroundColor: [
-                  "#234d20",
-                  "#36802d",
-                  "#77ab59",
-                  "#c9df8a",
-                  "#f0f7da"
-              ]}]
-            }
+    //             backgroundColor: ["#234d20", "#36802d", "#77ab59", "#c9df8a ", "#f0f7da"],
+    //             hoverBackgroundColor: [
+    //               "#234d20",
+    //               "#36802d",
+    //               "#77ab59",
+    //               "#c9df8a",
+    //               "#f0f7da"
+    //           ]}]
+    //         }
     
   };
 
@@ -100,187 +118,163 @@ class Stats extends Component {
 notify = () => toast(this.state.message)
     
     
-  dateForward = () => {
-    console.log("Date forward clicked")
-    var newForwardDate = moment(this.state.displayDate).add(1, 'days').format("YYYYMMDD")
-    console.log("Next day is " + newForwardDate)
+  // dateForward = () => {
+  //   console.log("Date forward clicked")
+  //   var newForwardDate = moment(this.state.displayDate).add(1, 'days').format("YYYYMMDD")
+  //   console.log("Next day is " + newForwardDate)
 
-    this.setState({
-      displayDate: newForwardDate
+  //   this.setState({
+  //     displayDate: newForwardDate
      
-    })
+  //   })
     
-    setTimeout(() => this.getToday(), 500)
-    setTimeout(() => this.getTodayStats(), 500)
+  //   setTimeout(() => this.getToday(), 500)
+  //   setTimeout(() => this.getTodayStats(), 500)
   
 
-  }
+  // }
 
-  dateBack = () => {
-    console.log("Date back clicked")
-    var newBackDate = moment(this.state.displayDate).subtract(1, 'days').format("YYYYMMDD")
-    console.log("Next day is " + newBackDate)
+  // dateBack = () => {
+  //   console.log("Date back clicked")
+  //   var newBackDate = moment(this.state.displayDate).subtract(1, 'days').format("YYYYMMDD")
+  //   console.log("Next day is " + newBackDate)
 
-    this.setState({
-      displayDate: newBackDate
+  //   this.setState({
+  //     displayDate: newBackDate
       
-    })
+  //   })
 
-    setTimeout(() => this.getToday(), 500)
-    setTimeout(() => this.getTodayStats(), 500)
+  //   setTimeout(() => this.getToday(), 500)
+  //   setTimeout(() => this.getTodayStats(), 500)
 
-  }
+  // }
 
-  getToday = () =>{
-    console.log("Display date in get today is " + this.state.displayDate)
-    axios
-    .get("api/logs/"+ this.props.auth.user._id +"/" + this.state.displayDate)
-    .then(res => {
+  // getToday = () =>{
+  //   console.log("Display date in get today is " + this.state.displayDate)
+  //   axios
+  //   .get("api/logs/"+ this.props.auth.user._id +"/" + this.state.displayDate)
+  //   .then(res => {
 
-      console.log(res.data)
-      this.setState({
-        dayEvents: res.data
+  //     console.log(res.data)
+  //     this.setState({
+  //       dayEvents: res.data
         
-      })
+  //     })
    
-    })
+  //   })
 
-  }
+  // }
 
-  getMonth = () =>{
-    axios
-    .get("api/logs/monthUserStats/" + this.state.currentMonth + "/" + this.state.currentYear)
-    .then(res => {
-      var tempMonthLabels =[]
-      var tempMonthStats = []
-      var tempMonthPoints =""
-      var tempMonthMedal=""
+  // getMonth = () =>{
+  //   axios
+  //   .get("api/logs/monthUserStats/" + this.state.currentMonth + "/" + this.state.currentYear)
+  //   .then(res => {
+  //     console.log(res.data);
 
-      res.data.map(item => {
-        tempMonthLabels.push(item._id)
-        tempMonthStats.push(item.totalPoints)
 
-      })
+  //     // if (tempMonthStats.length) {tempMonthPoints = tempMonthStats.reduce(sumPts)} else { tempMonthPoints =0}
 
-      if (tempMonthStats.length) {tempMonthPoints = tempMonthStats.reduce(sumPts)} else { tempMonthPoints =0}
+  //     // Notification(tempPoints)
+  //     function sumPts(total, num) {
+  //       return total + num
+  //     }
 
-      console.log("Points are " + tempMonthPoints + Notification(tempMonthPoints))
-         function Notification(input) {
-            switch(true) {
-              case ((input >= 1) && (input <= 100)):
-                return (tempMonthMedal = "🎖	Chocolate Medal",console.log("Chocolate Medal"));
-              case ((input >= 101) && (input <= 200)):
-                return (tempMonthMedal = "🥉 Bronze Medal",console.log("Bronze Medal"));
-              case ((input >= 201) && (input <= 300)):
-                return (tempMonthMedal = "🥈	Silver Medal",console.log("Silver Medal"));
-              case ((input >= 301) && (input <= 1000)):
-                return (tempMonthMedal = "🏆	Gold Medal",console.log("Gold Medal"));
-              default:
-                return null;
-            }
-          };
-
-      // Notification(tempPoints)
-      function sumPts(total, num) {
-        return total + num
-      }
-
-      console.log(res.data)
-      this.setState({
-        monthStats: res.data,
-        monthMedal: tempMonthMedal,
-        setMonthData:{
-          labels:tempMonthLabels,
-          points: tempMonthPoints || 0,
-          display: false,
-          datasets:[{
-            data: tempMonthStats,
+  //     console.log(res.data)
+  //   //   this.setState({
+  //   //     monthStats: res.data,
+  //   //     monthMedal: tempMonthMedal,
+  //   //     setMonthData:{
+  //   //       labels:tempMonthLabels,
+  //   //       points: tempMonthPoints || 0,
+  //   //       display: false,
+  //   //       datasets:[{
+  //   //         data: tempMonthStats,
             
-            backgroundColor: ["#234d20", "#36802d", "#77ab59", "#c9df8a ", "#f0f7da"],
-      hoverBackgroundColor: [
-        "#234d20",
-        "#36802d",
-        "#77ab59",
-        "#c9df8a",
-        "#f0f7da"
-    ]
-       }]
+  //   //         backgroundColor: ["#234d20", "#36802d", "#77ab59", "#c9df8a ", "#f0f7da"],
+  //   //   hoverBackgroundColor: [
+  //   //     "#234d20",
+  //   //     "#36802d",
+  //   //     "#77ab59",
+  //   //     "#c9df8a",
+  //   //     "#f0f7da"
+  //   // ]
+  //   //    }]
 
-        } 
-      })
+  //   //     } 
+  //   //   })
 
    
-    })
+  //   })
 
-  }
+  // }
 
 
-  getTodayStats = () => {
-    axios
-    .get("api/logs/group/"+ this.props.auth.user._id +"/" + this.state.displayDate)
-    .then(res => {
-      var tempLabels =[]
-      var tempStats = []
-      var tempPoints =""
-      var tempMedal=""
+  // getTodayStats = () => {
+  //   axios
+  //   .get("api/logs/group/"+ this.props.auth.user._id +"/" + this.state.displayDate)
+  //   .then(res => {
+  //     var tempLabels =[]
+  //     var tempStats = []
+  //     var tempPoints =""
+  //     var tempMedal=""
 
-      res.data.map(item => {
-        tempLabels.push(item._id)
-        tempStats.push(item.totalPoints)
+  //     res.data.map(item => {
+  //       tempLabels.push(item._id)
+  //       tempStats.push(item.totalPoints)
 
-      })
+  //     })
 
-      if (tempStats.length) {tempPoints = tempStats.reduce(sumPts)} else { tempPoints =0}
+  //     if (tempStats.length) {tempPoints = tempStats.reduce(sumPts)} else { tempPoints =0}
 
-      console.log("Points are " + tempPoints + Notification(tempPoints))
-         function Notification(input) {
-            switch(true) {
-              case ((input >= 1) && (input <= 100)):
-                return (tempMedal = "🎖	Chocolate Medal",console.log("Chocolate Medal"));
-              case ((input >= 101) && (input <= 200)):
-                return (tempMedal = "🥉 Bronze Medal",console.log("Bronze Medal"));
-              case ((input >= 201) && (input <= 300)):
-                return (tempMedal = "🥈	Silver Medal",console.log("Silver Medal"));
-              case ((input >= 301) && (input <= 1000)):
-                return (tempMedal = "🏆	Gold Medal",console.log("Gold Medal"));
-              default:
-                return null;
-            }
-          };
+  //     console.log("Points are " + tempPoints + Notification(tempPoints))
+  //        function Notification(input) {
+  //           switch(true) {
+  //             case ((input >= 1) && (input <= 100)):
+  //               return (tempMedal = "🎖	Chocolate Medal",console.log("Chocolate Medal"));
+  //             case ((input >= 101) && (input <= 200)):
+  //               return (tempMedal = "🥉 Bronze Medal",console.log("Bronze Medal"));
+  //             case ((input >= 201) && (input <= 300)):
+  //               return (tempMedal = "🥈	Silver Medal",console.log("Silver Medal"));
+  //             case ((input >= 301) && (input <= 1000)):
+  //               return (tempMedal = "🏆	Gold Medal",console.log("Gold Medal"));
+  //             default:
+  //               return null;
+  //           }
+  //         };
 
-      // Notification(tempPoints)
-      function sumPts(total, num) {
-        return total + num
-      }
+  //     // Notification(tempPoints)
+  //     function sumPts(total, num) {
+  //       return total + num
+  //     }
 
-      console.log(res.data)
-      this.setState({
-        dayStats: res.data,
-        medal:tempMedal,
-        setData:{
-          labels:tempLabels,
-          points: tempPoints || 0,
-          display: true,
-          datasets:[{
-            data: tempStats,
+  //     console.log(res.data)
+  //     this.setState({
+  //       dayStats: res.data,
+  //       medal:tempMedal,
+  //       setData:{
+  //         labels:tempLabels,
+  //         points: tempPoints || 0,
+  //         display: true,
+  //         datasets:[{
+  //           data: tempStats,
             
-            backgroundColor: ["#234d20", "#36802d", "#77ab59", "#c9df8a ", "#f0f7da"],
-      hoverBackgroundColor: [
-        "#234d20",
-        "#36802d",
-        "#77ab59",
-        "#c9df8a",
-        "#f0f7da"
-    ]
-       }]
+  //           backgroundColor: ["#234d20", "#36802d", "#77ab59", "#c9df8a ", "#f0f7da"],
+  //     hoverBackgroundColor: [
+  //       "#234d20",
+  //       "#36802d",
+  //       "#77ab59",
+  //       "#c9df8a",
+  //       "#f0f7da"
+  //   ]
+  //      }]
 
-        }
-      })
+  //       }
+  //     })
 
    
-    })
+  //   })
 
-  }
+  // }
 
 
 
@@ -291,19 +285,61 @@ notify = () => toast(this.state.message)
 }  
 
 
+// componentDidMount() {
+//     this.loadlists();
+//   }
+
+  loadHS = () => {
+
+    axios.get("api/logs/monthUserStats/" + this.state.currentMonth + "/" + this.state.currentYear)
+      .then(res => {
+        
+
+      var tempLabels =[]
+      var tempStats = []
+
+      res.data.map(item => {
+        tempLabels.push(item._id)
+        tempStats.push(item.count)
+      })
+
+        this.setState({ 
+          list: res.data,
+          setBarData: {
+              labels: tempLabels,
+              datasets: [
+                {
+                  label: 'High Scores',
+                  backgroundColor: '#13dd68',
+                  borderColor: 'rgba(255,99,132,1)',
+                  borderWidth: 1,
+                  hoverBackgroundColor: 'rgba(255,99,132,0.4)',
+                  hoverBorderColor: 'rgba(255,99,132,1)',
+                  data: tempStats
+                }
+              ]
+            }
+        })
+      })
+      .catch(err => console.log(err));
+  };
+
+
+
+
   componentDidMount() {
 
-
-    this.props.loadList()
+    this.loadHS()
+    // this.props.loadList()
 
     this.setState({
       displayDate: moment(new Date()).format("YYYYMMDD"),
     })
 
 
-    setTimeout(() => this.getToday(), 500)
-    setTimeout(() => this.getTodayStats(), 500)
-    setTimeout(() => this.getMonth(), 500)
+    // setTimeout(() => this.getToday(), 500)
+    // setTimeout(() => this.getTodayStats(), 500)
+    // setTimeout(() => this.getMonth(), 500)
    
     
   
@@ -327,9 +363,24 @@ notify = () => toast(this.state.message)
 
     return <Container>
        <ToastContainer />
-      <Row className="justify-content-md-center mb-3 mt-3"> <h4 >Welcome to your Green Dashboard, {this.props.auth.user.name} </h4>
+      <Row className="justify-content-md-center mb-3 mt-3"> 
       <Col md={12} className="mt-3" >
-        <Row className="justify-content-md-center">
+{/* 
+          {this.state.list.length ? (
+              <List>
+                {this.state.list.map(list => (
+                  <ListItem>
+                        {list._id} .....................    
+                        {list.count}
+                  </ListItem>
+                ))}
+              </List>
+            ) : (
+              <h3>No Results to Display</h3>
+            )} */}
+        <HorizontalChart setBarData={this.state.setBarData}></HorizontalChart>
+
+        {/* <Row className="justify-content-md-center">
         <div className="float-left text-center "> <img src="../images/recycle.jpg"/><div>Re Use</div> </div>
       <div className="float-left text-center ml-5"> <img src="../images/greenaction.jpg"/><div>Green Action</div></div>
       <div className="float-left text-center ml-5"> <img src="../images/lifestyle.jpg"/><div>Lifestyle</div></div>
@@ -365,7 +416,7 @@ notify = () => toast(this.state.message)
         <Col md={3}></Col>
         <Col md={6}></Col>
         <Col md={3} className="text-center"><h5>{this.state.monthMedal ? "This "  + moment(this.state.eventMonth).format("MMMM") + " you have earned a " + (this.state.monthMedal) : `No points yet` }</h5>
-        <DoughnutChart  options={this.state.setMonthData} setData={this.state.setMonthData}></DoughnutChart>
+        <DoughnutChart  options={this.state.setMonthData} setData={this.state.setMonthData}></DoughnutChart> */}
         </Col>
 
       </Row>
@@ -375,12 +426,14 @@ notify = () => toast(this.state.message)
   }
 }
 
-const mapStateToProps = state => {
-  return { events: state.events,
-           auth: state.auth };
-};
+export default (Stats);
 
-export default connect(
-  mapStateToProps,
-  { loadList }
-)(Stats);
+// const mapStateToProps = state => {
+//   return { events: state.events,
+//            auth: state.auth };
+// };
+
+// export default connect(
+//   mapStateToProps,
+//   { loadList }
+// )(Stats);
