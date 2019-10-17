@@ -1,33 +1,38 @@
 import React, { Component, Fragment } from "react";
 import { Link } from "react-router-dom";
-import { Collapse, Navbar, NavbarBrand, Nav, NavLink, NavbarToggler, NavItem, Container } from "reactstrap";
+import {
+  Collapse,
+  Navbar,
+  NavbarBrand,
+  Nav,
+  NavLink,
+  NavbarToggler,
+  NavItem,
+  Container
+} from "reactstrap";
 import SignupModal from "../../auth/SignupModal";
 import Logout from "../../auth/Logout";
 import LoginModal from "../../auth/LoginModal";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
-import logo from './logo.svg';
-import "./style.css"
-import openSocket from 'socket.io-client'
+import logo from "./logo.svg";
+import "./style.css";
+import openSocket from "socket.io-client";
 
-
-const socket =openSocket('/')
+const socket = openSocket("/");
 
 class AppNavbar extends Component {
   state = {
     isOpen: false,
-    message:"",
-    weatherImg:"",
+    message: "",
+    weatherImg: "",
     weatherCaption: ""
   };
 
   constructor() {
-    super()
+    super();
     this.sendSocketIO = this.sendSocketIO.bind(this);
-    
-    
-   
-}
+  }
 
   static propTypes = {
     auth: PropTypes.object.isRequired
@@ -40,89 +45,82 @@ class AppNavbar extends Component {
   };
 
   sendSocketIO(msg) {
-    socket.emit('Test', msg);
-    
-}  
+    socket.emit("Test", msg);
+  }
 
   componentDidMount() {
+    socket.emit("getWeather", "Test");
 
-    socket.emit('getWeather', "Test");
-   
     socket.on("Weather", data => {
-
-      console.log("I have the weather in Navbar")
-      console.log(data)
-      var tempWeatherImg=""
-      var tempWeatherCaption=""
+      console.log("I have the weather in Navbar");
+      console.log(data);
+      var tempWeatherImg = "";
+      var tempWeatherCaption = "";
 
       switch (data.icon) {
         case "clear-night":
-          tempWeatherImg = "../images/clear-night.jpg"
-          tempWeatherCaption = "Turn down the heat. Grab a blanket instead!"
+          tempWeatherImg = "../images/clear-night.jpg";
+          tempWeatherCaption = "Turn down the heat. Grab a blanket instead!";
           break;
         case "clear-day":
-          tempWeatherImg = "../images/clear-day.jpg"
+          tempWeatherImg = "../images/clear-day.jpg";
           break;
         case "cloudy":
-          tempWeatherImg = "../images/cloudy.jpg"
+          tempWeatherImg = "../images/cloudy.jpg";
           break;
         case "rain":
-          tempWeatherImg = "../images/rain.jpg"
-          tempWeatherCaption = "It's raining. Water your plants naturally outside!"
+          tempWeatherImg = "../images/rain.jpg";
+          tempWeatherCaption =
+            "It's raining. Water your plants naturally outside!";
           break;
         case "partly-cloudy-day":
-          tempWeatherImg = "../images/partly-cloudy-day.jpg"
+          tempWeatherImg = "../images/partly-cloudy-day.jpg";
           break;
         case "partly-cloudy-night":
-          tempWeatherImg = "../images/partly-cloudy-night.jpg"
+          tempWeatherImg = "../images/partly-cloudy-night.jpg";
           break;
         case "snow":
-          tempWeatherImg = "../images/snow.jpg"
+          tempWeatherImg = "../images/snow.jpg";
           break;
         case "wind":
-          tempWeatherImg = "../images/wind.jpg"
+          tempWeatherImg = "../images/wind.jpg";
           break;
         case "sleet":
-          tempWeatherImg = "../images/sleet.jpg"
+          tempWeatherImg = "../images/sleet.jpg";
           break;
         case "fog":
-          tempWeatherImg = "../images/fog.jpg"
+          tempWeatherImg = "../images/fog.jpg";
           break;
         default:
-          tempWeatherImg = "../images/unknown.jpg"
+          tempWeatherImg = "../images/unknown.jpg";
       }
 
       this.setState({
-        message:"Current Weather: " + data.summary + " " + Math.round(data.temperature) + "\xB0",
-        weatherImg:tempWeatherImg,
+        message:
+          "Current Weather: " +
+          data.summary +
+          " " +
+          Math.round(data.temperature) +
+          "\xB0",
+        weatherImg: tempWeatherImg,
         weatherCaption: tempWeatherCaption
-        
-      })
-
-      
-    })
-
-    
-
+      });
+    });
   }
 
   render() {
-
     // console.log("userobject is" + (this.props.auth.user))
 
     // console.log("user name " + this.props.auth.user.name)
 
-    
     const { isAuthenticated, user } = this.props.auth;
 
     const authLinks = (
       <Fragment>
-
-        <NavItem>
-        </NavItem>
+        <NavItem></NavItem>
         <NavItem>
           <NavLink tag={Link} to="/resources">
-          Resources
+            Resources
           </NavLink>
         </NavItem>
         <NavItem>
@@ -136,13 +134,16 @@ class AppNavbar extends Component {
           </NavLink>
         </NavItem>
         <NavItem>
-          <NavLink tag={Link} to={`/chat?name=${user ? user.name : "Guest"}&room=GreenPoint%20Support`}>
+          <NavLink
+            tag={Link}
+            to={`/chat?name=${
+              user ? user.name : "Guest"
+            }&room=GreenPoint%20Support`}
+          >
             Support Chat
           </NavLink>
         </NavItem>
         <Logout />
-
-        
       </Fragment>
     );
 
@@ -166,14 +167,25 @@ class AppNavbar extends Component {
         </NavItem>
       </Fragment>
     );
+    console.log(JSON.stringify(this.props.auth.user));
 
     return (
       <div>
         <Navbar className="navbar-css" dark expand="sm">
           <Container>
-          <img src={logo} className="App-logo" alt="logo" />
+            <img src={logo} className="App-logo" alt="logo" />
             <NavbarBrand href="/">GreenPoint</NavbarBrand>
-            <div className="weather-container"><div className="weather-info">{this.state.message}  </div> {this.state.weatherImg ? <div className="weather-img-cont"><img className="weather-img" src={this.state.weatherImg} /> </div> : <div></div>}<div className="weather-caption">{this.state.weatherCaption}</div></div>
+            <div className="weather-container">
+              <div className="weather-info">{this.state.message} </div>{" "}
+              {this.state.weatherImg ? (
+                <div className="weather-img-cont">
+                  <img className="weather-img" src={this.state.weatherImg} />{" "}
+                </div>
+              ) : (
+                <div></div>
+              )}
+              <div className="weather-caption">{this.state.weatherCaption}</div>
+            </div>
             <NavbarToggler onClick={this.toggle} />
             <Collapse isOpen={this.state.isOpen} navbar>
               <Nav className="ml-auto" navbar>
