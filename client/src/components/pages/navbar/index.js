@@ -48,6 +48,10 @@ class AppNavbar extends Component {
     socket.emit("Test", msg);
   }
 
+  checkRender = (username) => {
+    console.log("I am loggin for render " + username)
+  }
+
   componentDidMount() {
     socket.emit("getWeather", "Test");
 
@@ -109,11 +113,10 @@ class AppNavbar extends Component {
   }
 
   render() {
-    // console.log("userobject is" + (this.props.auth.user))
-
-    // console.log("user name " + this.props.auth.user.name)
 
     const { isAuthenticated, user } = this.props.auth;
+
+    this.checkRender(user ? user.name : "none")
 
     const authLinks = (
       <Fragment>
@@ -167,7 +170,7 @@ class AppNavbar extends Component {
         </NavItem>
       </Fragment>
     );
-    console.log(JSON.stringify(this.props.auth.user));
+    
 
     return (
       <div>

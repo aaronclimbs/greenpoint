@@ -4,7 +4,7 @@ import {Row,Col, Container} from "reactstrap";
 // import EventList from '../../events'
 // import DayList from '../../daylist'
 // import DayStats from '../../daystats'
-import HorizontalChart from '../../HorizontalBar'
+import HorizontalChart from '../../horizontalBar'
 // import { loadList } from "../../../actions/eventActions"
 import axios from "axios";
 import openSocket from 'socket.io-client'
