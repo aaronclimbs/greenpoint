@@ -38,11 +38,23 @@ class Stats extends Component {
     
   monthForward = () => {
     console.log("Date forward clicked")
-    var newForwardDate = moment(this.state.displayMonth).add(1, 'months').format("MM")
-    console.log("Next month is " + newForwardDate)
+    var newForwardMonth = moment(this.state.displayMonth).add(1, 'months').format("MM")
+    console.log("Next month is " + newForwardMonth)
+
+    if (this.state.displayMonth === "12") {
+      var newForwardYear = parseInt(this.state.displayYear) + 1
+      console.log("New year is " + newForwardYear)
+      this.setState({
+        displayYear: newForwardYear
+      })
+    }
+
+    
 
     this.setState({
-      displayMonth: newForwardDate
+      displayMonth: newForwardMonth
+      
+      
      
     })
     
@@ -53,11 +65,26 @@ class Stats extends Component {
 
   monthBack = () => {
     console.log("Date back clicked")
-    var newBackDate = moment(this.state.displayMonth).subtract(1, 'months').format("MM")
-    console.log("Next day is " + newBackDate)
+
+    if (this.state.displayMonth === "01") {
+      var newBackYear = this.state.displayYear - 1
+      console.log("New year is " + newBackYear)
+      
+      this.setState({
+        displayYear: newBackYear
+      })
+    }
+
+    var newBackMonth = moment(this.state.displayMonth).subtract(1, 'months').format("MM")
+    console.log("Next day is " + newBackMonth)
+
+  
+
+
+
 
     this.setState({
-      displayMonth: newBackDate
+      displayMonth: newBackMonth
       
     })
 
