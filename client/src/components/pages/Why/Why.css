@@ -1,7 +1,6 @@
 .whyStatement {
     color: #36802d;
-    font-weight: bold;
-    margin-left: 10%;
+     margin-left: 10%;
     margin-right: 10%;
 }
 
@@ -10,6 +9,7 @@
     padding-bottom: 30px;
     font-size: 34px;
     padding-top: 5%;
+    font-weight: bold;
 }
 
 

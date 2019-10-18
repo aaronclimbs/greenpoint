@@ -43,3 +43,11 @@ margin-right: auto;
     margin-left: 25%;
     background-color: #f2f3f8;
 }
+
+.relatedLinks {
+    text-align: center;
+}
+
+.rLinks {
+    margin: 20px;
+}

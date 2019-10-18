@@ -79,7 +79,7 @@ icetoggle = () => {
         <Modal className="modal-lg" isOpen={this.state.icemodal} toggle={this.icetoggle}>
           <ModalHeader className="why-modal-ice"><img className="whyHoverOne"></img></ModalHeader>
           <ModalBody>
-<p className="why-modal-text">Trift Glacier, Switzerland, has retrated by 1.17 km (0.7 miles) between 2006 (left) and 2015 (right).</p>
+<p className="why-modal-text">Trift Glacier, Switzerland, has retreated by 1.17 km (0.7 miles) between 2006 (left) and 2015 (right).</p>
           </ModalBody>
         </Modal>
 
@@ -90,7 +90,7 @@ icetoggle = () => {
           </ModalBody>
         </Modal>
 
-              <br></br>
+
 
               <p className="secondPara"><img src="../images/recpic.jpg" className="rightPic"></img> In other words: When you drive a car, the engine <span className="hoverOne" onMouseOver={this.firetoggle}>burns</span> fuel which creates a certain amount of CO2, depending on its fuel consumption and the driving distance. (CO2 is the chemical symbol for carbon dioxide). When you heat your house with oil, gas or coal, then you also generate CO2. Even if you heat your house with electricity, the generation of the electrical power may also have emitted a certain amount of CO2. When you buy food and goods, the production of the food and goods also emitted some quantities of CO2.</p>
 

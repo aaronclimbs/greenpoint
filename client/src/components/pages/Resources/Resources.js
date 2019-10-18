@@ -197,7 +197,7 @@ this.setState({
                   this.toggle("3");
                 }}
               >
-                Carbon Footprint Calculator / Related Links
+                Related Links
               </NavLink>
             </NavItem>
           </Nav>
@@ -289,6 +289,27 @@ this.setState({
           </TabPane>
         </TabContent>
         {/* Recycling map tab ends here */}
+        {/* Related Links tab starts here */}
+        <TabContent activeTab={this.state.activeTab}>
+          <TabPane tabId="3">
+<div className="relatedLinks">
+  <br></br>
+  <a className="rLinks" href="https://www.onegreenplanet.org">One Green Planet</a>
+  <br></br>
+  <a className="rLinks" href="https://coolclimate.berkeley.edu/calculator">CoolClimate Carbon Footprint Calculator from Berkeley</a>
+  <br></br>
+  <a className="rLinks" href="https://www.youtube.com/watch?v=ZwFA3YMfkoc&t=5111s">Realtime Chat Application by JavaScript Mastery</a>
+  <br></br>
+  <a className="rLinks" href="https://www.chartjs.org/">ChartJS</a>
+  <br></br>
+  <a className="rLinks" href="https://api.earth911.com/">Earth911 API</a>
+  <br></br>
+  <a className="rLinks" href="https://sendgrid.com/">SendGrid</a>
+  <br></br>
+
+</div>
+          </TabPane>
+        </TabContent>
       </div>
     );
   }
