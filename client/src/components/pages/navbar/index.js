@@ -1,4 +1,5 @@
 import React, { Component, Fragment } from "react";
+import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import {
   Collapse,
@@ -13,7 +14,6 @@ import {
 import SignupModal from "../../auth/SignupModal";
 import Logout from "../../auth/Logout";
 import LoginModal from "../../auth/LoginModal";
-import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import logo from "./logo.svg";
 import "./style.css";
@@ -21,17 +21,21 @@ import openSocket from "socket.io-client";
 
 const socket = openSocket("/");
 
+const moment= require("moment")
+
 class AppNavbar extends Component {
   state = {
     isOpen: false,
     message: "",
     weatherImg: "",
-    weatherCaption: ""
+    weatherCaption: "",
+    weatherRun: false
   };
 
   constructor() {
     super();
     this.sendSocketIO = this.sendSocketIO.bind(this);
+    this.setState = this.setState.bind(this)
   }
 
   static propTypes = {
@@ -48,14 +52,47 @@ class AppNavbar extends Component {
     socket.emit("Test", msg);
   }
 
-  checkRender = (username) => {
-    console.log("I am loggin for render " + username)
+ 
+
+  checkRender = (userloc) => {
+    console.log("I am loggin for render " + userloc)
+
+    console.log("user location is " + JSON.stringify(userloc))
+
+   if (userloc !== "No location available") {
+
+    if (this.state.weatherRun === false) {
+      socket.emit("getWeather", userloc);
+      this.setState({weatherRun: true})
+    } else {
+
+      const getWeather = (userloc) => {
+        socket.emit("getWeather", userloc);
+  
+          
+      }
+
+      setInterval(() => getWeather(userloc), 300000)
+
+
+    }
+     
+
+  }
+    
   }
 
-  componentDidMount() {
-    socket.emit("getWeather", "Test");
+ 
 
-    socket.on("Weather", data => {
+  componentDidMount() {
+
+    this.setState({
+      weatherRun:false
+    })
+
+ 
+
+    socket.on("Weather", (data, city) => {
       console.log("I have the weather in Navbar");
       console.log(data);
       var tempWeatherImg = "";
@@ -64,44 +101,52 @@ class AppNavbar extends Component {
       switch (data.icon) {
         case "clear-night":
           tempWeatherImg = "../images/clear-night.jpg";
-          tempWeatherCaption = "Turn down the heat. Grab a blanket instead!";
+          tempWeatherCaption = "Perfect weather to look at the stars!";
           break;
         case "clear-day":
           tempWeatherImg = "../images/clear-day.jpg";
+          tempWeatherCaption = "Solar panels would work great today!";
           break;
         case "cloudy":
           tempWeatherImg = "../images/cloudy.jpg";
+          tempWeatherCaption = "Don't let the clouds keep you inside!";
           break;
         case "rain":
           tempWeatherImg = "../images/rain.jpg";
-          tempWeatherCaption =
-            "It's raining. Water your plants naturally outside!";
+          tempWeatherCaption ="It's raining. Water your plants naturally outside!";
           break;
         case "partly-cloudy-day":
           tempWeatherImg = "../images/partly-cloudy-day.jpg";
+          tempWeatherCaption = "Some sun is better than none!";
           break;
         case "partly-cloudy-night":
           tempWeatherImg = "../images/partly-cloudy-night.jpg";
+          tempWeatherCaption = "It's dark out. Who care's if its cloudy!";
           break;
         case "snow":
           tempWeatherImg = "../images/snow.jpg";
+          tempWeatherCaption = "Turn down the heat. Grab a blanket instead!";
           break;
         case "wind":
           tempWeatherImg = "../images/wind.jpg";
+          tempWeatherCaption = "Windmills are generating power today!";
           break;
         case "sleet":
           tempWeatherImg = "../images/sleet.jpg";
+          tempWeatherCaption = "Drive your Hybrid or Ev slower today!";
           break;
         case "fog":
           tempWeatherImg = "../images/fog.jpg";
+          tempWeatherCaption = "Drive your Hybrid or Ev slower today!";
           break;
         default:
           tempWeatherImg = "../images/unknown.jpg";
+          tempWeatherCaption = "My AI can't determine the weather";
       }
 
       this.setState({
         message:
-          "Current Weather: " +
+          city+ " Weather, " +
           data.summary +
           " " +
           Math.round(data.temperature) +
@@ -116,7 +161,7 @@ class AppNavbar extends Component {
 
     const { isAuthenticated, user } = this.props.auth;
 
-    this.checkRender(user ? user.name : "none")
+    this.checkRender(user ? user.location : "No location available")
 
     const authLinks = (
       <Fragment>
@@ -207,6 +252,5 @@ const mapStateToProps = state => {
 };
 
 export default connect(
-  mapStateToProps,
-  {}
+  mapStateToProps
 )(AppNavbar);
