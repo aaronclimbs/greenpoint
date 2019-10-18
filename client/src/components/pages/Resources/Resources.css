@@ -48,6 +48,6 @@ margin-right: auto;
     text-align: center;
 }
 
-.rLinks {
-    margin: 20px;
+.relatedLinks li {
+    list-style-type: none;
 }

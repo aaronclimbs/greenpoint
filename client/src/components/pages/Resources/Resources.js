@@ -292,22 +292,24 @@ this.setState({
         {/* Related Links tab starts here */}
         <TabContent activeTab={this.state.activeTab}>
           <TabPane tabId="3">
-<div className="relatedLinks">
+<ul className="relatedLinks">
+<br></br>
+  <li><a className="rLinks" href="https://www.onegreenplanet.org">One Green Planet</a></li>
   <br></br>
-  <a className="rLinks" href="https://www.onegreenplanet.org">One Green Planet</a>
+  <li><a className="rLinks" href="https://coolclimate.berkeley.edu/calculator">CoolClimate Carbon Footprint Calculator from Berkeley</a></li>
   <br></br>
-  <a className="rLinks" href="https://coolclimate.berkeley.edu/calculator">CoolClimate Carbon Footprint Calculator from Berkeley</a>
+  <li><a className="rLinks" href="https://www.youtube.com/watch?v=ZwFA3YMfkoc&t=5111s">Realtime Chat Application by JavaScript Mastery</a></li>
   <br></br>
-  <a className="rLinks" href="https://www.youtube.com/watch?v=ZwFA3YMfkoc&t=5111s">Realtime Chat Application by JavaScript Mastery</a>
+  <li><a className="rLinks" href="https://www.chartjs.org/">ChartJS</a></li>
   <br></br>
-  <a className="rLinks" href="https://www.chartjs.org/">ChartJS</a>
+  <li><a className="rLinks" href="https://api.earth911.com/">Earth911 API</a></li>
   <br></br>
-  <a className="rLinks" href="https://api.earth911.com/">Earth911 API</a>
+  <li><a className="rLinks" href="https://www.twilio.com/">Twilio</a></li>
   <br></br>
-  <a className="rLinks" href="https://sendgrid.com/">SendGrid</a>
+  <li><a className="rLinks" href="https://sendgrid.com/">SendGrid</a></li>
   <br></br>
 
-</div>
+</ul>
           </TabPane>
         </TabContent>
       </div>
