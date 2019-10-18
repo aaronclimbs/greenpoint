@@ -1,7 +1,6 @@
 .whyStatement {
     color: #36802d;
-    font-weight: bold;
-    margin-left: 10%;
+     margin-left: 10%;
     margin-right: 10%;
 }
 
@@ -10,6 +9,7 @@
     padding-bottom: 30px;
     font-size: 34px;
     padding-top: 5%;
+    font-weight: bold;
 }
 
 
@@ -23,13 +23,9 @@ font-size: 22px;
     color: red;
 }
 
-.hoverTwo {
-    color: red;
-}
-
     .leftPic {
         float: left;
-        width: 40%;
+        width: 38%;
         padding: 0 20px 20px 0;
     }
 
@@ -97,18 +93,9 @@ font-size: 22px;
         text-align: center;
         bottom:0;
         right:0;
-        margin-right:10px;
+        margin-right: 10px;
+        font-family: 'Lato', sans-serif;
     }
-
-    /* .why-modal-video {
-        border-bottom: none;
-        padding: 15px 15px 0 15px;
-        background-size: cover;
-        background-repeat: repeat-x;
-        background-position: center center;
-        color:white;
-        position: inherit; 
-     } */
 
      .youtube-responsive-container {
         position:relative;
@@ -143,7 +130,7 @@ font-size: 22px;
       .hoverText {
           text-align: center;
           color: red;
-          font-size: 12px;
+          font-size: 16px;
           margin-bottom: 20px;
       }
 
