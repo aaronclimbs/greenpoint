@@ -43,8 +43,8 @@ class EventList extends Component {
             eventQuantity: 1,
             eventPoints: e.currentTarget.getAttribute('data-points'),
             eventCat: e.currentTarget.getAttribute('data-category'),
-            eventMonth: this.state.eventMonth,
-            eventYear: this.state.eventYear
+            eventMonth: moment(this.state.eventDate).format("MM"),
+            eventYear: moment(this.state.eventDate).format("YYYY"),
 
 
           }
@@ -85,7 +85,7 @@ class EventList extends Component {
         </div><DatePicker className="mb-2"
         selected={this.state.eventDate}
         onChange={this.handleDateChange}
-         includeDates={[new Date(), addDays(new Date(), -1)]}
+        //  includeDates={[new Date(), addDays(new Date(), -1)]}
         
         inline/>
         <Dropdown size="lg"   isOpen={this.state.dropdownOpen} toggle={this.toggle} >
