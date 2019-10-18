@@ -7,6 +7,7 @@ const server = require('http').createServer(app)
 const io = require('socket.io').listen(server)
 const axios = require("axios")
 const cors = require('cors');
+const moment= require("moment")
 
 const { addUser, removeUser, getUser, getUsersInRoom } = require('./users');
 
@@ -67,11 +68,11 @@ io.sockets.on('connection', function (socket) {
   })
 
   socket.on('getWeather', (userloc) => {
-   console.log("user loc is " + userloc)
+   console.log("user loc in get weather is  " + userloc + "" + moment(new Date()).format("YYYYMMDD hh:mm")  )
 
-   socket.emit("Weather", {temperature:64, summary: "Rain", icon: "rain"})
+  //  socket.broadcast.emit("Weather", {temperature:58, summary: "Cloudy", icon: "cloudy"})
 
-  //  getWeather(socket, userloc)
+   getWeather(socket, userloc)
    
 
     // socket.emit('message', { user: 'admin', text: `${user.name}, Welcome to ${user.room}.`});
@@ -110,13 +111,13 @@ io.sockets.on('connection', function (socket) {
 const getWeather  = async (socket, userloc) => {
   console.log("I'm getting the weather")
 
-  try {
-    const res =await axios.get (
-      "https://api.darksky.net/forecast/e040cb3dafa1fdb7dbc48b2aea251422/" + userloc
+  // try {
+  //   const res =await axios.get (
+  //     "https://api.darksky.net/forecast/e040cb3dafa1fdb7dbc48b2aea251422/" + userloc.lat + "," + userloc.lng
 
-    );
-    socket.emit("Weather", res.data.currently)
-  } catch (error) {
-    console.log(error)
-  }
+  //   );
+  //   socket.emit("Weather", res.data.currently, userloc.city)
+  // } catch (error) {
+  //   console.log(error)
+  // }
 }
