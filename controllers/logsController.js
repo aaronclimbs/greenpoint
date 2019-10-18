@@ -99,11 +99,15 @@ module.exports = {
     .then(dbModel => res.json(dbModel))
     .catch(err => res.status(422).json(err));
 },
+
 groupByUserCatStatsMonth: function(req, res) {
-    
-    
+console.log("Leaderboard info query " + month + " " + year)
   var month = parseInt(req.params.month)
   var year = parseInt(req.params.year)
+
+ 
+
+  console.log("Leaderboard stats query is " + month + " " + year)
   db.Log
   .aggregate([
     {$lookup: {

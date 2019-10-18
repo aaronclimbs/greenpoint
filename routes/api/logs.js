@@ -39,8 +39,6 @@ router
   router
   .route("/monthCatStats/:month/:year")
   .get(logsController.groupByUserCatStatsMonth)
-  .put(logsController.update)
-  .delete(logsController.remove);
 
   
 
