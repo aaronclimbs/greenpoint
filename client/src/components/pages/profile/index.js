@@ -336,7 +336,7 @@ class Profile extends Component {
             <DoughnutChart setData={this.state.setData}></DoughnutChart>
           </div>
           <div className="profile__high-scores">
-            <Button outline={true} block={true} color="primary" className="text-center mt-5" href="/stats">
+            <Button outline={true} block={true} color="success" className="text-center mt-5" href="/stats">
               View High Scores
             </Button>
           </div>
