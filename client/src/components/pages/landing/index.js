@@ -15,7 +15,7 @@ export default class Landing extends Component {
         
         </Col>
         <Col md={6} className="text-center"><img className="landing-img" src="/images/gpback.jpg" />
-        <div className="landing-tagline">See how your daily actions can <span className="landing-add">ADD</span> up to better world</div> 
+        <div className="landing-tagline">See how your daily actions can <span className="landing-add">ADD</span> up to a better world</div> 
         
       <Row className="justify-content-center mt-2">
       <div className="float-left text-center floatdown ml-1" > <img src="../images/recycle.jpg"/><div>Re Use</div> </div>
