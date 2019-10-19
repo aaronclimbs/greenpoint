@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Row, Col, Container } from "reactstrap";
+import { Button, Container } from "reactstrap";
 import { connect } from "react-redux";
 import EventList from "../../events";
 import DayList from "../../daylist";
@@ -41,20 +41,8 @@ class Profile extends Component {
         {
           data: [],
 
-          backgroundColor: [
-            "#234d20",
-            "#36802d",
-            "#77ab59",
-            "#c9df8a ",
-            "#f0f7da"
-          ],
-          hoverBackgroundColor: [
-            "#234d20",
-            "#36802d",
-            "#77ab59",
-            "#c9df8a",
-            "#f0f7da"
-          ]
+          backgroundColor: ["#234d20", "#36802d", "#77ab59", "#c9df8a ", "#f0f7da"],
+          hoverBackgroundColor: ["#234d20", "#36802d", "#77ab59", "#c9df8a", "#f0f7da"]
         }
       ]
     },
@@ -95,20 +83,8 @@ class Profile extends Component {
         {
           data: [],
 
-          backgroundColor: [
-            "#234d20",
-            "#36802d",
-            "#77ab59",
-            "#c9df8a ",
-            "#f0f7da"
-          ],
-          hoverBackgroundColor: [
-            "#234d20",
-            "#36802d",
-            "#77ab59",
-            "#c9df8a",
-            "#f0f7da"
-          ]
+          backgroundColor: ["#234d20", "#36802d", "#77ab59", "#c9df8a ", "#f0f7da"],
+          hoverBackgroundColor: ["#234d20", "#36802d", "#77ab59", "#c9df8a", "#f0f7da"]
         }
       ]
     }
@@ -154,27 +130,18 @@ class Profile extends Component {
 
   getToday = () => {
     console.log("Display date in get today is " + this.state.displayDate);
-    axios
-      .get(
-        "api/logs/" + this.props.auth.user._id + "/" + this.state.displayDate
-      )
-      .then(res => {
-        console.log(res.data);
-        this.setState({
-          dayEvents: res.data
-        });
+    axios.get("api/logs/" + this.props.auth.user._id + "/" + this.state.displayDate).then(res => {
+      console.log(res.data);
+      this.setState({
+        dayEvents: res.data
       });
+    });
   };
 
   getMonth = () => {
     axios
       .get(
-        "api/logs/month/" +
-          this.props.auth.user._id +
-          "/" +
-          this.state.currentMonth +
-          "/" +
-          this.state.currentYear
+        "api/logs/month/" + this.props.auth.user._id + "/" + this.state.currentMonth + "/" + this.state.currentYear
       )
       .then(res => {
         var tempMonthLabels = [];
@@ -193,29 +160,17 @@ class Profile extends Component {
           tempMonthPoints = 0;
         }
 
-        console.log(
-          "Points are " + tempMonthPoints + Notification(tempMonthPoints)
-        );
+        console.log("Points are " + tempMonthPoints + Notification(tempMonthPoints));
         function Notification(input) {
           switch (true) {
             case input >= 1 && input <= 100:
-              return (
-                (tempMonthMedal = "🎖	Chocolate Medal"),
-                console.log("Chocolate Medal")
-              );
+              return (tempMonthMedal = "🎖	Chocolate Medal"), console.log("Chocolate Medal");
             case input >= 101 && input <= 200:
-              return (
-                (tempMonthMedal = "🥉 Bronze Medal"),
-                console.log("Bronze Medal")
-              );
+              return (tempMonthMedal = "🥉 Bronze Medal"), console.log("Bronze Medal");
             case input >= 201 && input <= 300:
-              return (
-                (tempMonthMedal = "🥈	Silver Medal"), console.log("Silver Medal")
-              );
+              return (tempMonthMedal = "🥈	Silver Medal"), console.log("Silver Medal");
             case input >= 301 && input <= 1000:
-              return (
-                (tempMonthMedal = "🏆	Gold Medal"), console.log("Gold Medal")
-              );
+              return (tempMonthMedal = "🏆	Gold Medal"), console.log("Gold Medal");
             default:
               return null;
           }
@@ -238,20 +193,8 @@ class Profile extends Component {
               {
                 data: tempMonthStats,
 
-                backgroundColor: [
-                  "#234d20",
-                  "#36802d",
-                  "#77ab59",
-                  "#c9df8a ",
-                  "#f0f7da"
-                ],
-                hoverBackgroundColor: [
-                  "#234d20",
-                  "#36802d",
-                  "#77ab59",
-                  "#c9df8a",
-                  "#f0f7da"
-                ]
+                backgroundColor: ["#234d20", "#36802d", "#77ab59", "#c9df8a ", "#f0f7da"],
+                hoverBackgroundColor: ["#234d20", "#36802d", "#77ab59", "#c9df8a", "#f0f7da"]
               }
             ]
           }
@@ -260,88 +203,63 @@ class Profile extends Component {
   };
 
   getTodayStats = () => {
-    axios
-      .get(
-        "api/logs/group/" +
-          this.props.auth.user._id +
-          "/" +
-          this.state.displayDate
-      )
-      .then(res => {
-        var tempLabels = [];
-        var tempStats = [];
-        var tempPoints = "";
-        var tempMedal = "";
+    axios.get("api/logs/group/" + this.props.auth.user._id + "/" + this.state.displayDate).then(res => {
+      var tempLabels = [];
+      var tempStats = [];
+      var tempPoints = "";
+      var tempMedal = "";
 
-        res.data.map(item => {
-          tempLabels.push(item._id);
-          tempStats.push(item.totalPoints);
-        });
-
-        if (tempStats.length) {
-          tempPoints = tempStats.reduce(sumPts);
-        } else {
-          tempPoints = 0;
-        }
-
-        console.log("Points are " + tempPoints + Notification(tempPoints));
-        function Notification(input) {
-          switch (true) {
-            case input >= 1 && input <= 100:
-              return (
-                (tempMedal = "🎖	Chocolate Medal"), console.log("Chocolate Medal")
-              );
-            case input >= 101 && input <= 200:
-              return (
-                (tempMedal = "🥉 Bronze Medal"), console.log("Bronze Medal")
-              );
-            case input >= 201 && input <= 300:
-              return (
-                (tempMedal = "🥈	Silver Medal"), console.log("Silver Medal")
-              );
-            case input >= 301 && input <= 1000:
-              return (tempMedal = "🏆	Gold Medal"), console.log("Gold Medal");
-            default:
-              return null;
-          }
-        }
-
-        // Notification(tempPoints)
-        function sumPts(total, num) {
-          return total + num;
-        }
-
-        console.log(res.data);
-        this.setState({
-          dayStats: res.data,
-          medal: tempMedal,
-          setData: {
-            labels: tempLabels,
-            points: tempPoints || 0,
-            display: true,
-            datasets: [
-              {
-                data: tempStats,
-
-                backgroundColor: [
-                  "#234d20",
-                  "#36802d",
-                  "#77ab59",
-                  "#c9df8a ",
-                  "#f0f7da"
-                ],
-                hoverBackgroundColor: [
-                  "#234d20",
-                  "#36802d",
-                  "#77ab59",
-                  "#c9df8a",
-                  "#f0f7da"
-                ]
-              }
-            ]
-          }
-        });
+      res.data.map(item => {
+        tempLabels.push(item._id);
+        tempStats.push(item.totalPoints);
       });
+
+      if (tempStats.length) {
+        tempPoints = tempStats.reduce(sumPts);
+      } else {
+        tempPoints = 0;
+      }
+
+      console.log("Points are " + tempPoints + Notification(tempPoints));
+      function Notification(input) {
+        switch (true) {
+          case input >= 1 && input <= 100:
+            return (tempMedal = "🎖	Chocolate Medal"), console.log("Chocolate Medal");
+          case input >= 101 && input <= 200:
+            return (tempMedal = "🥉 Bronze Medal"), console.log("Bronze Medal");
+          case input >= 201 && input <= 300:
+            return (tempMedal = "🥈	Silver Medal"), console.log("Silver Medal");
+          case input >= 301 && input <= 1000:
+            return (tempMedal = "🏆	Gold Medal"), console.log("Gold Medal");
+          default:
+            return null;
+        }
+      }
+
+      // Notification(tempPoints)
+      function sumPts(total, num) {
+        return total + num;
+      }
+
+      console.log(res.data);
+      this.setState({
+        dayStats: res.data,
+        medal: tempMedal,
+        setData: {
+          labels: tempLabels,
+          points: tempPoints || 0,
+          display: true,
+          datasets: [
+            {
+              data: tempStats,
+
+              backgroundColor: ["#234d20", "#36802d", "#77ab59", "#c9df8a ", "#f0f7da"],
+              hoverBackgroundColor: ["#234d20", "#36802d", "#77ab59", "#c9df8a", "#f0f7da"]
+            }
+          ]
+        }
+      });
+    });
   };
 
   sendSocketIO(msg) {
@@ -370,20 +288,11 @@ class Profile extends Component {
 
         <div className="profile__date-main">
           <div>
-            <i
-              className="fa fa-caret-left fa-2x mr-3"
-              onClick={this.dateBack}
-            ></i>
+            <i className="fa fa-caret-left fa-2x mr-3" onClick={this.dateBack}></i>
           </div>
+          <div>{moment(this.state.displayDate).format("dddd MMMM Do, YYYY")}</div>
           <div>
-            {moment(this.state.displayDate).format("dddd MMMM Do, YYYY")}
-          </div>
-          <div>
-            <i
-              className="fa fa-caret-right fa-2x ml-3"
-              aria-hidden="true"
-              onClick={this.dateForward}
-            ></i>
+            <i className="fa fa-caret-right fa-2x ml-3" aria-hidden="true" onClick={this.dateForward}></i>
           </div>
         </div>
         <div className="profile__grid-container">
@@ -398,7 +307,7 @@ class Profile extends Component {
             />
           </div>
 
-          <div>
+          <div className="profile__myevents">
             <h5>My Green Events </h5>
             <DayList
               getToday={this.getToday}
@@ -410,19 +319,17 @@ class Profile extends Component {
             />
           </div>
 
-          <div>
-            <h5>
-              {this.state.medal
-                ? `Today you've earned a ${this.state.medal}`
-                : `No points yet`}
-            </h5>
+          <div className="profile__doughnut-day">
+            <h5>{this.state.medal ? `Today you've earned a ${this.state.medal}` : `No points yet`}</h5>
             <DoughnutChart setData={this.state.setData}></DoughnutChart>
-            <a className="navbar-brand" href="/stats">
-              High Scores
-            </a>
+          </div>
+          <div className="profile__high-scores">
+            <Button outline={true} block={true} color="primary" className="text-center mt-5" href="/stats">
+              View High Scores
+            </Button>
           </div>
 
-          <div>
+          <div className="profile__doughnut-month">
             <h5>
               {this.state.monthMedal
                 ? "This " +
@@ -431,10 +338,7 @@ class Profile extends Component {
                   this.state.monthMedal
                 : `No points yet`}
             </h5>
-            <DoughnutChart
-              options={this.state.setMonthData}
-              setData={this.state.setMonthData}
-            ></DoughnutChart>
+            <DoughnutChart options={this.state.setMonthData} setData={this.state.setMonthData}></DoughnutChart>
           </div>
         </div>
       </Container>

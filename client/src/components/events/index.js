@@ -1,10 +1,5 @@
 import React, { Component } from "react";
-import {
-  Dropdown,
-  DropdownMenu,
-  DropdownItem,
-  DropdownToggle
-} from "reactstrap";
+import { ListGroup, ListGroupItem, DropdownItem, DropdownToggle } from "reactstrap";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import axios from "axios";
@@ -36,7 +31,7 @@ class EventList extends Component {
     console.log("Item list click" + e.currentTarget.catname);
 
     const eventItem = {
-      eventName: e.currentTarget.name,
+      eventName: e.currentTarget.getAttribute("data-name"),
       userID: this.props.userID,
       eventDate: moment(this.state.eventDate).format("YYYYMMDD"),
       eventQuantity: 1,
@@ -53,70 +48,46 @@ class EventList extends Component {
       this.props.getTodayStats();
       this.props.getMonth();
     });
+    document.querySelector(".events__grid-item").scrollTo(0, 0);
   };
 
-  // toggle = () => {
-  //   this.setState ({
-  //     dropdownOpen: true
-  //   });
-  // }
+  toggle = () => {
+    // this.setState ({
+    //   dropdownOpen: true
+    // });
+  };
 
   componentDidMount() {}
 
   render() {
     return (
       <div className="events__grid-main">
-        <div className="events_grid-item">
+        <div className="events__grid-item">
           <DatePicker
-            className="mb-2"
+            className="my-2 w-100 text-center"
             selected={this.state.eventDate}
             onChange={this.handleDateChange}
             includeDates={[new Date(), addDays(new Date(), -1)]}
-            inline
+            dateFormat="MMMM d, yyyy"
+            todayButton="Today"
           />
-        </div>
-        <div className="events__grid-item">
-          <Dropdown
-            size="lg"
-            isOpen={this.state.dropdownOpen}
-            toggle={this.toggle}
-          >
-            <DropdownToggle caret>{this.state.dropdownValue}</DropdownToggle>
 
-            <DropdownMenu
-              modifiers={{
-                setMaxHeight: {
-                  enabled: true,
-                  order: 890,
-                  fn: data => {
-                    return {
-                      ...data,
-                      styles: {
-                        overflow: "auto",
-                        maxHeight: 200,
-                        maxWidth: 250
-                      }
-                    };
-                  }
-                }
-              }}
-            >
-              {this.props.events.map(event => {
-                return (
-                  <DropdownItem
-                    className="event-items"
-                    onClick={this.onClick}
-                    name={event.name}
-                    key={event._id}
-                    data-category={event.category}
-                    data-points={event.points}
-                  >
-                    <div>{event.name}</div>
-                  </DropdownItem>
-                );
-              })}
-            </DropdownMenu>
-          </Dropdown>
+          <ListGroup>
+            {this.props.events.map(event => {
+              return (
+                <ListGroupItem
+                  className="event-item"
+                  onClick={this.onClick}
+                  data-name={event.name}
+                  key={event._id}
+                  data-category={event.category}
+                  data-points={event.points}
+                >
+                  <div>{event.name}</div>
+                </ListGroupItem>
+              );
+            })}
+          </ListGroup>
         </div>
       </div>
     );
