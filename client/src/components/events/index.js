@@ -13,18 +13,16 @@ class EventList extends Component {
   state = {
     dropdownOpen: true,
     dropdownValue: "Choose a Green Action",
-    eventDate: new Date(),
-    displayDate: new Date(),
-    eventMonth: new Date().getMonth() + 1,
-    eventYear: new Date().getFullYear()
+    eventDate: this.props.displayDate
+    
   };
 
-  handleDateChange = date => {
-    this.setState({
-      eventDate: date,
-      displayDate: date
-    });
-  };
+  // handleDateChange = date => {
+  //   this.setState({
+  //     eventDate: date,
+  //     displayDate: date
+  //   });
+  // };
 
   onClick = e => {
     e.preventDefault();
@@ -33,12 +31,12 @@ class EventList extends Component {
     const eventItem = {
       eventName: e.currentTarget.getAttribute("data-name"),
       userID: this.props.userID,
-      eventDate: moment(this.state.eventDate).format("YYYYMMDD"),
+      eventDate: this.props.displayDate,
       eventQuantity: 1,
       eventPoints: e.currentTarget.getAttribute("data-points"),
       eventCat: e.currentTarget.getAttribute("data-category"),
-      eventMonth: this.state.eventMonth,
-      eventYear: this.state.eventYear
+      eventMonth: moment(this.props.displayDate).format("MM"),
+      eventYear: moment(this.props.displayDate).format("YYYY")
     };
     console.log(eventItem);
 
@@ -57,20 +55,22 @@ class EventList extends Component {
     // });
   };
 
-  componentDidMount() {}
+  componentDidMount() {
+   
+  }
 
   render() {
     return (
       <div className="events__grid-main">
         <div className="events__grid-item">
-          <DatePicker
+          {/* <DatePicker
             className="my-2 w-100 text-center"
             selected={this.state.eventDate}
             onChange={this.handleDateChange}
             includeDates={[new Date(), addDays(new Date(), -1)]}
             dateFormat="MMMM d, yyyy"
             todayButton="Today"
-          />
+          /> */}
 
           <ListGroup>
             {this.props.events.map(event => {
