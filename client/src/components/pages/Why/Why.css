@@ -1,138 +1,133 @@
 .whyStatement {
-    color: #36802d;
-     margin-left: 10%;
-    margin-right: 10%;
+  color: #36802d;
+  margin-left: 10%;
+  margin-right: 10%;
 }
 
 .whyHeader {
-    text-align: center;
-    padding-bottom: 30px;
-    font-size: 34px;
-    padding-top: 5%;
-    font-weight: bold;
+  text-align: center;
+  padding-bottom: 30px;
+  font-size: 34px;
+  padding-top: 5%;
+  font-weight: bold;
 }
 
-
 .firstPara {
-display: inline-block;
-text-indent: 40px;
-font-size: 22px;
+  display: inline-block;
+  text-indent: 40px;
+  font-size: 22px;
 }
 
 .hoverOne {
-    color: red;
+  color: red;
 }
 
-    .leftPic {
-        float: left;
-        width: 38%;
-        padding: 0 20px 20px 0;
-    }
+.leftPic {
+  float: left;
+  width: 38%;
+  padding: 0 20px 20px 0;
+}
 
-    .secondPara {
-        display: inline-block;
-        text-indent: 40px;
-        font-size: 22px;
-        padding-top: 15px;
+.secondPara {
+  display: inline-block;
+  text-indent: 40px;
+  font-size: 22px;
+  padding-top: 15px;
+}
 
-    }
+.rightPic {
+  float: right;
+  width: 45%;
+  padding: 0 20px 20px 20px;
+}
 
-    .rightPic {
-        float: right;
-        width: 45%;
-        padding: 0 20px 20px 20px;
-    }
+.thirdPara {
+  display: inline-block;
+  text-indent: 40px;
+  font-size: 22px;
+  padding-top: 15px;
+}
 
-    .thirdPara {
-        display: inline-block;
-        text-indent: 40px;
-        font-size: 22px;
-        padding-top: 15px;
+.why-modal-header {
+  border-bottom: none;
+  padding: 15px 15px 0 15px;
+  background-image: url("/images/recpic2.jpg");
+  height: 250px;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+  color: white;
+  position: relative;
+}
 
-    }
+.why-modal-fire {
+  border-bottom: none;
+  padding: 15px 15px 0 15px;
+  background-image: url("/images/recpic5.jpg");
+  height: 250px;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+  color: white;
+  position: relative;
+}
 
-    .why-modal-header {
-        border-bottom: none;
-        padding: 15px 15px 0 15px;
-        background-image: url("/images/recpic2.jpg");
-        height: 250px;
-        background-size: cover;
-        background-repeat: no-repeat;
-        background-position: center center;
-        color:white;
-        position: relative; 
-     }
+.why-modal-ice {
+  border-bottom: none;
+  padding: 15px 15px 0 15px;
+  background-image: url("/images/recpic6.jpg");
+  height: 250px;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+  color: white;
+  position: relative;
+}
 
-     
-    .why-modal-fire {
-        border-bottom: none;
-        padding: 15px 15px 0 15px;
-        background-image: url("/images/recpic5.jpg");
-        height: 250px;
-        background-size: cover;
-        background-repeat: no-repeat;
-        background-position: center center;
-        color:white;
-        position: relative; 
-     }
+.why-modal-text {
+  position: relative;
+  text-align: center;
+  bottom: 0;
+  right: 0;
+  margin-right: 10px;
+  font-family: "Lato", sans-serif;
+}
 
-    .why-modal-ice {
-        border-bottom: none;
-        padding: 15px 15px 0 15px;
-        background-image: url("/images/recpic6.jpg");
-        height: 250px;
-        background-size: cover;
-        background-repeat: no-repeat;
-        background-position: center center;
-        color:white;
-        position: relative; 
-     }
-    
-    .why-modal-text {
-        position: relative;
-        text-align: center;
-        bottom:0;
-        right:0;
-        margin-right: 10px;
-        font-family: 'Lato', sans-serif;
-    }
+.youtube-responsive-container {
+  position: relative;
+  padding-bottom: 56.25%;
+  padding-top: 30px;
+  height: 0;
+  overflow: hidden;
+}
 
-     .youtube-responsive-container {
-        position:relative;
-        padding-bottom:56.25%;
-        padding-top:30px;
-        height:0;
-        overflow:hidden;
-        }
-        
-        .youtube-responsive-container iframe, .youtube-responsive-container object, .youtube-responsive-container embed {
-        position:absolute;
-        top:0;
-        left:0;
-        width:100%;
-        height:100%;
-        }
+.youtube-responsive-container iframe,
+.youtube-responsive-container object,
+.youtube-responsive-container embed {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
 
-     @media (min-width: 992px) {
-        .modal-lg {
-          width: 90%;
-          max-width: 600px;
-        }
-      }
+@media (min-width: 992px) {
+  .modal-lg {
+    width: 90%;
+    max-width: 600px;
+  }
+}
 
-     @media (min-width: 768px) {
-        .modal-xl {
-          width: 90%;
-          max-width: 1000px;
-        }
-      }
+@media (min-width: 768px) {
+  .modal-xl {
+    width: 90%;
+    max-width: 1000px;
+  }
+}
 
-      .hoverText {
-          text-align: center;
-          color: red;
-          font-size: 16px;
-          margin-bottom: 20px;
-      }
-
-  
-
+.hoverText {
+  text-align: center;
+  color: red;
+  font-size: 16px;
+  margin-bottom: 20px;
+}

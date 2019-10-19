@@ -1,25 +1,20 @@
-import {
-    EVENT_LIST_LOADED, GET_ERRORS, CLEAR_ERRORS, EVENT_LOAD_FAIL
-    } from "../actions/types";
-
-
+import { EVENT_LIST_LOADED } from "../actions/types";
 
 const initialState = {
-    events: []
-    };
+  events: []
+};
 
 export default function(state = initialState, action) {
-switch (action.type) {
+  switch (action.type) {
     case EVENT_LIST_LOADED:
-    return {
+      return {
         ...state,
         events: action.payload
-    };
+      };
 
     default:
       return {
         ...state
       };
-
-}}
-
+  }
+}

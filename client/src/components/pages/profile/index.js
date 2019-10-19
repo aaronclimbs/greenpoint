@@ -3,7 +3,7 @@ import { Button, Container } from "reactstrap";
 import { connect } from "react-redux";
 import EventList from "../../events";
 import DayList from "../../daylist";
-import DayStats from "../../daystats";
+// import DayStats from "../../daystats";
 import DoughnutChart from "../../doughnut";
 import { loadList } from "../../../actions/eventActions";
 import axios from "axios";
@@ -146,10 +146,10 @@ class Profile extends Component {
       .then(res => {
         var tempMonthLabels = [];
         var tempMonthStats = [];
-        var tempMonthPoints = "";
+        var tempMonthPoints = 0;
         var tempMonthMedal = "";
 
-        res.data.map(item => {
+        res.data.forEach(item => {
           tempMonthLabels.push(item._id);
           tempMonthStats.push(item.totalPoints);
         });
@@ -164,13 +164,17 @@ class Profile extends Component {
         function Notification(input) {
           switch (true) {
             case input >= 1 && input <= 100:
-              return (tempMonthMedal = "🎖	Chocolate Medal"), console.log("Chocolate Medal");
+              console.log("Chocolate Medal");
+              return (tempMonthMedal = "🎖	Chocolate Medal");
             case input >= 101 && input <= 200:
-              return (tempMonthMedal = "🥉 Bronze Medal"), console.log("Bronze Medal");
+              console.log("Bronze Medal");
+              return (tempMonthMedal = "🥉 Bronze Medal");
             case input >= 201 && input <= 300:
-              return (tempMonthMedal = "🥈	Silver Medal"), console.log("Silver Medal");
+              console.log("Silver Medal");
+              return (tempMonthMedal = "🥈	Silver Medal");
             case input >= 301 && input <= 1000:
-              return (tempMonthMedal = "🏆	Gold Medal"), console.log("Gold Medal");
+              console.log("Gold Medal");
+              return (tempMonthMedal = "🏆	Gold Medal");
             default:
               return null;
           }
@@ -206,10 +210,10 @@ class Profile extends Component {
     axios.get("api/logs/group/" + this.props.auth.user._id + "/" + this.state.displayDate).then(res => {
       var tempLabels = [];
       var tempStats = [];
-      var tempPoints = "";
+      var tempPoints = 0;
       var tempMedal = "";
 
-      res.data.map(item => {
+      res.data.forEach(item => {
         tempLabels.push(item._id);
         tempStats.push(item.totalPoints);
       });
@@ -224,13 +228,17 @@ class Profile extends Component {
       function Notification(input) {
         switch (true) {
           case input >= 1 && input <= 100:
-            return (tempMedal = "🎖	Chocolate Medal"), console.log("Chocolate Medal");
+            console.log("Chocolate Medal");
+            return (tempMedal = "🎖	Chocolate Medal");
           case input >= 101 && input <= 200:
-            return (tempMedal = "🥉 Bronze Medal"), console.log("Bronze Medal");
+            console.log("Bronze Medal");
+            return (tempMedal = "🥉 Bronze Medal");
           case input >= 201 && input <= 300:
-            return (tempMedal = "🥈	Silver Medal"), console.log("Silver Medal");
+            console.log("Silver Medal");
+            return (tempMedal = "🥈	Silver Medal");
           case input >= 301 && input <= 1000:
-            return (tempMedal = "🏆	Gold Medal"), console.log("Gold Medal");
+            console.log("Gold Medal");
+            return (tempMedal = "🏆	Gold Medal");
           default:
             return null;
         }

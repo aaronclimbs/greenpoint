@@ -1,16 +1,7 @@
 import React, { Component, Fragment } from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
-import {
-  Collapse,
-  Navbar,
-  NavbarBrand,
-  Nav,
-  NavLink,
-  NavbarToggler,
-  NavItem,
-  Container
-} from "reactstrap";
+import { Collapse, Navbar, NavbarBrand, Nav, NavLink, NavbarToggler, NavItem, Container } from "reactstrap";
 import SignupModal from "../../auth/SignupModal";
 import Logout from "../../auth/Logout";
 import LoginModal from "../../auth/LoginModal";
@@ -20,8 +11,6 @@ import "./style.css";
 import openSocket from "socket.io-client";
 
 const socket = openSocket("/");
-
-const moment= require("moment")
 
 class AppNavbar extends Component {
   state = {
@@ -35,7 +24,7 @@ class AppNavbar extends Component {
   constructor() {
     super();
     this.sendSocketIO = this.sendSocketIO.bind(this);
-    this.setState = this.setState.bind(this)
+    this.setState = this.setState.bind(this);
   }
 
   static propTypes = {
@@ -52,45 +41,29 @@ class AppNavbar extends Component {
     socket.emit("Test", msg);
   }
 
- 
+  checkRender = userloc => {
+    console.log("I am loggin for render " + userloc);
 
-  checkRender = (userloc) => {
-    console.log("I am loggin for render " + userloc)
+    console.log("user location is " + JSON.stringify(userloc));
 
-    console.log("user location is " + JSON.stringify(userloc))
-
-   if (userloc !== "No location available") {
-
-    if (this.state.weatherRun === false) {
-      socket.emit("getWeather", userloc);
-      this.setState({weatherRun: true})
-    } else {
-
-      const getWeather = (userloc) => {
+    if (userloc !== "No location available") {
+      if (this.state.weatherRun === false) {
         socket.emit("getWeather", userloc);
-  
-          
+        this.setState({ weatherRun: true });
+      } else {
+        const getWeather = userloc => {
+          socket.emit("getWeather", userloc);
+        };
+
+        setInterval(() => getWeather(userloc), 300000);
       }
-
-      setInterval(() => getWeather(userloc), 300000)
-
-
     }
-     
-
-  }
-    
-  }
-
- 
+  };
 
   componentDidMount() {
-
     this.setState({
-      weatherRun:false
-    })
-
- 
+      weatherRun: false
+    });
 
     socket.on("Weather", (data, city) => {
       console.log("I have the weather in Navbar");
@@ -113,7 +86,7 @@ class AppNavbar extends Component {
           break;
         case "rain":
           tempWeatherImg = "../images/rain.jpg";
-          tempWeatherCaption ="It's raining. Water your plants naturally outside!";
+          tempWeatherCaption = "It's raining. Water your plants naturally outside!";
           break;
         case "partly-cloudy-day":
           tempWeatherImg = "../images/partly-cloudy-day.jpg";
@@ -145,12 +118,7 @@ class AppNavbar extends Component {
       }
 
       this.setState({
-        message:
-          city+ " Weather, " +
-          data.summary +
-          " " +
-          Math.round(data.temperature) +
-          "\xB0",
+        message: city + " Weather, " + data.summary + " " + Math.round(data.temperature) + "\xB0",
         weatherImg: tempWeatherImg,
         weatherCaption: tempWeatherCaption
       });
@@ -158,10 +126,9 @@ class AppNavbar extends Component {
   }
 
   render() {
-
     const { isAuthenticated, user } = this.props.auth;
 
-    this.checkRender(user ? user.location : "No location available")
+    this.checkRender(user ? user.location : "No location available");
 
     const authLinks = (
       <Fragment>
@@ -182,12 +149,7 @@ class AppNavbar extends Component {
           </NavLink>
         </NavItem>
         <NavItem>
-          <NavLink
-            tag={Link}
-            to={`/chat?name=${
-              user ? user.name : "Guest"
-            }&room=GreenPoint%20Support`}
-          >
+          <NavLink tag={Link} to={`/chat?name=${user ? user.name : "Guest"}&room=GreenPoint%20Support`}>
             Support Chat
           </NavLink>
         </NavItem>
@@ -215,7 +177,6 @@ class AppNavbar extends Component {
         </NavItem>
       </Fragment>
     );
-    
 
     return (
       <div>
@@ -224,10 +185,14 @@ class AppNavbar extends Component {
             <img src={logo} className="App-logo" alt="logo" />
             <NavbarBrand href="/">GreenPoint</NavbarBrand>
             <div className="weather-container">
-              <div className="weather-info">{this.state.message} </div>{" "}
+              <div className="weather-info">{this.state.message} </div>
               {this.state.weatherImg ? (
                 <div className="weather-img-cont">
-                  <img className="weather-img" src={this.state.weatherImg} />{" "}
+                  <img
+                    className="weather-img"
+                    src={this.state.weatherImg}
+                    alt={"weather-image-" + this.state.weatherImg.replace(".jpg", "")}
+                  />
                 </div>
               ) : (
                 <div></div>
@@ -251,6 +216,4 @@ const mapStateToProps = state => {
   return { auth: state.auth };
 };
 
-export default connect(
-  mapStateToProps
-)(AppNavbar);
+export default connect(mapStateToProps)(AppNavbar);

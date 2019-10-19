@@ -16,14 +16,12 @@ import {
   NavLink,
   Card,
   Button,
-  CardTitle,
   CardText,
   Row,
   Form,
   Dropdown,
   DropdownItem,
   Popover,
-  PopoverHeader,
   PopoverBody
 } from "reactstrap";
 
@@ -31,17 +29,13 @@ import classnames from "classnames";
 import axios from "axios";
 import scraper from "../../../helpers/scraper";
 import "./Resources.css";
-import GoogleMapReact from 'google-map-react';
-
-
+import GoogleMapReact from "google-map-react";
 
 class Resources extends Component {
-
-  constructor (props) {
+  constructor(props) {
     super(props);
 
-    this.popToggle=this.popToggle.bind(this);
-   
+    this.popToggle = this.popToggle.bind(this);
   }
 
   state = {
@@ -55,13 +49,9 @@ class Resources extends Component {
       lng: -77.0369
     },
     zoom: 11,
-   popOverDisplay:[],
-   popoverOpen: false
-   
-    
+    popOverDisplay: [],
+    popoverOpen: false
   };
-
-  
 
   tabs(tab) {
     this.toggle = this.toggle.bind(this);
@@ -85,78 +75,65 @@ class Resources extends Component {
 
   onGetMaterials = e => {
     e.preventDefault();
-    console.log(
-      "Form has been submitted. Search term is " + this.state.materialQuery
-    );
-    axios.get("api/helpers/recycle/" + this.state.materialQuery)
-    .then(response => {
+    console.log("Form has been submitted. Search term is " + this.state.materialQuery);
+    axios.get("api/helpers/recycle/" + this.state.materialQuery).then(response => {
       this.setState({
         materialOptions: response.data.result
-      })
-    })
-};
+      });
+    });
+  };
 
-getLocationData = e => {
-  var tempDisplay =[]
-  this.setState({selected : {
-    description: e.currentTarget.name,
-    material_id: e.currentTarget.getAttribute("data-id")
-  } }, () => {
-    this.setState({materialQuery: ""})
-    axios.get(`/api/helpers/locations/${this.state.selected.material_id}`).then(response => {
-      console.log("Location data is " + JSON.stringify(response.data.result))
-     
-  
-
-  
-
-      this.setState({
+  getLocationData = e => {
+    this.setState(
+      {
         selected: {
-          ...this.state.selected,
-          locations: response.data
-         
+          description: e.currentTarget.name,
+          material_id: e.currentTarget.getAttribute("data-id")
         }
-      })
-    })
-  })
+      },
+      () => {
+        this.setState({ materialQuery: "" });
+        axios.get(`/api/helpers/locations/${this.state.selected.material_id}`).then(response => {
+          console.log("Location data is " + JSON.stringify(response.data.result));
 
+          this.setState({
+            selected: {
+              ...this.state.selected,
+              locations: response.data
+            }
+          });
+        });
+      }
+    );
+  };
 
-}
+  // popArray =() => {
+  //   var tempArray=[]
+  //   console.log("location array is " + this.state.selected.locations.result.length)
 
-// popArray =() => {
-//   var tempArray=[]
-//   console.log("location array is " + this.state.selected.locations.result.length)
+  //   for (let i=0; i<this.state.selected.locations.result.length; i++ ) {
+  //     tempArray.push({index:i, popoverOpen:false})
+  //   }
 
-//   for (let i=0; i<this.state.selected.locations.result.length; i++ ) {
-//     tempArray.push({index:i, popoverOpen:false})
-//   }
+  //   console.log("Temp array is " + JSON.stringify(tempArray))
 
-//   console.log("Temp array is " + JSON.stringify(tempArray))
+  // this.setState({
+  //   popOverDisplay: tempArray
+  // })
+  // }
 
-// this.setState({
-//   popOverDisplay: tempArray
-// })  
-// }
-
-popToggle =() => {
- 
-
-this.setState({
-  popoverOpen: !this.state.popoverOpen
-})  
-}
-
-
-
+  popToggle = () => {
+    this.setState({
+      popoverOpen: !this.state.popoverOpen
+    });
+  };
 
   async componentDidMount() {
     // this.earth911();
 
     // console.log("Loc is " + this.props.auth.user.location.lat)
     axios
-      .get(
-        "https://cors-anywhere.herokuapp.com/https://www.onegreenplanet.org/channel/environment/"
-      )
+      .get("https://cors-anywhere.herokuapp.com/https://www.onegreenplanet.org/channel/environment/")
       .then(response => scraper(response))
       .then(result => this.setState({ scrapeResults: result }))
       .catch(err => console.log(err));
@@ -230,9 +207,9 @@ this.setState({
             })}
           </TabPane>
         </TabContent>
-                          {/* Article Tab/Scraping ends here */}
+        {/* Article Tab/Scraping ends here */}
 
-                  {/* Recycling map tab starts here */}
+        {/* Recycling map tab starts here */}
         <TabContent activeTab={this.state.activeTab}>
           <TabPane tabId="2">
             <br></br>
@@ -240,9 +217,7 @@ this.setState({
               <Form onSubmit={this.onGetMaterials}>
                 <InputGroup>
                   <InputGroupAddon addonType="prepend" className="APIsearch">
-                    <InputGroupText>
-                      Enter material you want to recycle...
-                    </InputGroupText>
+                    <InputGroupText>Enter material you want to recycle...</InputGroupText>
                   </InputGroupAddon>
                   <br></br>
                   <Input
@@ -251,65 +226,107 @@ this.setState({
                     value={this.state.materialQuery}
                     onChange={this.handleInputChange}
                   />
-                  <Button color="success">
-                    Search
-                  </Button>
+                  <Button color="success">Search</Button>
                 </InputGroup>
               </Form>
-              {this.state.materialQuery && <Dropdown>
-              {this.state.materialOptions.map(option => {
-                return <DropdownItem key={option.material_id} data-id={option.material_id} name={option.description} onClick={this.getLocationData}>{option.description}</DropdownItem>
-              })}
-              </Dropdown>}
+              {this.state.materialQuery && (
+                <Dropdown>
+                  {this.state.materialOptions.map(option => {
+                    return (
+                      <DropdownItem
+                        key={option.material_id}
+                        data-id={option.material_id}
+                        name={option.description}
+                        onClick={this.getLocationData}
+                      >
+                        {option.description}
+                      </DropdownItem>
+                    );
+                  })}
+                </Dropdown>
+              )}
               <br></br>
-              <div style={{ height: '100vh', width: '100%' }}>
-              {this.state.selected.locations && <GoogleMapReact
-          bootstrapURLKeys={{ key: "AIzaSyDw0JZhy_QiGa9aBDIXyLP0lIqUXMPado8"}}
-          defaultCenter={this.state.center}
-          defaultZoom={this.state.zoom}> 
-              
-                {this.state.selected.locations.result.map((location, index) => {
-                  return <div lat={location.latitude} lng={location.longitude} > <Button key={index}  id={"popover-" + location.location_id} type="button">
-                      {index}
-                    </Button>
-                    <Popover placement="bottom" isOpen={this.state.popoverOpen} data-id={"popover-" + location.location_id} target={"popover-" + location.location_id} toggle={this.popToggle} >
-                    <PopoverBody>
-                      {location.description}
-                    </PopoverBody>
-
-                    </Popover>
-                    </div>
-        
-                       
-                })}
-              </GoogleMapReact>}
+              <div style={{ height: "100vh", width: "100%" }}>
+                {this.state.selected.locations && (
+                  <GoogleMapReact
+                    bootstrapURLKeys={{ key: "AIzaSyDw0JZhy_QiGa9aBDIXyLP0lIqUXMPado8" }}
+                    defaultCenter={this.state.center}
+                    defaultZoom={this.state.zoom}
+                  >
+                    {this.state.selected.locations.result.map((location, index) => {
+                      return (
+                        <div lat={location.latitude} lng={location.longitude}>
+                          {" "}
+                          <Button key={index} id={"popover-" + location.location_id} type="button">
+                            {index}
+                          </Button>
+                          <Popover
+                            placement="bottom"
+                            isOpen={this.state.popoverOpen}
+                            data-id={"popover-" + location.location_id}
+                            target={"popover-" + location.location_id}
+                            toggle={this.popToggle}
+                          >
+                            <PopoverBody>{location.description}</PopoverBody>
+                          </Popover>
+                        </div>
+                      );
+                    })}
+                  </GoogleMapReact>
+                )}
               </div>
             </div>
-            
           </TabPane>
         </TabContent>
         {/* Recycling map tab ends here */}
         {/* Related Links tab starts here */}
         <TabContent activeTab={this.state.activeTab}>
           <TabPane tabId="3">
-<ul className="relatedLinks">
-<br></br>
-  <li><a className="rLinks" href="https://www.onegreenplanet.org">One Green Planet</a></li>
-  <br></br>
-  <li><a className="rLinks" href="https://coolclimate.berkeley.edu/calculator">CoolClimate Carbon Footprint Calculator from Berkeley</a></li>
-  <br></br>
-  <li><a className="rLinks" href="https://www.youtube.com/watch?v=ZwFA3YMfkoc&t=5111s">Realtime Chat Application by JavaScript Mastery</a></li>
-  <br></br>
-  <li><a className="rLinks" href="https://www.chartjs.org/">ChartJS</a></li>
-  <br></br>
-  <li><a className="rLinks" href="https://api.earth911.com/">Earth911 API</a></li>
-  <br></br>
-  <li><a className="rLinks" href="https://www.twilio.com/">Twilio</a></li>
-  <br></br>
-  <li><a className="rLinks" href="https://sendgrid.com/">SendGrid</a></li>
-  <br></br>
-
-</ul>
+            <ul className="relatedLinks">
+              <br></br>
+              <li>
+                <a className="rLinks" href="https://www.onegreenplanet.org">
+                  One Green Planet
+                </a>
+              </li>
+              <br></br>
+              <li>
+                <a className="rLinks" href="https://coolclimate.berkeley.edu/calculator">
+                  CoolClimate Carbon Footprint Calculator from Berkeley
+                </a>
+              </li>
+              <br></br>
+              <li>
+                <a className="rLinks" href="https://www.youtube.com/watch?v=ZwFA3YMfkoc&t=5111s">
+                  Realtime Chat Application by JavaScript Mastery
+                </a>
+              </li>
+              <br></br>
+              <li>
+                <a className="rLinks" href="https://www.chartjs.org/">
+                  ChartJS
+                </a>
+              </li>
+              <br></br>
+              <li>
+                <a className="rLinks" href="https://api.earth911.com/">
+                  Earth911 API
+                </a>
+              </li>
+              <br></br>
+              <li>
+                <a className="rLinks" href="https://www.twilio.com/">
+                  Twilio
+                </a>
+              </li>
+              <br></br>
+              <li>
+                <a className="rLinks" href="https://sendgrid.com/">
+                  SendGrid
+                </a>
+              </li>
+              <br></br>
+            </ul>
           </TabPane>
         </TabContent>
       </div>
@@ -319,10 +336,11 @@ this.setState({
 
 const mapStateToProps = state => {
   return {
-           auth: state.auth };
+    auth: state.auth
+  };
 };
 
 export default connect(
   mapStateToProps,
-  {  }
+  {}
 )(Resources);
