@@ -12,6 +12,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "./style.css";
 
+
 const socket = openSocket("/");
 
 const moment = require("moment");
@@ -340,6 +341,13 @@ class Profile extends Component {
             </h5>
             <DoughnutChart options={this.state.setMonthData} setData={this.state.setMonthData}></DoughnutChart>
           </div>
+        </div>
+        <div>
+          <form action='/api/helpers/sendannoyingtexttogabe' method='POST'>
+            <div class='form-group'>
+                <button>¯\_(ツ)_/¯</button>
+            </div>
+          </form>
         </div>
       </Container>
     );
