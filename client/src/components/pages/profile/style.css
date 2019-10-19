@@ -1,10 +1,27 @@
-H4 {
-    color: #234d20
+h4 {
+  color: #234d20;
 }
 
-H5 {
-    color: #36802d;
-    margin-bottom: 20px;
-    font-weight: bold;
+h5 {
+  color: #36802d;
+  margin-bottom: 20px;
+  font-weight: bold;
 }
 
+.profile__header-main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1em 0;
+}
+
+.profile__grid-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+}
+
+.profile__date-main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

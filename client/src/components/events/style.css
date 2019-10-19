@@ -1,4 +1,8 @@
 .event-items {
-    color:green;
-    
+  color: green;
+}
+
+.events__grid-main {
+    display: grid;
+    grid-template-rows: 1fr 1fr;
 }
