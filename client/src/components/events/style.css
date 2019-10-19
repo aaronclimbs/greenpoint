@@ -1,4 +1,35 @@
-.event-items {
-    color:green;
-    
+.event-item {
+  color: green;
+}
+
+.events__grid-main {
+  display: grid;
+  gap: 10px;
+}
+
+.events__grid-item {
+  max-height: 40vh;
+  overflow-y: scroll;
+  position: relative;
+  scroll-behavior: smooth;
+}
+
+.event-item {
+  cursor: pointer;
+}
+
+.event-item:hover {
+  background-color: grey;
+  color: white;
+}
+
+.events__grid-item > div {
+  position: sticky;
+  top: 0;
+}
+
+.react-datepicker-wrapper {
+  width: 100%;
+  position: sticky;
+  top: 0;
 }
