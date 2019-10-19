@@ -1,6 +1,7 @@
 const router = require("express").Router();
 require("dotenv").config();
 const axios = require("axios");
+const jokes = require('../../helpers/annoyGabe');
 
 router.get("/recycle/:query", (req, res) => {
   const headers = {
@@ -52,6 +53,21 @@ router.get("/zip-to-gps/:zipcode", (req, res) => {
     )
     .then(response => res.json(response.data))
     .catch(err => console.log(err));
+});
+
+router.post('/sendannoyingtexttogabe', function(req, res, next){
+  var randomJoke = jokes[Math.floor(jokes.length * Math.random())];
+
+  var client = require('twilio')(
+      process.env.TWILIO_ACCOUNT_SID,
+      process.env.TWILIO_AUTH_TOKEN
+  );
+  
+  client.messages.create({
+      from: process.env.TWILIO_PHONE_NUMBER,
+      to: process.env.ANNOY_PHONE_NUMBER,
+      body: randomJoke 
+  }).then((message) => console.log(message.sid));
 });
 
 module.exports = router;
