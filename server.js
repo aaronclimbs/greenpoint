@@ -111,13 +111,13 @@ io.sockets.on('connection', function (socket) {
 const getWeather  = async (socket, userloc) => {
   console.log("I'm getting the weather")
 
-  // try {
-  //   const res =await axios.get (
-  //     "https://api.darksky.net/forecast/e040cb3dafa1fdb7dbc48b2aea251422/" + userloc.lat + "," + userloc.lng
+  try {
+    const res =await axios.get (
+      "https://api.darksky.net/forecast/e040cb3dafa1fdb7dbc48b2aea251422/" + userloc.lat + "," + userloc.lng
 
-  //   );
-  //   socket.emit("Weather", res.data.currently, userloc.city)
-  // } catch (error) {
-  //   console.log(error)
-  // }
+    );
+    socket.emit("Weather", res.data.currently, userloc.city)
+  } catch (error) {
+    console.log(error)
+  }
 }

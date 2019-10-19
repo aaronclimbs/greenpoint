@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Button, Container } from "reactstrap";
+import { Button, Container, Row } from "reactstrap";
 import { connect } from "react-redux";
 import EventList from "../../events";
 import DayList from "../../daylist";
@@ -111,6 +111,7 @@ class Profile extends Component {
 
     setTimeout(() => this.getToday(), 500);
     setTimeout(() => this.getTodayStats(), 500);
+    setTimeout(() => this.getMonth(), 500);
   };
 
   dateBack = () => {
@@ -126,6 +127,7 @@ class Profile extends Component {
 
     setTimeout(() => this.getToday(), 500);
     setTimeout(() => this.getTodayStats(), 500);
+    setTimeout(() => this.getMonth(), 500);
   };
 
   getToday = () => {
@@ -141,7 +143,7 @@ class Profile extends Component {
   getMonth = () => {
     axios
       .get(
-        "api/logs/month/" + this.props.auth.user._id + "/" + this.state.currentMonth + "/" + this.state.currentYear
+        "api/logs/month/" + this.props.auth.user._id + "/" + parseInt(moment(this.state.displayDate).format("MM")) + "/" + parseInt(moment(this.state.displayDate).format("YYYY"))
       )
       .then(res => {
         var tempMonthLabels = [];
@@ -286,7 +288,7 @@ class Profile extends Component {
           <h4>Welcome to your Green Dashboard, {this.props.auth.user.name} </h4>
         </div>
 
-        <div className="profile__date-main">
+        {/* <div className="profile__date-main">
           <div>
             <i className="fa fa-caret-left fa-2x mr-3" onClick={this.dateBack}></i>
           </div>
@@ -294,16 +296,26 @@ class Profile extends Component {
           <div>
             <i className="fa fa-caret-right fa-2x ml-3" aria-hidden="true" onClick={this.dateForward}></i>
           </div>
-        </div>
+        </div> */}
         <div className="profile__grid-container">
           <div className="profile__eventlist">
             <h5>Add Green Events</h5>
+            <Row className="justify-content-md-center">
+            <div>
+            <i className="fa fa-caret-left fa-2x mr-3" onClick={this.dateBack}></i>
+          </div>
+          <div><h5>{moment(this.state.displayDate).format("dddd MMMM Do, YYYY")}</h5></div>
+          <div>
+            <i className="fa fa-caret-right fa-2x ml-3" aria-hidden="true" onClick={this.dateForward}></i>
+          </div>
+          </Row>
             <EventList
               getToday={this.getToday}
               getTodayStats={this.getTodayStats}
               getMonth={this.getMonth}
               events={this.props.events.events}
               userID={this.props.auth.user._id}
+              displayDate={this.state.displayDate}
             />
           </div>
 
@@ -333,7 +345,7 @@ class Profile extends Component {
             <h5>
               {this.state.monthMedal
                 ? "This " +
-                  moment(this.state.eventMonth).format("MMMM") +
+                  moment(this.state.displayDate).format("MMMM") +
                   " you have earned a " +
                   this.state.monthMedal
                 : `No points yet`}
