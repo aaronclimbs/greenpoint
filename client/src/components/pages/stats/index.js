@@ -84,7 +84,7 @@ class Stats extends Component {
         var tempLabels = [];
         var tempStats = [];
 
-        res.data.map(item => {
+        res.data.forEach(item => {
           tempLabels.push(item._id);
           tempStats.push(item.count);
         });

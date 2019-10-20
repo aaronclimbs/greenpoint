@@ -166,6 +166,7 @@ export default class Why extends Component {
           <div className="youtube-responsive-container">
             <ModalHeader className="why-modal-video">
               <iframe
+                title="greta-vid"
                 width="560"
                 height="315"
                 src="https://www.youtube.com/embed/rYxt0BeTrT8"

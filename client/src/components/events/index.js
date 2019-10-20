@@ -1,11 +1,11 @@
 import React, { Component } from "react";
 import { ListGroup, ListGroupItem } from "reactstrap";
-import DatePicker from "react-datepicker";
+// import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import axios from "axios";
 import "./style.css";
 
-import { addDays } from "date-fns";
+// import { addDays } from "date-fns";
 
 const moment = require("moment");
 
@@ -14,7 +14,6 @@ class EventList extends Component {
     dropdownOpen: true,
     dropdownValue: "Choose a Green Action",
     eventDate: this.props.displayDate
-    
   };
 
   // handleDateChange = date => {
@@ -55,9 +54,7 @@ class EventList extends Component {
     // });
   };
 
-  componentDidMount() {
-   
-  }
+  componentDidMount() {}
 
   render() {
     return (
