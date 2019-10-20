@@ -129,7 +129,7 @@ export default class Why extends Component {
         </Modal>
 
         <p className="secondPara">
-          <img src="../images/recpic.jpg" alt="rec-pic-3" className="rightPic"></img> In other words: When you
+          <img src="../images/recpic.jpg" alt="rec-pic-2" className="rightPic"></img> In other words: When you
           drive a car, the engine
           <span className="hoverOne" onMouseOver={this.firetoggle}>
             burns
@@ -144,14 +144,14 @@ export default class Why extends Component {
         <br></br>
 
         <p className="thirdPara">
-          <img src="../images/recpic7.jpg" alt="rec-pic-2" className="leftPic"></img>We recognize that in order to
-          raise environmental awareness and increase recycling efforts there needs to be quality and easily
+          <img src="../images/recpic7.jpg" alt="warming-pic" className="leftPic"></img>We recognize that in order
+          to raise environmental awareness and increase recycling efforts there needs to be quality and easily
           understandable information available in order for people to get involved. This is what prompted us to
           create this website. Greenpoint is intended to build awareness around environmentally conscious actions
-          and reward uses through points and community. Our intent is to increase recycling rates, which translates
-          into measurable benefits including waste reduction, energy savings, natural resource conservation and job
-          creation. Give your trash a better future; don’t let it end up in a landfill. We all have a
-          responsibility to preserve the Earth for
+          and reward users through points and community. Our intent is to increase recycling rates, which
+          translates into measurable benefits including waste reduction, energy savings, natural resource
+          conservation and job creation. Give your trash a better future; don’t let it end up in a landfill. We all
+          have a responsibility to preserve the Earth for
           <span className="hoverOne" onMouseOver={this.videotoggle2}>
             generations
           </span>
@@ -166,7 +166,6 @@ export default class Why extends Component {
           <div className="youtube-responsive-container">
             <ModalHeader className="why-modal-video">
               <iframe
-                title="why-modal-video-greta"
                 width="560"
                 height="315"
                 src="https://www.youtube.com/embed/rYxt0BeTrT8"
