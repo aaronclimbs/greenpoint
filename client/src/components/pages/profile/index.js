@@ -363,11 +363,7 @@ class Profile extends Component {
           </div>
         </div>
         <div>
-          <form action='/api/helpers/sendannoyingtexttogabe' method='POST'>
-            <div class='form-group'>
-                <button>¯\_(ツ)_/¯</button>
-            </div>
-          </form>
+         
         </div>
       </Container>
     );

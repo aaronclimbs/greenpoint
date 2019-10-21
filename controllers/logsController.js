@@ -71,7 +71,7 @@ module.exports = {
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   },
-  groupByUserStatsMonth: function(req, res) {
+  groupByUserTotalMonth: function(req, res) {
     
     
     var month = parseInt(req.params.month)
@@ -105,9 +105,6 @@ console.log("Leaderboard info query " + month + " " + year)
   var month = parseInt(req.params.month)
   var year = parseInt(req.params.year)
 
- 
-
-  console.log("Leaderboard stats query is " + month + " " + year)
   db.Log
   .aggregate([
     {$lookup: {
@@ -117,7 +114,7 @@ console.log("Leaderboard info query " + month + " " + year)
       as: "user_info"
     }},
     {$unwind: "$user_info"},
- {$match: { $and: [ {eventMonth: month}, {eventYear: year}]}},  
+ {$match: { $and: [ {eventCat: req.params.category}, {eventMonth: month}, {eventYear: year}]}},  
  {$group: {
 
    _id: "$user_info.name", count: {$sum: {$multiply: ["$eventPoints", "$eventQuantity"] }}}},
@@ -125,12 +122,60 @@ console.log("Leaderboard info query " + month + " " + year)
    $sort: 
    {"count":-1 }
  },
- {$limit:10}
+ {$limit:5}
 
 ])
   .then(dbModel => res.json(dbModel))
   .catch(err => res.status(422).json(err));
 },
+
+groupBySiteMonth: function(req, res) {
+    var month = parseInt(req.params.month)
+    var year = parseInt(req.params.year)
+    db.Log
+    .aggregate([
+      {$lookup: {
+        from: "users",
+        localField: "userID",
+        foreignField: "_id",
+        as: "user_info"
+      }},
+      {$unwind: "$user_info"},
+   {$match: { $and: [ {eventMonth: month}, {eventYear: year}]}},  
+   {$group: {
+  
+     _id: null, count: {$sum: {$multiply: ["$eventPoints", "$eventQuantity"] }}}},
+
+  
+  ])
+    .then(dbModel => res.json(dbModel))
+    .catch(err => res.status(422).json(err));
+  },
+
+  groupBySiteYear: function(req, res) {
+    
+    var year = parseInt(req.params.year)
+    db.Log
+    .aggregate([
+      {$lookup: {
+        from: "users",
+        localField: "userID",
+        foreignField: "_id",
+        as: "user_info"
+      }},
+      {$unwind: "$user_info"},
+   {$match: { $and: [ {eventYear: year}]}},  
+   {$group: {
+  
+     _id: null, count: {$sum: {$multiply: ["$eventPoints", "$eventQuantity"] }}}},
+
+  
+  ])
+    .then(dbModel => res.json(dbModel))
+    .catch(err => res.status(422).json(err));
+  },
+
+  
 
   create: function(req, res) {
     db.Log

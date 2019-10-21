@@ -31,14 +31,22 @@ router
   .delete(logsController.remove);
 
   router
-  .route("/monthUserStats/:month/:year")
-  .get(logsController.groupByUserStatsMonth)
+  .route("/monthUserTotal/:month/:year")
+  .get(logsController.groupByUserTotalMonth)
   .put(logsController.update)
   .delete(logsController.remove);
 
   router
-  .route("/monthCatStats/:month/:year")
+  .route("/monthCatStatsTotal/:category/:month/:year")
   .get(logsController.groupByUserCatStatsMonth)
+
+  router
+  .route("/monthSiteTotal/:month/:year")
+  .get(logsController.groupBySiteMonth)
+
+  router
+  .route("/group/year/SiteTotal/:year")
+  .get(logsController.groupBySiteYear)
 
   
 
