@@ -1,10 +1,55 @@
-H4 {
+.stats-H4 {
     color: #234d20
 }
 
-H5 {
+.stats-H5 {
     color: #36802d;
     margin-bottom: 20px;
     font-weight: bold;
 }
+
+.bar-chart {
+    height:250px;
+}
+
+.cat-width {
+width:75%
+}
+
+.list-border {
+   border:0px;
+   color:#244d20;
+  
+}
+
+.list-pill {
+background-color:#77ab59;
+}
+
+.cat-heading{
+    color:#244d20;
+    font-weight:bold;
+}
+
+.top-heading {
+
+    color:#244d20;
+    font-weight:bold;
+
+}
+
+.points {
+    color:#77ab59;
+    font-weight:bold;
+    font-size:3em;
+}
+
+.stats-hr {
+    color:#373737;
+    border: solid 1px #373737;
+    
+   
+}
+
+
 

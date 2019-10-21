@@ -29,7 +29,7 @@ class HorizontalChart extends Component{
       <div>
         
       <div >
-        <HorizontalBar width={250} height={150}   options={{
+        <HorizontalBar width={250} height={250}   options={{
         responsive: true,
         maintainAspectRatio: false,
       }} data={this.props.setBarData} />
