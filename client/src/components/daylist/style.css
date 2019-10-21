@@ -5,7 +5,8 @@
   color: #234d20;
 }
 .day-list-header {
-  color: #234d20;
+  color: white;
+ 
 }
 
 .day-list-icon {
@@ -71,7 +72,7 @@ table.day-list {
 }
 
 .day-list th {
-  background: white;
+  background: #36802d;
   position: sticky;
   top: 0;
   box-shadow: 0 2px 2px -1px rgba(0, 0, 0, 0.4);
